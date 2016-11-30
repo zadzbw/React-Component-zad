@@ -1,0 +1,50 @@
+.swing-animate(@className,@animateName) {
+  .@{className}-enter, .@{className}-appear {
+    .animate-enter-and-appear();
+    animation-play-state: paused;
+
+    // 这里会产生冗余的css代码
+    &&-active {
+      animation-name: ~"@{animateName}In";
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes SwingIn {
+  0% {
+    transform: translateX(0px);
+  }
+  10% {
+    transform: translateX(-8px);
+  }
+  20% {
+    transform: translateX(6px);
+  }
+  30% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(1.33px);
+  }
+  70% {
+    transform: translateX(-1px);
+  }
+  80% {
+    transform: translateX(.83px);
+  }
+  90% {
+    transform: translateX(-.46px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.swing-animate(swing, Swing);

@@ -1,0 +1,129 @@
+.move-animate(@className,@animateName) {
+  .@{className}-enter, .@{className}-appear {
+    opacity: 0;
+    animation-timing-function: @ease-out-circ;
+  }
+
+  .@{className}-leave {
+    animation-timing-function: @ease-in-circ;
+  }
+
+  .make-animate(@className, @animateName);
+}
+
+@keyframes MoveUpIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveUpOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveDownIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveDownOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveLeftIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveLeftOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveRightIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes MoveRightOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    transform-origin: 0 0;
+  }
+}
+
+.move-animate(move-up, MoveUp);
+.move-animate(move-down, MoveDown);
+.move-animate(move-left, MoveLeft);
+.move-animate(move-right, MoveRight);

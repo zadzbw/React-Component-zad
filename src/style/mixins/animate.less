@@ -1,0 +1,34 @@
+@import "../variables";
+
+.animate-enter-and-appear(@duration:@animation-duration-base) {
+  animation-duration: @duration;
+  animation-fill-mode: both;
+}
+
+.animate-leave(@duration:@animation-duration-base) {
+  animation-duration: @duration;
+  animation-fill-mode: both;
+}
+
+.make-animate(@className,@animateName,@duration:@animation-duration-base) {
+  .@{className}-enter, .@{className}-appear {
+    .animate-enter-and-appear(@duration);
+    animation-play-state: paused;
+
+    // 这里会产生冗余的css代码
+    &&-active {
+      animation-name: ~"@{animateName}In";
+      animation-play-state: running;
+    }
+  }
+
+  .@{className}-leave {
+    .animate-leave(@duration);
+    animation-play-state: paused;
+
+    &&-active {
+      animation-name: ~"@{animateName}Out";
+      animation-play-state: running;
+    }
+  }
+}

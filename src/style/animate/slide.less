@@ -1,0 +1,129 @@
+.slide-animate(@className,@animateName) {
+  .@{className}-enter, .@{className}-appear {
+    opacity: 0;
+    animation-timing-function: @ease-out-quint;
+  }
+
+  .@{className}-leave {
+    animation-timing-function: @ease-in-quint;
+  }
+
+  .make-animate(@className, @animateName);
+}
+
+@keyframes SlideUpIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(.618);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes SlideUpOut {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: 0 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleY(.618);
+    transform-origin: 0 0;
+  }
+}
+
+@keyframes SlideDownIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(.618);
+    transform-origin: 100% 100%;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: 100% 100%;
+  }
+}
+
+@keyframes SlideDownOut {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: 100% 100%;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleY(.618);
+    transform-origin: 100% 100%;
+  }
+}
+
+@keyframes SlideLeftIn {
+  0% {
+    opacity: 0;
+    transform: scaleX(.618);
+    transform-origin: -50% 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: -50% 0;
+  }
+}
+
+@keyframes SlideLeftOut {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: -50% 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(.618);
+    transform-origin: -50% 0;
+  }
+}
+
+@keyframes SlideRightIn {
+  0% {
+    opacity: 0;
+    transform: scaleX(.618);
+    transform-origin: 100% 100%;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: 100% 100%;
+  }
+}
+
+@keyframes SlideRightOut {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: 100% 100%;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(.618);
+    transform-origin: 100% 100%;
+  }
+}
+
+.slide-animate(slide-up, SlideUp);
+.slide-animate(slide-down, SlideDown);
+.slide-animate(slide-left, SlideLeft);
+.slide-animate(slide-right, SlideRight);

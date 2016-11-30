@@ -1,0 +1,26 @@
+// 折角效果的 mixin,其中角度为0~90deg
+
+.folder-corner(@background,@size,@angle:30deg) {
+  position: relative;
+  background: linear-gradient(@angle - 180deg, transparent @size, #58a 0); // 生成折角效果
+  border-radius: 0.5em;
+  box-shadow: none; // 容器的box-shadow会产生异常
+  overflow: hidden; // 角度过大或过小时,折角会超过容器
+
+  @x: @size/sin(@angle);
+  @y: @size/cos(@angle);
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to left bottom, transparent 50%, rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, .4)) no-repeat 100% 0; // 生成翻折效果
+    width: @y;
+    height: @x;
+    transform: translateY(@y - @x) rotate(2 * @angle - 90deg); // 这里要注意顺序,先平移,后旋转
+    transform-origin: bottom right;
+    border-bottom-left-radius: inherit;
+    box-shadow: -.2*@size .2*@size .3*@size -.1*@size rgba(0, 0, 0, .15);
+  }
+}
