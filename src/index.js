@@ -1,10 +1,6 @@
-//styles
-import '../node_modules/font-awesome/less/font-awesome.less';
-import './style/index.less';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import TestPage from './Pages/TestPage';
+import TestPage from './pages/TestPage';
 
 ReactDOM.render(<TestPage/>, document.getElementById('root'));
