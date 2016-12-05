@@ -7,6 +7,6 @@
  * @param {String, Number} target
  * @return {Boolean}
  */
-export default function oneOf(array, target) {
+export default function isOneOf(array, target) {
 	return Array.prototype.includes.apply(array, [target, 0]);
 }

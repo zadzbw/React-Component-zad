@@ -11,9 +11,16 @@ export default class TestPage extends React.Component {
 	render() {
 		return (
 			<div className="test-wrap">
-				<Icon name={'shield'}/>
+				<Button type={'primary'}>primary</Button>
+				<Button>default</Button>
+				<Button type={'ghost'}>ghost</Button>
+				<Button type={'dashed'}>dashed</Button>
 				<br/>
-				<Button>123</Button>
+				<Button type={'primary'}><Icon name={'shield'}/>shield</Button>
+				<Button shape={'circle'}><Icon name={'shield'}/></Button>
+				<Button type={'ghost'}>shield<Icon name={'shield'}/></Button>
+				<Button type={'dashed'} shape={'circle'}><Icon name={'shield'}/></Button>
+				<br/>
 			</div>
 		);
 	}
