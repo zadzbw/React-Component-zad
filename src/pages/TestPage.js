@@ -6,6 +6,7 @@ import React from 'react';
 import './TestPage.less';
 
 import {Icon, Button} from '../components';
+const ButtonGroup = Button.Group;
 
 export default class TestPage extends React.Component {
 	render() {
@@ -20,6 +21,13 @@ export default class TestPage extends React.Component {
 				<Button shape={'circle'}><Icon name={'shield'}/></Button>
 				<Button type={'ghost'}>shield<Icon name={'shield'}/></Button>
 				<Button type={'dashed'} shape={'circle'}><Icon name={'shield'}/></Button>
+				<br/>
+				<ButtonGroup>
+					<Button type={'primary'}>primary</Button>
+					<Button>default</Button>
+					<Button type={'ghost'}>ghost</Button>
+					<Button type={'dashed'}>dashed</Button>
+				</ButtonGroup>
 				<br/>
 			</div>
 		);

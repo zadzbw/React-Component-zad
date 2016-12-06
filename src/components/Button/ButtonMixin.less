@@ -84,7 +84,7 @@
   .btn-size(@btn-padding-base; @font-size-base; @btn-border-radius-base);
 
   &-sm {
-    .btn-size(@btn-padding-sm; @font-size-sm; @btn-border-radius-sm);
+    .btn-size(@btn-group-padding-sm; @font-size-sm; @btn-border-radius-sm);
   }
 
   &-lg {
@@ -119,12 +119,14 @@
   .btn-size(0; @font-size-base + 2; 50%);
 
   &.zad-btn-sm {
+    top: 0;
     width: @btn-circle-size-sm;
     height: @btn-circle-size-sm;
     .btn-size(0; @font-size-sm + 2; 50%);
   }
 
   &.zad-btn-lg {
+    top: 0;
     width: @btn-circle-size-lg;
     height: @btn-circle-size-lg;
     .btn-size(0; @btn-font-size-lg + 2; 50%);

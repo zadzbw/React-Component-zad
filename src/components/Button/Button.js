@@ -70,14 +70,14 @@ export default class Button extends Component {
 	render() {
 		const {type, size, shape, className, children, ...props} = this.props;
 
-		const sizeClass = ({
+		const sizeSuffix = ({
 			large: 'lg',
 			small: 'sm',
 		})[size];
 
 		const btnClass = classNames(btnPrefix, className, {
 			[`${btnPrefix}-${type}`]: type && isOneOf(_type.type, type),
-			[`${btnPrefix}-${sizeClass}`]: size && isOneOf(_type.size, size),
+			[`${btnPrefix}-${sizeSuffix}`]: size && isOneOf(_type.size, size),
 			[`${btnPrefix}-${shape}`]: shape && isOneOf(_type.shape, shape)
 		});
 

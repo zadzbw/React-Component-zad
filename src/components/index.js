@@ -4,5 +4,13 @@
 import '../../node_modules/font-awesome/less/font-awesome.less';
 import '../style/index.less';
 
-export {default as Button} from './Button';
-export {default as Icon} from './Icon';
+import Icon from './Icon';
+import Button from './Button';
+import ButtonGroup from './ButtonGroup';
+
+Button.Group = ButtonGroup;
+
+export {
+	Icon,
+	Button
+};

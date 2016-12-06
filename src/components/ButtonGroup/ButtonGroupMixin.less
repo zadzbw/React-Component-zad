@@ -1,0 +1,50 @@
+@import "../../style/variables";
+@import "../Button/ButtonMixin";
+
+.btn-group-base(@btnClassName) {
+  position: relative;
+  display: inline-block;
+  > .@{btnClassName} {
+    margin-right: 0;
+
+    .btn-size(@btn-padding-base; @font-size-base; @btn-border-radius-base);
+
+    &:hover, &:focus, &:active, &-primary {
+      z-index: 2;
+    }
+  }
+
+  &-sm > .@{btnClassName} {
+    .btn-size(@btn-group-padding-sm; @font-size-sm; @btn-border-radius-sm);
+  }
+
+  &-lg > .@{btnClassName} {
+    .btn-size(@btn-padding-lg; @btn-font-size-lg; @btn-border-radius-base);
+  }
+}
+
+.btn-group(@btnClassName) {
+  .btn-group-base(@btnClassName);
+
+  .@{btnClassName} + .@{btnClassName} {
+    margin-left: -1px;
+  }
+
+  .@{btnClassName}:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .@{btnClassName}:first-child:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 8px;
+  }
+
+  .@{btnClassName}:last-child:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-left: 8px;
+  }
+}
