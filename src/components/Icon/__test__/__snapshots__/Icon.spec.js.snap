@@ -1,0 +1,52 @@
+exports[`Icon test fixedWidth 1`] = `
+<Icon
+  fixedWidth={true}
+  name="shield">
+  <i
+    className="fa fa-shield fa-fw" />
+</Icon>
+`;
+
+exports[`Icon test icon name 1`] = `
+<Icon
+  name="shield">
+  <i
+    className="fa fa-shield" />
+</Icon>
+`;
+
+exports[`Icon test pulse 1`] = `
+<Icon
+  name="shield"
+  pulse={true}>
+  <i
+    className="fa fa-shield fa-pulse" />
+</Icon>
+`;
+
+exports[`Icon test rotate 1`] = `
+<Icon
+  name="shield"
+  rotate={90}>
+  <i
+    className="fa fa-shield fa-rotate-90" />
+</Icon>
+`;
+
+exports[`Icon test size 1`] = `
+<Icon
+  name="shield"
+  size="2x">
+  <i
+    className="fa fa-shield fa-2x" />
+</Icon>
+`;
+
+exports[`Icon test spin 1`] = `
+<Icon
+  name="shield"
+  spin={true}>
+  <i
+    className="fa fa-shield fa-spin" />
+</Icon>
+`;

@@ -1,0 +1,101 @@
+exports[`Button test Icon 1`] = `
+<Button
+  disabled={true}
+  onClick={[Function]}>
+  <button
+    className="zad-btn"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <Icon
+      name="shield">
+      <i
+        className="fa fa-shield" />
+    </Icon>
+    <span>
+      hello
+    </span>
+  </button>
+</Button>
+`;
+
+exports[`Button test clicked 1`] = `
+<Button
+  onClick={[Function]}>
+  <button
+    className="zad-btn"
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      button
+    </span>
+  </button>
+</Button>
+`;
+
+exports[`Button test disabled 1`] = `
+<Button
+  disabled={true}
+  onClick={[Function]}>
+  <button
+    className="zad-btn"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      button
+    </span>
+  </button>
+</Button>
+`;
+
+exports[`Button test shape 1`] = `
+<Button
+  onClick={[Function]}
+  shape="circle">
+  <button
+    className="zad-btn zad-btn-circle"
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      circle
+    </span>
+  </button>
+</Button>
+`;
+
+exports[`Button test size 1`] = `
+<Button
+  onClick={[Function]}
+  size="large">
+  <button
+    className="zad-btn zad-btn-lg"
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      large
+    </span>
+  </button>
+</Button>
+`;
+
+exports[`Button test type 1`] = `
+<Button
+  onClick={[Function]}
+  type="primary">
+  <button
+    className="zad-btn zad-btn-primary"
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      primary
+    </span>
+  </button>
+</Button>
+`;

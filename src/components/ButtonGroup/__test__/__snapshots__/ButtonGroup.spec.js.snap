@@ -1,0 +1,128 @@
+exports[`ButtonGroup test normal 1`] = `
+<ButtonGroup>
+  <div
+    className="zad-btn-group">
+    <Button
+      onClick={[Function]}
+      type="primary">
+      <button
+        className="zad-btn zad-btn-primary"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <Icon
+          name="shield">
+          <i
+            className="fa fa-shield" />
+        </Icon>
+        <span>
+          shield
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}>
+      <button
+        className="zad-btn"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          default
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}
+      type="ghost">
+      <button
+        className="zad-btn zad-btn-ghost"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          ghost
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}
+      type="dashed">
+      <button
+        className="zad-btn zad-btn-dashed"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          dashed
+        </span>
+      </button>
+    </Button>
+  </div>
+</ButtonGroup>
+`;
+
+exports[`ButtonGroup test size 1`] = `
+<ButtonGroup
+  size="large">
+  <div
+    className="zad-btn-group zad-btn-group-lg">
+    <Button
+      onClick={[Function]}
+      type="primary">
+      <button
+        className="zad-btn zad-btn-primary"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <Icon
+          name="shield">
+          <i
+            className="fa fa-shield" />
+        </Icon>
+        <span>
+          shield
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}>
+      <button
+        className="zad-btn"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          default
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}
+      type="ghost">
+      <button
+        className="zad-btn zad-btn-ghost"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          ghost
+        </span>
+      </button>
+    </Button>
+    <Button
+      onClick={[Function]}
+      type="dashed">
+      <button
+        className="zad-btn zad-btn-dashed"
+        onClick={[Function]}
+        onMouseUp={[Function]}
+        type="button">
+        <span>
+          dashed
+        </span>
+      </button>
+    </Button>
+  </div>
+</ButtonGroup>
+`;
