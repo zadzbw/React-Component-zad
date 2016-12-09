@@ -1,0 +1,18 @@
+@import "../../style/variables";
+@import "./GridMixin";
+
+.init-grid-columns();
+.make-grid();
+.make-grid(-xs);
+
+@media (min-width: @screen-sm-min) {
+  .make-grid(-sm);
+}
+
+@media (min-width: @screen-md-min) {
+  .make-grid(-md);
+}
+
+@media (min-width: @screen-lg-min) {
+  .make-grid(-lg);
+}

@@ -1,0 +1,69 @@
+@import "../../style/variables";
+
+.init-grid-columns() {
+  .col(@index) {
+    @item: ~".zad-col-@{index}, .zad-col-xs-@{index}, .zad-col-sm-@{index}, .zad-col-md-@{index}, .zad-col-lg-@{index}";
+    .col((@index + 1), @item);
+  }
+
+  .col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".zad-col-@{index}, .zad-col-xs-@{index}, .zad-col-sm-@{index}, .zad-col-md-@{index}, .zad-col-lg-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      position: relative;
+      min-height: 1px;
+      padding-left: (@grid-gap / 2);
+      padding-right: (@grid-gap / 2);
+    }
+  }
+
+  .col(1);
+}
+
+.float-grid-columns(@size) {
+  .col(@index) {
+    @item: ~".zad-col@{size}-@{index}";
+    .col((@index + 1), @item);
+  }
+
+  .col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".zad-col@{size}-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: left;
+      flex: 0 0 auto;
+    }
+  }
+
+  .col(1);
+}
+
+.loop-grid-columns(@index, @size) when (@index > 0) {
+  .zad-col@{size}-@{index} {
+    display: block;
+    width: percentage(@index / @grid-columns);
+  }
+
+  .zad-col@{size}-offset-@{index} {
+    margin-left: percentage(@index / @grid-columns);
+  }
+
+  .loop-grid-columns((@index - 1), @size);
+}
+
+.loop-grid-columns(@index, @size) when (@index = 0) {
+  .zad-col@{size}-@{index} {
+    display: none;
+  }
+}
+
+.make-grid(@size:"") {
+  .float-grid-columns(~"@{size}");
+  .loop-grid-columns(@grid-columns, ~"@{size}");
+}

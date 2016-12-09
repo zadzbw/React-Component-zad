@@ -1,0 +1,133 @@
+exports[`Grid test align and justify 1`] = `
+<Row
+  align="middle"
+  className="test-row"
+  gap={0}
+  justify="space-around">
+  <div
+    className="zad-row test-row zad-row-vertical-middle zad-row-horizontal-space-around">
+    <Col
+      className="test-col"
+      offset={0}
+      span={4}>
+      <div
+        className="test-col zad-col-4" />
+    </Col>
+  </div>
+</Row>
+`;
+
+exports[`Grid test normal 1`] = `
+<Row
+  align="top"
+  className="test-row"
+  gap={24}
+  justify="start">
+  <div
+    className="zad-row test-row zad-row-vertical-top zad-row-horizontal-start"
+    style={
+      Object {
+        "marginLeft": -12,
+        "marginRight": -12,
+      }
+    }>
+    <Col
+      className="test-col"
+      offset={0}
+      span={4}
+      style={
+        Object {
+          "paddingLeft": 12,
+          "paddingRight": 12,
+        }
+      }>
+      <div
+        className="test-col zad-col-4"
+        style={
+          Object {
+            "paddingLeft": 12,
+            "paddingRight": 12,
+          }
+        }>
+        <div
+          className="test-col-box">
+          col-4
+        </div>
+      </div>
+    </Col>
+    <Col
+      className="test-col"
+      offset={0}
+      span={6}
+      style={
+        Object {
+          "paddingLeft": 12,
+          "paddingRight": 12,
+        }
+      }>
+      <div
+        className="test-col zad-col-6"
+        style={
+          Object {
+            "paddingLeft": 12,
+            "paddingRight": 12,
+          }
+        }>
+        <div
+          className="test-col-box">
+          col-6
+        </div>
+      </div>
+    </Col>
+  </div>
+</Row>
+`;
+
+exports[`Grid test offset 1`] = `
+<Row
+  align="top"
+  className="test-row"
+  gap={0}
+  justify="start">
+  <div
+    className="zad-row test-row zad-row-vertical-top zad-row-horizontal-start">
+    <Col
+      className="test-col"
+      offset={8}
+      span={4}>
+      <div
+        className="test-col zad-col-4 zad-col-offset-8" />
+    </Col>
+    <Col
+      className="test-col"
+      offset={12}
+      span={6}>
+      <div
+        className="test-col zad-col-6 zad-col-offset-12" />
+    </Col>
+  </div>
+</Row>
+`;
+
+exports[`Grid test responsive 1`] = `
+<Row
+  align="top"
+  className="test-row"
+  gap={0}
+  justify="start">
+  <div
+    className="zad-row test-row zad-row-vertical-top zad-row-horizontal-start">
+    <Col
+      className="test-col"
+      lg={12}
+      md={8}
+      offset={0}
+      sm={6}
+      span={0}
+      xs={4}>
+      <div
+        className="test-col zad-col-xs-4 zad-col-sm-6 zad-col-md-8 zad-col-lg-12" />
+    </Col>
+  </div>
+</Row>
+`;

@@ -1,8 +1,35 @@
+@import "../style/variables";
+
 .test-wrap {
   margin: 20px;
 
-  .zad-btn {
+  .test-btn {
     margin-right: 10px;
     margin-bottom: 10px;
+  }
+
+  .test-row {
+    background-color: darken(@background-color-base, 5%);
+
+    .test-col {
+      text-align: center;
+      min-height: 30px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-size: @font-size-xl;
+      color: @body-background;
+
+      .test-col-box {
+        padding: 16px 0;
+        background-color: shade(@primary-color, 10%);
+      }
+
+      &:nth-child(2n+1) {
+        .test-col-box {
+          padding: 24px 0;
+          background-color: @primary-color;
+        }
+      }
+    }
   }
 }

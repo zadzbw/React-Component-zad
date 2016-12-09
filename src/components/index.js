@@ -7,10 +7,13 @@ import '../style/index.less';
 import Icon from './Icon';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
+import {Row, Col} from './Grid';
 
 Button.Group = ButtonGroup;
 
 export {
 	Icon,
-	Button
+	Button,
+	Row,
+	Col
 };
