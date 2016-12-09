@@ -8,5 +8,5 @@
  * @return {Boolean}
  */
 export default function isOneOf(array, target) {
-	return Array.prototype.includes.apply(array, [target, 0]);
+  return Array.prototype.includes.apply(array, [target, 0]);
 }

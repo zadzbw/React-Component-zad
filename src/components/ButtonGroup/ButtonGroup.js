@@ -8,33 +8,33 @@ import isOneOf from '../../utils/isOneOf';
 import './ButtonGroup.less';
 
 const _type = {
-	size: ['small', 'large']
+  size: ['small', 'large']
 };
 const btnGroupPrefix = 'zad-btn-group';
 
 export default class ButtonGroup extends Component {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	static propTypes = {
-		size: PropTypes.string
-	};
+  static propTypes = {
+    size: PropTypes.string
+  };
 
-	render() {
-		const {size, className, ...props} = this.props;
+  render() {
+    const {size, className, ...props} = this.props;
 
-		const sizeSuffix = ({
-			large: 'lg',
-			small: 'sm',
-		})[size];
+    const sizeSuffix = ({
+      large: 'lg',
+      small: 'sm',
+    })[size];
 
-		const btnGroupClass = classNames(btnGroupPrefix, className, {
-			[`${btnGroupPrefix}-${sizeSuffix}`]: size && isOneOf(_type.size, size)
-		});
+    const btnGroupClass = classNames(btnGroupPrefix, className, {
+      [`${btnGroupPrefix}-${sizeSuffix}`]: size && isOneOf(_type.size, size)
+    });
 
-		return (
-			<div {...props} className={btnGroupClass}></div>
-		);
-	}
+    return (
+      <div {...props} className={btnGroupClass}></div>
+    );
+  }
 }
