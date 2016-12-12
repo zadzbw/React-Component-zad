@@ -1,0 +1,28 @@
+exports[`Affix test normal 1`] = `
+<Affix
+  offsetTop={20}
+  onChange={[Function]}
+  target={[Function]}>
+  <div
+    onChange={[Function]}
+    style={null}>
+    <div
+      className=""
+      style={null}>
+      <Button
+        onClick={[Function]}
+        type="primary">
+        <button
+          className="zad-btn zad-btn-primary"
+          onClick={[Function]}
+          onMouseUp={[Function]}
+          type="button">
+          <span>
+            Affix top
+          </span>
+        </button>
+      </Button>
+    </div>
+  </div>
+</Affix>
+`;

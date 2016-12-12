@@ -1,7 +1,7 @@
 /**
  * Created by zad on 16/12/5.
  */
-import React, {PropTypes, Component}from 'react';
+import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
 import isOneOf from '../../utils/isOneOf';
 

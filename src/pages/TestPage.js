@@ -5,7 +5,7 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col} from '../components';
+import {Icon, Button, Row, Col, Affix} from '../components';
 const ButtonGroup = Button.Group;
 
 export default class TestPage extends React.Component {
@@ -55,6 +55,16 @@ export default class TestPage extends React.Component {
             <div className="test-col-box">Column</div>
           </Col>
         </Row>
+        <br/>
+        <div>
+          <Affix offsetTop={20}>
+            <Button type="primary">Affix top</Button>
+          </Affix>
+          <br />
+          <Affix offsetBottom={20}>
+            <Button type="primary">Affix bottom</Button>
+          </Affix>
+        </div>
       </div>
     );
   }

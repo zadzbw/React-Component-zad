@@ -8,6 +8,6 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
-<div id="root"></div>
+<div id="root" style="min-height: 1200px;"></div>
 </body>
 </html>
