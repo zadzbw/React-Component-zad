@@ -10,6 +10,7 @@ import ButtonGroup from './ButtonGroup';
 import {Row, Col} from './Grid';
 import Affix from './Affix';
 import ToTop from './ToTop';
+import Breadcrumb from './Breadcrumb';
 
 Button.Group = ButtonGroup;
 
@@ -20,4 +21,5 @@ export {
   Col,
   Affix,
   ToTop,
+  Breadcrumb,
 };

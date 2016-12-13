@@ -4,6 +4,7 @@
 import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
 import isOneOf from '../../utils/isOneOf';
+import Button from '../Button';
 
 import './ButtonGroup.less';
 
@@ -22,7 +23,7 @@ export default class ButtonGroup extends Component {
   };
 
   render() {
-    const {size, className, ...props} = this.props;
+    const {size, className, children, ...props} = this.props;
 
     const sizeSuffix = ({
       large: 'lg',
@@ -33,8 +34,18 @@ export default class ButtonGroup extends Component {
       [`${btnGroupPrefix}-${sizeSuffix}`]: size && isOneOf(_type.size, size)
     });
 
+    const btns = React.Children.map(children, (btn) => {
+      if (btn.type !== Button) {
+        // 限制 ButtonGroup 的子元素只能是 Button
+        return null;
+      }
+      return btn;
+    });
+
     return (
-      <div {...props} className={btnGroupClass}></div>
+      <div {...props} className={btnGroupClass}>
+        {btns}
+      </div>
     );
   }
 }
