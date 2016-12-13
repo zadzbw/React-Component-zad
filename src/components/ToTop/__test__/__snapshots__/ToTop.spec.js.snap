@@ -1,0 +1,21 @@
+exports[`ToTop test init 1`] = `
+<ToTop
+  duration={400}
+  onClick={[Function]}
+  target={[Function]}
+  triggerHeight={300}>
+  <Animate
+    animation={Object {}}
+    component="span"
+    onAppear={[Function]}
+    onEnd={[Function]}
+    onEnter={[Function]}
+    onLeave={[Function]}
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionLeave={true}
+    transitionName="zoom">
+    <span />
+  </Animate>
+</ToTop>
+`;

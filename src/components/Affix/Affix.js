@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import _omit from 'lodash/omit';
 import _isEqual from 'lodash/isEqual';
-import _noop from 'lodash/noop';
 import getScroll from '../../utils/getScroll';
 
 import './Affix.less';
@@ -58,7 +57,7 @@ export default class Affix extends Component {
   };
 
   _setAffixStyle(e, newAffixStyle) {
-    const {onChange = _noop, target} = this.props;
+    const {onChange, target} = this.props;
     const prevAffixStyle = this.state.affixStyle;
     const isWindow = target() === window;
 

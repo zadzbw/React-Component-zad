@@ -15,6 +15,7 @@ const btnPrefix = 'zad-btn';
 export default class Button extends Component {
   constructor(props) {
     super(props);
+    this.state = {clicked: false};
     this._clickBtn = this._clickBtn.bind(this);
     this._blurBtn = this._blurBtn.bind(this);
   }
@@ -41,25 +42,19 @@ export default class Button extends Component {
     }
   }
 
-  _toggleBtnClass(btn) {
-    btn.classList.remove(`${btnPrefix}-clicked`);
-
-    this.addClicked = setTimeout(() => {
-      btn.classList.add(`${btnPrefix}-clicked`);
-    }, 20);
-
+  _clickBtn(e) {
+    this.setState({clicked: false});
     // 先clear，再remove
     if (this.removeClicked) {
       clearTimeout(this.removeClicked);
     }
-    this.removeClicked = setTimeout(() => {
-      btn.classList.remove(`${btnPrefix}-clicked`);
-    }, 500);
-  }
 
-  _clickBtn(e) {
-    const btn = ReactDOM.findDOMNode(this);
-    this._toggleBtnClass(btn);
+    this.addClicked = setTimeout(() => {
+      this.setState({clicked: true});
+    }, 10);
+    this.removeClicked = setTimeout(() => {
+      this.setState({clicked: false});
+    }, 500);
     this.props.onClick(e);
   }
 
@@ -69,6 +64,7 @@ export default class Button extends Component {
 
   render() {
     const {type, size, shape, className, children, ...props} = this.props;
+    const {clicked} = this.state;
 
     const sizeSuffix = ({
       large: 'lg',
@@ -76,6 +72,7 @@ export default class Button extends Component {
     })[size];
 
     const btnClass = classNames(btnPrefix, className, {
+      [`${btnPrefix}-clicked`]: clicked,
       [`${btnPrefix}-${type}`]: type && isOneOf(_type.type, type),
       [`${btnPrefix}-${sizeSuffix}`]: size && isOneOf(_type.size, size),
       [`${btnPrefix}-${shape}`]: shape && isOneOf(_type.shape, shape)

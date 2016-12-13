@@ -5,7 +5,7 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop} from '../components';
 const ButtonGroup = Button.Group;
 
 export default class TestPage extends React.Component {
@@ -65,6 +65,7 @@ export default class TestPage extends React.Component {
             <Button type="primary">Affix bottom</Button>
           </Affix>
         </div>
+        <ToTop/>
       </div>
     );
   }

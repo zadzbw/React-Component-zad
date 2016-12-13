@@ -18,8 +18,8 @@ export default class Icon extends Component {
   };
 
   render() {
-    const {name, size, fixedWidth, spin, pulse, rotate, ...props} = this.props;
-    const iconClass = classNames('fa', `fa-${name}`, {
+    const {name, size, fixedWidth, spin, pulse, rotate, className, ...props} = this.props;
+    const iconClass = classNames('fa', `fa-${name}`, className, {
       [`fa-${size}`]: size && isOneOf(_type.size, size),
       [`fa-rotate-${rotate}`]: rotate && isOneOf(_type.rotate, rotate),
       'fa-fw': fixedWidth,

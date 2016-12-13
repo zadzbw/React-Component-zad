@@ -9,6 +9,7 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import {Row, Col} from './Grid';
 import Affix from './Affix';
+import ToTop from './ToTop';
 
 Button.Group = ButtonGroup;
 
@@ -17,5 +18,6 @@ export {
   Button,
   Row,
   Col,
-  Affix
+  Affix,
+  ToTop,
 };
