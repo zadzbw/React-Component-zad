@@ -1,7 +1,7 @@
 /**
  * Created by zad on 16/12/9.
  */
-/** to calc the offset of an HTMLElement
+/** to calc the offset of a HTMLElement
  * @param {HTMLElement} target
  * @return {Object}
  */
