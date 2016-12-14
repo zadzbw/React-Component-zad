@@ -1,0 +1,76 @@
+exports[`Breadcrumb test normal 1`] = `
+<div
+  className="zad-bread">
+  <BreadcrumbItem
+    separator="/">
+    Home
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator="/">
+    <a
+      href="#/post">
+      Post
+    </a>
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    href="#/app"
+    separator="/">
+    <Icon
+      name="shield" />
+    <span>
+      Application
+    </span>
+  </BreadcrumbItem>
+</div>
+`;
+
+exports[`Breadcrumb test react-router mock 1`] = `
+<div
+  className="zad-bread">
+  <BreadcrumbItem
+    separator="/">
+    <a
+      href="#/">
+      Home
+    </a>
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator="/">
+    <a
+      href="#/user/1">
+      User1
+    </a>
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator="/">
+    <a
+      href="#/user/1/application/2">
+      Application2
+    </a>
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator="/">
+    <span>
+      Post3
+    </span>
+  </BreadcrumbItem>
+</div>
+`;
+
+exports[`Breadcrumb test separator 1`] = `
+<div
+  className="zad-bread">
+  <BreadcrumbItem
+    separator=">">
+    Home
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator=">">
+    Application
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    separator=">">
+    About
+  </BreadcrumbItem>
+</div>
+`;

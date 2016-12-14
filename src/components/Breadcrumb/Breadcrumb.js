@@ -7,10 +7,21 @@ import BreadcrumbItem from './BreadcrumbItem';
 
 import './Breadcrumb.less';
 
+function getBreadcrumbName(route, params) {
+  if (!route.breadcrumbName) {
+    return null;
+  }
+
+  const paramsKeys = Object.keys(params).join('|');
+  // reg: /:(id|name|age)/g
+  const reg = new RegExp(`:(${paramsKeys})`, 'g');
+  return route.breadcrumbName.replace(reg, (match, p1) => params[p1] || match);
+}
+
 function defaultItemRender(route, params, routes, paths) {
-  const isLastItem = routes.indexOf(route) === routes.length - 1;
+  const isLast = routes.indexOf(route) === routes.length - 1;
   const name = getBreadcrumbName(route, params);
-  return isLastItem ? <span>{name}</span> : <a href={`#/${paths.join('/')}`}>{name}</a>;
+  return isLast ? (<span>{name}</span>) : (<a href={`#/${paths.join('/')}`}>{name}</a>);
 }
 
 export default class Breadcrumb extends Component {
@@ -26,8 +37,9 @@ export default class Breadcrumb extends Component {
   };
 
   static defaultProps = {
-    separator: '/',
+    routes: [],
     params: {},
+    separator: '/',
     itemRender: defaultItemRender
   };
 
@@ -36,10 +48,42 @@ export default class Breadcrumb extends Component {
     const breadClass = classNames('zad-bread', className);
     let crumbs = '';
 
-    // todo render
+    if (routes && routes.length > 0) {
+      const paths = [];
+      crumbs = routes.map((route) => {
+        route.path = route.path || '';
+        // 去除开头处的'/'
+        let path = route.path.replace(/^\//, '');
+        Object.keys(params).forEach((key) => {
+          // user/:id => user/123
+          path = path.replace(`:${key}`, params[key]);
+        });
+        if (path) {
+          paths.push(path);
+        }
+        if (route.breadcrumbName) {
+          return (
+            <BreadcrumbItem separator={separator} key={route.breadcrumbName}>
+              {itemRender(route, params, routes, paths)}
+            </BreadcrumbItem>
+          );
+        }
+        return null;
+      });
+    } else if (children) {
+      crumbs = React.Children.map(children, (item, index) => {
+        if (item.type !== BreadcrumbItem) {
+          return null;
+        }
+        return cloneElement(item, {
+          separator,
+          key: `bread-crumb-item-${index}`
+        });
+      });
+    }
 
     return (
-      <div className={breadClass}>
+      <div {...props} className={breadClass}>
         {crumbs}
       </div>
     );

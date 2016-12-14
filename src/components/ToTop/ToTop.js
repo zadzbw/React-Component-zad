@@ -46,8 +46,9 @@ export default class ToTop extends Component {
   _scrollToTop(e) {
     if (window.requestAnimationFrame) {
       let start = null;
-      const {duration} = this.props;
-      const scrollTop = document.body.scrollTop;
+      const {duration, target} = this.props;
+      // 获取 target 的滚动高度
+      const scrollTop = getScroll(target()).top;
       const step = (now) => {
         if (!start) {
           start = now;
@@ -68,7 +69,8 @@ export default class ToTop extends Component {
   _setTopValue(value) {
     const target = (this.props.target)();
     if (target === window) {
-      document.body.scrollTop = value;
+      document.body.scrollTop = value; // Safari and Chrome
+      document.documentElement.scrollTop = value; // Firefox Opera and IE
     } else if (target instanceof HTMLElement) {
       target.scrollTop = value;
     }

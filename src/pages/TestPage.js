@@ -5,8 +5,22 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb} from '../components';
 const ButtonGroup = Button.Group;
+const BreadcrumbItem = Breadcrumb.Item;
+
+const mock = {
+  bread: {
+    // react-router mock
+    params: {userId: 1, appId: 2, postId: 3},
+    routes: [
+      {path: '/', breadcrumbName: 'Home'},
+      {path: 'user/:userId', breadcrumbName: 'User:userId'},
+      {path: 'application/:appId', breadcrumbName: 'Application:appId'},
+      {path: 'post/:postId', breadcrumbName: 'Post:postId'}
+    ]
+  }
+};
 
 export default class TestPage extends React.Component {
   render() {
@@ -65,7 +79,22 @@ export default class TestPage extends React.Component {
             <Button type="primary">Affix bottom</Button>
           </Affix>
         </div>
-        <ToTop/>
+        <br/>
+        <div>
+          <Breadcrumb>
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem><a href="#/post">Post</a></BreadcrumbItem>
+            <BreadcrumbItem href={'#/app'}><Icon name={'shield'}/><span>Application</span></BreadcrumbItem>
+            <BreadcrumbItem href={'#/app/details'}><Icon name={'shield'}/><span>Details</span></BreadcrumbItem>
+            <BreadcrumbItem>About</BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+        <br/>
+        <div>
+          <Breadcrumb params={mock.bread.params} routes={mock.bread.routes}/>
+        </div>
+        <br/>
+        <ToTop duration={700}/>
       </div>
     );
   }

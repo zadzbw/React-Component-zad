@@ -1,1 +1,37 @@
 @import "../../style/variables";
+
+.zad-bread {
+  color: @text-color-secondary;
+  font-size: @font-size-base;
+
+  &-item {
+    a {
+      color: @text-color;
+      transition: color @animation-duration-slow;
+
+      &:hover {
+        color: tint(@primary-color, 20%);
+      }
+    }
+
+    &-link {
+      > .fa + span {
+        margin-left: 0.2857em;
+      }
+    }
+
+    &:last-child {
+      font-weight: bold;
+      color: @text-color;
+    }
+
+    &-separator {
+      margin: 0 8px;
+      color: @border-color-base;
+    }
+
+    &:last-child &-separator {
+      display: none;
+    }
+  }
+}

@@ -3,8 +3,6 @@
  */
 import React, {PropTypes, Component} from 'react';
 
-import './BreadcrumbItem.less';
-
 export default class BreadcrumbItem extends Component {
   constructor(props) {
     super(props);
@@ -22,15 +20,15 @@ export default class BreadcrumbItem extends Component {
   render() {
     const {separator, children, ...props} = this.props;
     const link = this.props.href ? (
-      <a className="zad-bread-link" {...props}>{children}</a>
+      <a className="zad-bread-item-link" {...props}>{children}</a>
     ) : (
-      <span className="zad-bread-link" {...props}>{children}</span>
+      <span className="zad-bread-item-link" {...props}>{children}</span>
     );
 
     return (
-      <span>
+      <span className="zad-bread-item">
         {link}
-        <span className="zad-bread-separator">{separator}</span>
+        <span className="zad-bread-item-separator">{separator}</span>
       </span>
     );
   }
