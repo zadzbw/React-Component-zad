@@ -5,7 +5,7 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown} from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
 
@@ -19,7 +19,13 @@ const mock = {
       {path: 'application/:appId', breadcrumbName: 'Application:appId'},
       {path: 'post/:postId', breadcrumbName: 'Post:postId'}
     ]
-  }
+  },
+  dropdown: [
+    {name: '中国-China', value: 'CN'},
+    {name: '日本-Japan', value: 'JP'},
+    {name: '美国-USA', value: 'USA'},
+    {name: '英国-England', value: 'UK'},
+  ]
 };
 
 export default class TestPage extends React.Component {
@@ -92,6 +98,18 @@ export default class TestPage extends React.Component {
         <br/>
         <div>
           <Breadcrumb params={mock.bread.params} routes={mock.bread.routes}/>
+        </div>
+        <br/>
+        <div>
+          <DropDown className="test-dropdown" menus={mock.dropdown}>
+            DropDown
+          </DropDown>
+          <DropDown className="test-dropdown" menus={mock.dropdown}>
+            DropDown
+          </DropDown>
+          <DropDown className="test-dropdown" menus={mock.dropdown}>
+            DropDown
+          </DropDown>
         </div>
         <br/>
         <ToTop duration={700}/>
