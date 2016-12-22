@@ -12,15 +12,33 @@ import DropDownItem from './DropDownItem';
 
 import './DropDown.less';
 
+function renderItems(menus, func) {
+  return menus.map((menu) => {
+    if (!menu.menus) {
+      return <DropDownItem name={menu.name} key={menu.value} onClick={func.bind(this, menu.value)}/>;
+    } else {
+      return (
+        <DropDownItem type={'sub'} name={menu.name} key={`sub-${+new Date()}`}>
+          {renderItems.apply(this, [menu.menus, func])}
+        </DropDownItem>
+      );
+    }
+  });
+}
+
+export const dropDownPrefix = 'zad-dropdown';
+
 export default class DropDown extends Component {
   static propTypes = {
-    onSelect: PropTypes.func,
-    menus: PropTypes.array
+    menus: PropTypes.array,
+    disabled: PropTypes.bool,
+    onSelect: PropTypes.func
   };
 
   static defaultProps = {
-    onSelect: () => undefined,
-    menus: []
+    menus: [],
+    disabled: false,
+    onSelect: () => undefined
   };
 
   constructor(props) {
@@ -48,7 +66,11 @@ export default class DropDown extends Component {
     });
   }
 
-  click() {
+  click(e) {
+    // 如果点击到2级菜单，则什么都不做
+    if (e.target.classList.contains(`${dropDownPrefix}-sub-title`)) {
+      return false;
+    }
     const {visible} = this.state;
     if (visible) {
       this.switchVisible();
@@ -56,16 +78,12 @@ export default class DropDown extends Component {
   }
 
   render() {
-    const {className, style, children, menus, onSelect, ...props} = this.props;
-    const dropDownClass = classNames('zad-dropdown', className);
+    const {className, style, children, menus, disabled, onSelect, ...props} = this.props;
+    const dropDownClass = classNames(dropDownPrefix, className);
     const Func = chainFunc(onSelect, this.switchVisible);
-    const items = menus.map((menu) => {
-      return (
-        <DropDownItem onClick={Func.bind(this, menu.value)} name={menu.name} key={menu.value}/>
-      );
-    });
+    const items = renderItems.apply(this, [menus, Func]);
     const itemsWrap = !this.state.visible ? null : (
-      <div className="zad-dropdown-items">
+      <div className={`${dropDownPrefix}-items`}>
         {items}
       </div>
     );
@@ -73,8 +91,12 @@ export default class DropDown extends Component {
     return (
       <div {...props} className={dropDownClass} style={style}>
         <ButtonGroup>
-          <Button type={'ghost'}>{children}</Button>
-          <Button type={'ghost'} onClick={this.switchVisible}><Icon name={'angle-down'}/></Button>
+          <Button type={'ghost'} disabled={disabled}>
+            {children}
+          </Button>
+          <Button type={'ghost'} disabled={disabled} onClick={this.switchVisible}>
+            <Icon name={'angle-down'}/>
+          </Button>
         </ButtonGroup>
         <Animate transitionName="slide-up">
           {itemsWrap}

@@ -21,14 +21,33 @@ const mock = {
     ]
   },
   dropdown: [
-    {name: '中国-China', value: 'CN'},
-    {name: '日本-Japan', value: 'JP'},
-    {name: '美国-USA', value: 'USA'},
-    {name: '英国-England', value: 'UK'},
+    {name: '中国1-China', value: 'CN1'},
+    {name: '日本1-Japan', value: 'JP1'},
+    {name: '美国1-USA', value: 'USA1'},
+    {
+      name: '二级菜单', menus: [
+      {name: '中国2-China', value: 'CN2'},
+      {name: '日本2-Japan', value: 'JP2'},
+      {name: '美国2-USA', value: 'USA2'},
+      {
+        name: '三级菜单', menus: [
+        {name: '中国3-China', value: 'CN3'},
+        {name: '日本3-Japan', value: 'JP3'},
+        {name: '美国3-USA', value: 'USA3'}
+      ]
+      }
+    ]
+    }
   ]
 };
 
 export default class TestPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.text = 'test';
+    this.testDropDown = this.testDropDown.bind(this);
+  }
+
   render() {
     return (
       <div className="test-wrap">
@@ -101,13 +120,7 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div>
-          <DropDown className="test-dropdown" menus={mock.dropdown}>
-            DropDown
-          </DropDown>
-          <DropDown className="test-dropdown" menus={mock.dropdown}>
-            DropDown
-          </DropDown>
-          <DropDown className="test-dropdown" menus={mock.dropdown}>
+          <DropDown className="test-dropdown" menus={mock.dropdown} onSelect={this.testDropDown}>
             DropDown
           </DropDown>
         </div>
@@ -115,5 +128,9 @@ export default class TestPage extends React.Component {
         <ToTop duration={700}/>
       </div>
     );
+  }
+
+  testDropDown(value, e) {
+    console.log(this.text, value, e.target);
   }
 }

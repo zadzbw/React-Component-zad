@@ -1,32 +1,35 @@
-@import "../../style/variables";
+@import "./DropDownMixin";
 
 .zad-dropdown {
   display: inline-block;
+  user-select: none;
 
   &-items {
-    position: absolute;
-    display: block;
-    outline: none;
+    .drop-down-items-wrap();
     margin-top: 8px;
-    padding: 0;
-    text-align: left;
-    background-color: @body-background;
-    border-radius: @border-radius-base;
-    box-shadow: @box-shadow-base;
-    z-index: @z-index-dropdown;
   }
 
   &-item {
-    padding: @btn-padding-lg;
-    margin: 0;
-    font-size: @font-size-base;
-    color: @text-color;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    .drop-down-item();
+  }
 
-    &:hover {
-      background-color: tint(@primary-color, 85%);
+  &-sub {
+    position: relative;
+
+    &-title {
+      .drop-down-item();
+    }
+
+    &-wrap {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      padding-left: 4px;
+      height: 100%;
+    }
+
+    &-items {
+      .drop-down-items-wrap();
     }
   }
 }

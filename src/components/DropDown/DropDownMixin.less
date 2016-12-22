@@ -1,0 +1,28 @@
+@import "../../style/variables";
+
+.drop-down-items-wrap() {
+  position: absolute;
+  display: block;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  background-color: @body-background;
+  border-radius: @border-radius-base;
+  box-shadow: @box-shadow-base;
+  z-index: @z-index-dropdown;
+}
+
+.drop-down-item() {
+  padding: @btn-padding-lg;
+  margin: 0;
+  font-size: @font-size-base;
+  color: @text-color;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: tint(@primary-color, 85%);
+  }
+}
