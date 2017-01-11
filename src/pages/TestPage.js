@@ -123,6 +123,9 @@ export default class TestPage extends React.Component {
           <DropDown className="test-dropdown" menus={mock.dropdown} onSelect={this.testDropDown}>
             DropDown
           </DropDown>
+          <DropDown className="test-dropdown" menus={mock.dropdown} onSelect={this.testDropDown}>
+            DropDown
+          </DropDown>
         </div>
         <br/>
         <ToTop duration={700}/>

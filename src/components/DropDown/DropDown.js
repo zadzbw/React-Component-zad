@@ -2,6 +2,7 @@
  * Created by zad on 16/12/20.
  */
 import React, {PropTypes, Component} from 'react';
+import ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
 import classNames from 'classnames';
 import chainFunc from '../../utils/chainFunc';
@@ -14,15 +15,11 @@ import './DropDown.less';
 
 function renderItems(menus, func) {
   return menus.map((menu) => {
-    if (!menu.menus) {
-      return <DropDownItem name={menu.name} key={menu.value} onClick={func.bind(this, menu.value)}/>;
-    } else {
-      return (
-        <DropDownItem type={'sub'} name={menu.name} key={`sub-${+new Date()}`}>
-          {renderItems.apply(this, [menu.menus, func])}
-        </DropDownItem>
-      );
-    }
+    return menu.menus ? (
+      <DropDownItem type={'sub'} name={menu.name} key={`sub-${+new Date()}`}>
+        {renderItems.apply(this, [menu.menus, func])}
+      </DropDownItem>
+    ) : <DropDownItem name={menu.name} key={menu.value} onClick={func.bind(this, menu.value)}/>;
   });
 }
 
@@ -47,34 +44,36 @@ export default class DropDown extends Component {
       visible: false
     };
     this.switchVisible = this.switchVisible.bind(this);
-    this.click = this.click.bind(this);
+    this.clickInside = this.clickInside.bind(this);
   }
 
   switchVisible() {
     this.setState({
       visible: !this.state.visible,
-    }, () => {
-      if (this.state.visible) {
-        setTimeout(() => {
-          window.addEventListener('click', this.click, false);
-        }, 0);
-      } else {
-        setTimeout(() => {
-          window.removeEventListener('click', this.click, false);
-        }, 0);
-      }
     });
   }
 
-  click(e) {
-    // 如果点击到2级菜单，则什么都不做
+  clickInside(e) {
+    // 如果点击到2级菜单的title，则什么都不做
     if (e.target.classList.contains(`${dropDownPrefix}-sub-title`)) {
       return false;
     }
-    const {visible} = this.state;
-    if (visible) {
-      this.switchVisible();
+    // 如果点击到外部，则进行switch
+    const isClickInside = ReactDOM.findDOMNode(this).contains(e.target);
+    if (!isClickInside) {
+      const {visible} = this.state;
+      if (visible) {
+        this.switchVisible();
+      }
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('click', this.clickInside, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.clickInside, false);
   }
 
   render() {
