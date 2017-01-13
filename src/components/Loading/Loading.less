@@ -1,0 +1,158 @@
+@import "../../style/variables";
+
+.zad-loader {
+  color: @text-color-secondary;
+  text-align: center;
+  vertical-align: middle;
+  display: none;
+  opacity: 0;
+
+  &-is-loading {
+    opacity: 1;
+    position: static;
+    display: inline-block;
+  }
+
+  &-entity {
+    display: inline-block;
+    width: @loader-base-size;
+    height: @loader-base-size;
+  }
+
+  &-sm .zad-loader-entity {
+    width: @loader-sm-size;
+    height: @loader-sm-size;
+  }
+
+  &-lg .zad-loader-entity {
+    width: @loader-lg-size;
+    height: @loader-lg-size;
+  }
+
+  &-svg {
+    animation: rotate 2.5s linear infinite;
+    height: 100%;
+    transform-origin: center center;
+    width: 100%;
+  }
+
+  &-circle {
+    stroke-width: 5;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 1, 151;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: loader-dash 2s @ease-in-out infinite, loader-color 7s @ease-in-out infinite;
+  }
+}
+
+.zad-loading {
+  &-has-children {
+    position: relative;
+
+    .zad-loader {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 5;
+
+      &-entity {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &-show-tip .zad-loader-entity {
+        transform: translate(-50%, -50%) translateY(-10px);
+      }
+
+      &-tip {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        user-select: none;
+        animation: tip-color 7s @ease-in-out infinite;
+        transform: translateY(@loader-base-size / 2 - 6);
+      }
+
+      &-sm .zad-loader-tip {
+        transform: translateY(@loader-sm-size / 2 - 6);
+      }
+
+      &-lg .zad-loader-tip {
+        transform: translateY(@loader-lg-size / 2 - 6);
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+    transition: all 0.3s @ease-in-out;
+  }
+
+  &-blur {
+    opacity: 0.7;
+    filter: blur(1px);
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: transparent;
+    }
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-dash {
+  0% {
+    stroke-dasharray: 1, 151;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 151;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 151;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes loader-color {
+  0%, 100% {
+    stroke: @highlight-color;
+  }
+  25% {
+    stroke: @primary-color;
+  }
+  50% {
+    stroke: @success-color;
+  }
+  75% {
+    stroke: @warning-color;
+  }
+}
+
+@keyframes tip-color {
+  0%, 100% {
+    color: @highlight-color;
+  }
+  25% {
+    color: @primary-color;
+  }
+  50% {
+    color: @success-color;
+  }
+  75% {
+    color: @warning-color;
+  }
+}

@@ -5,7 +5,7 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading} from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
 
@@ -44,8 +44,12 @@ const mock = {
 export default class TestPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true
+    };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
+    this.changeLoading = this.changeLoading.bind(this);
   }
 
   render() {
@@ -129,11 +133,44 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <ToTop duration={700}/>
+
+        <Row gap={24}>
+          <Col span={6}>
+            <div style={{background: '#eee'}}>
+              <Loading tip="waiting for success..." size={'default'} loading={this.state.loading} delay={300}>
+                <div>
+                  <p>111111111</p>
+                  <p>222222222</p>
+                  <p>333333333</p>
+                  <p>444444444</p>
+                  <p>555555555</p>
+                  <p>666666666</p>
+                  <p>777777777</p>
+                </div>
+              </Loading>
+            </div>
+          </Col>
+          <Col span={6}>
+            <div style={{background: '#eee'}}>
+              <Loading size={'small'}/>
+              <Loading/>
+              <Loading size={'large'}/>
+            </div>
+          </Col>
+        </Row>
+        <br/>
+        <Button onClick={this.changeLoading}>change loading</Button>
       </div>
     );
   }
 
   testDropDown(value, e) {
     console.log(this.text, value, e.target);
+  }
+
+  changeLoading() {
+    this.setState({
+      loading: !this.state.loading
+    });
   }
 }
