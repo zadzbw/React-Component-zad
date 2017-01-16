@@ -13,6 +13,7 @@ import ToTop from './ToTop';
 import Breadcrumb from './Breadcrumb';
 import DropDown from './DropDown';
 import Loading from './Loading';
+import Menu from './Menu';
 
 Button.Group = ButtonGroup;
 
@@ -26,4 +27,5 @@ export {
   Breadcrumb,
   DropDown,
   Loading,
+  Menu,
 };

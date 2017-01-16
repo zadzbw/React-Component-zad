@@ -5,9 +5,12 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading, Menu} from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
+const MenuItem = Menu.Item;
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 const mock = {
   bread: {
@@ -133,33 +136,71 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <ToTop duration={700}/>
-
-        <Row gap={24}>
-          <Col span={6}>
-            <div style={{background: '#eee'}}>
-              <Loading tip="waiting for success..." size={'default'} loading={this.state.loading} delay={300}>
-                <div>
-                  <p>111111111</p>
-                  <p>222222222</p>
-                  <p>333333333</p>
-                  <p>444444444</p>
-                  <p>555555555</p>
-                  <p>666666666</p>
-                  <p>777777777</p>
-                </div>
-              </Loading>
-            </div>
-          </Col>
-          <Col span={6}>
-            <div style={{background: '#eee'}}>
-              <Loading size={'small'}/>
-              <Loading/>
-              <Loading size={'large'}/>
-            </div>
-          </Col>
-        </Row>
+        <div>
+          <Row gap={24}>
+            <Col span={6}>
+              <div style={{background: '#eee'}}>
+                <Loading tip="waiting for success..." size={'default'} loading={this.state.loading} delay={300}>
+                  <div>
+                    <p>111111111</p>
+                    <p>222222222</p>
+                    <p>333333333</p>
+                    <p>444444444</p>
+                    <p>555555555</p>
+                    <p>666666666</p>
+                    <p>777777777</p>
+                  </div>
+                </Loading>
+              </div>
+            </Col>
+            <Col span={6}>
+              <div style={{background: '#eee'}}>
+                <Loading size={'small'}/>
+                <Loading/>
+                <Loading size={'large'}/>
+              </div>
+            </Col>
+          </Row>
+          <br/>
+          <Button type={'primary'} onClick={this.changeLoading}>change loading</Button>
+        </div>
         <br/>
-        <Button onClick={this.changeLoading}>change loading</Button>
+
+        <div style={{width: 240}}>
+          <Menu>
+            <SubMenu key="sub1" title={'navigation one'}>
+              <MenuItemGroup title={'test1'}>
+                <MenuItem>11111</MenuItem>
+                <MenuItem>22222</MenuItem>
+              </MenuItemGroup>
+              <MenuItemGroup title={'test2'}>
+                <MenuItem>33333</MenuItem>
+                <MenuItem>44444</MenuItem>
+              </MenuItemGroup>
+            </SubMenu>
+
+            <SubMenu key="sub2" title={'navigation two'}>
+              <MenuItemGroup title={'test3'}>
+                <MenuItem>55555</MenuItem>
+                <MenuItem>66666</MenuItem>
+              </MenuItemGroup>
+              <MenuItemGroup title={'test4'}>
+                <MenuItem>77777</MenuItem>
+                <MenuItem>88888</MenuItem>
+              </MenuItemGroup>
+            </SubMenu>
+
+            <SubMenu key="sub3" title={'navigation three'}>
+              <Menu.Item key="5">Option 5</Menu.Item>
+              <Menu.Item key="6">Option 6</Menu.Item>
+              <SubMenu key="sub4" title="Submenu">
+                <Menu.Item key="7">Option 7</Menu.Item>
+                <Menu.Item key="8">Option 8</Menu.Item>
+              </SubMenu>
+            </SubMenu>
+          </Menu>
+        </div>
+
       </div>
     );
   }
