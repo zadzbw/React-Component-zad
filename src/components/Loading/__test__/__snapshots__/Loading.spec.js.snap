@@ -1,0 +1,110 @@
+exports[`Loading Test has children 1`] = `
+<div
+  className="zad-loading-has-children">
+  <AnimateChild
+    animation={Object {}}
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionLeave={true}
+    transitionName="fade">
+    <div>
+      <Loader
+        loading={true} />
+    </div>
+  </AnimateChild>
+  <AnimateChild
+    animation={Object {}}
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionLeave={true}
+    transitionName="fade">
+    <div
+      className="zad-loading-container zad-loading-blur">
+      <div
+        className="test">
+        test
+      </div>
+    </div>
+  </AnimateChild>
+</div>
+`;
+
+exports[`Loading Test has tip 1`] = `
+<div
+  className="zad-loader zad-loader-show-tip zad-loader-is-loading">
+  <div
+    className="zad-loader-entity">
+    <svg
+      className="zad-loader-svg"
+      viewBox="25 25 50 50">
+      <circle
+        className="zad-loader-circle"
+        cx="50"
+        cy="50"
+        fill="none"
+        r="20" />
+    </svg>
+  </div>
+  <div
+    className="zad-loader-tip">
+    hello
+  </div>
+</div>
+`;
+
+exports[`Loading Test normal 1`] = `
+<div
+  className="zad-loader zad-loader-is-loading">
+  <div
+    className="zad-loader-entity">
+    <svg
+      className="zad-loader-svg"
+      viewBox="25 25 50 50">
+      <circle
+        className="zad-loader-circle"
+        cx="50"
+        cy="50"
+        fill="none"
+        r="20" />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Loading Test not loading 1`] = `
+<div
+  className="zad-loader">
+  <div
+    className="zad-loader-entity">
+    <svg
+      className="zad-loader-svg"
+      viewBox="25 25 50 50">
+      <circle
+        className="zad-loader-circle"
+        cx="50"
+        cy="50"
+        fill="none"
+        r="20" />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Loading Test size 1`] = `
+<div
+  className="zad-loader zad-loader-sm zad-loader-is-loading">
+  <div
+    className="zad-loader-entity">
+    <svg
+      className="zad-loader-svg"
+      viewBox="25 25 50 50">
+      <circle
+        className="zad-loader-circle"
+        cx="50"
+        cy="50"
+        fill="none"
+        r="20" />
+    </svg>
+  </div>
+</div>
+`;

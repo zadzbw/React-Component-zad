@@ -10,7 +10,7 @@ const _type = {
   size: ['small', 'large']
 };
 
-export default function ({
+export default function Loader({
   size = undefined,
   tip = '',
   loading,

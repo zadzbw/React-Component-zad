@@ -31,6 +31,7 @@ export default class Loading extends Component {
     delay: undefined,
   };
 
+  // 对改变loading状态进行去抖
   debounceLoading(nextProps) {
     const prevLoading = this.props.loading;
     const nextLoading = nextProps.loading;
@@ -41,7 +42,7 @@ export default class Loading extends Component {
     }
     // 如果设定了delay且前后状态不一致
     if (delay && !isNaN(+delay) && prevLoading !== nextLoading) {
-      this.debounceTimer = setTimeout(() => this.setState({loading: nextLoading}), 300);
+      this.debounceTimer = setTimeout(() => this.setState({loading: nextLoading}), delay);
     } else {
       this.setState({loading: nextLoading});
     }
