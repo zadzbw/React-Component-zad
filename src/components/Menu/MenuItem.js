@@ -6,13 +6,14 @@ import classNames from 'classnames';
 
 export default class MenuItem extends Component {
   render() {
-    const {prefix} = this.props;
+    const {prefix, level} = this.props;
     const itemClass = classNames({
       [`${prefix}-item`]: true
     });
+    const paddingLeft = level * 20;
 
     return (
-      <li className={itemClass}>
+      <li className={itemClass} style={{paddingLeft}}>
         {this.props.children}
       </li>
     );

@@ -17,10 +17,14 @@ export default class Menu extends Component {
 
   static propTypes = {
     mode: PropTypes.oneOf(['vertical', 'inline']),
+    level: PropTypes.number,
+    prefix: PropTypes.string,
   };
 
   static defaultProps = {
     mode: 'inline',
+    level: 1,
+    prefix: menuPrefix,
   };
 
   renderChildren(props) {
@@ -28,7 +32,8 @@ export default class Menu extends Component {
       return React.cloneElement(child,
         {
           ...child.props,
-          prefix: menuPrefix
+          level: props.level,
+          prefix: props.prefix,
         });
     });
   }

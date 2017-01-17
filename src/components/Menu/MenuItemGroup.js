@@ -10,20 +10,22 @@ export default class MenuItemGroup extends Component {
       return React.cloneElement(child,
         {
           ...child.props,
-          prefix: props.prefix
+          level: props.level,
+          prefix: props.prefix,
         });
     });
   }
 
   render() {
-    const {prefix, title} = this.props;
+    const {prefix, title, level} = this.props;
     const groupClass = classNames({
       [`${prefix}-item-group`]: true
     });
+    const paddingLeft = level * 16;
 
     return (
       <li className={groupClass}>
-        <div className={`${prefix}-item-group-title`}>
+        <div className={`${prefix}-item-group-title`} style={{paddingLeft}}>
           {title}
         </div>
         <ul className={`${prefix}-item-group-items`}>{this.renderChildren(this.props)}</ul>

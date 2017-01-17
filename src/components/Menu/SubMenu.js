@@ -20,7 +20,8 @@ export default class SubMenu extends Component {
       return React.cloneElement(child,
         {
           ...child.props,
-          prefix: props.prefix
+          level: props.level + 1,
+          prefix: props.prefix,
         });
     });
   }
@@ -32,16 +33,17 @@ export default class SubMenu extends Component {
   }
 
   render() {
-    const {prefix, title} = this.props;
+    const {prefix, title, level} = this.props;
     const {expand} = this.state;
     const subClass = classNames({
       [`${prefix}-sub`]: true,
       [`${prefix}-sub-expand`]: expand,
     });
+    const paddingLeft = level * 20;
 
     return (
       <li className={subClass}>
-        <div className={`${prefix}-sub-title`} onClick={this._expandItems}>
+        <div className={`${prefix}-sub-title`} onClick={this._expandItems} style={{paddingLeft}}>
           {title}
         </div>
         <Animate animation={collapseAnimation} component={'ul'}>
