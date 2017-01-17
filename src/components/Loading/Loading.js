@@ -14,7 +14,7 @@ export default class Loading extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: props.loading
+      loading: this.props.loading
     };
     this.debounceLoading = this.debounceLoading.bind(this);
   }

@@ -1,4 +1,5 @@
 @import "../../style/variables";
+@import "../../style/mixins/index";
 
 @menu-prefix: zad-menu;
 
@@ -33,16 +34,17 @@
     padding: 0 20px;
     position: relative;
     display: block;
-    white-space: nowrap;
+    .ellipsis();
     &:hover {
       color: @primary-color;
     }
   }
 
-  &-item-selected {
-    color: @primary-color;
-    // fix chrome render bug
-    transform: translateZ(0);
+  &-item, &-sub-title, &-item-group-title {
+    .fa {
+      min-width: 14px;
+      margin-right: 0.5em;
+    }
   }
 
   &-inline {
@@ -56,6 +58,8 @@
 
       &-selected {
         border-right: 3px solid @primary-color;
+        color: @primary-color;
+        background-color: tint(@primary-color, 90%);
         transform: translateZ(0);
       }
     }
@@ -68,8 +72,7 @@
       font-size: @font-size-base;
       line-height: 42px;
       height: 42px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      .ellipsis();
     }
   }
 
