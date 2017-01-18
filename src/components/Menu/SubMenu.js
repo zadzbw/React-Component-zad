@@ -14,7 +14,7 @@ export default class SubMenu extends Component {
   constructor(props) {
     super(props);
     this.__expandSub = this::this.__expandSub;
-    this._isOpen = this::this._isOpen;
+    this._isExpand = this::this._isExpand;
   }
 
   static propTypes = {
@@ -39,32 +39,34 @@ export default class SubMenu extends Component {
           ...child.props,
           level: props.level + 1,
           prefix: props.prefix,
-          openKeys: props.openKeys,
+          expandKeys: props.expandKeys,
           selectedKeys: props.selectedKeys,
           eventKey: child.key,
           _expandSub: props._expandSub,
           _selectItem: props._selectItem,
+          subParentKey: child.type === _SubMenu ? this.props.eventKey : '',
         });
     });
   }
 
-  _isOpen() {
-    const {openKeys, eventKey} = this.props;
-    return openKeys.includes(eventKey);
+  _isExpand() {
+    const {expandKeys, eventKey} = this.props;
+    return expandKeys.includes(eventKey);
   }
 
   __expandSub() {
-    const {eventKey, _expandSub} = this.props;
+    const {eventKey, _expandSub, subParentKey} = this.props;
     const param = {
       eventKey,
-      open: this._isOpen(),
+      expand: this._isExpand(),
+      subParentKey,
     };
     _expandSub(param);
   }
 
   render() {
     const {prefix, title, level} = this.props;
-    const expand = this._isOpen();
+    const expand = this._isExpand();
     const subClass = classNames({
       [`${prefix}-sub`]: true,
       [`${prefix}-sub-expand`]: expand,

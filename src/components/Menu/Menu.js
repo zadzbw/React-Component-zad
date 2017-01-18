@@ -15,7 +15,7 @@ export default class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openKeys: 'openKeys' in this.props ? this.props.openKeys : this.props.defaultOpenKeys,
+      expandKeys: 'expandKeys' in this.props ? this.props.expandKeys : this.props.defaultExpandKeys,
       selectedKeys: 'selectedKeys' in this.props ? this.props.selectedKeys : this.props.defaultSelectedKeys,
     };
     this._expandSub = this::this._expandSub;
@@ -26,22 +26,24 @@ export default class Menu extends Component {
     mode: PropTypes.oneOf(['vertical', 'inline']),
     level: PropTypes.number,
     prefix: PropTypes.string,
-    openKeys: PropTypes.arrayOf(PropTypes.string),
-    defaultOpenKeys: PropTypes.arrayOf(PropTypes.string),
+    expandKeys: PropTypes.arrayOf(PropTypes.string),
+    defaultExpandKeys: PropTypes.arrayOf(PropTypes.string),
     selectedKeys: PropTypes.arrayOf(PropTypes.string),
     defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
-    onOpenChange: PropTypes.func,
+    onExpandChange: PropTypes.func,
     onSelect: PropTypes.func,
+    onlyExpandOneSub: PropTypes.bool,
   };
 
   static defaultProps = {
     mode: 'inline',
     level: 1,
     prefix: menuPrefix,
-    defaultOpenKeys: [],
+    defaultExpandKeys: [],
     defaultSelectedKeys: [],
-    onOpenChange: () => undefined,
+    onExpandChange: () => undefined,
     onSelect: () => undefined,
+    onlyExpandOneSub: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -50,21 +52,21 @@ export default class Menu extends Component {
     if ('selectedKeys' in nextProps) {
       keys.selectedKeys = nextProps.selectedKeys;
     }
-    if ('openKeys' in nextProps) {
-      keys.openKeys = nextProps.openKeys;
+    if ('expandKeys' in nextProps) {
+      keys.expandKeys = nextProps.expandKeys;
     }
     this.setState(keys);
   }
 
   renderChildren(props) {
-    const {openKeys, selectedKeys} = this.state;
+    const {expandKeys, selectedKeys} = this.state;
     return React.Children.map(props.children, (child) => {
       return React.cloneElement(child,
         {
           ...child.props,
           level: props.level,
           prefix: props.prefix,
-          openKeys,
+          expandKeys,
           selectedKeys,
           eventKey: child.key,
           _expandSub: this._expandSub,
@@ -74,16 +76,20 @@ export default class Menu extends Component {
   }
 
   _expandSub(args) {
-    const openKeys = this.state.openKeys.concat();
-    if (!args.open) {
-      openKeys.push(args.eventKey);
+    const expandKeys = this.state.expandKeys.concat();
+    const {eventKey} = args;
+    if (!args.expand) {
+      if (!args.subParentKey && this.props.onlyExpandOneSub) {
+        _remove(expandKeys, (key) => eventKey !== key);
+      }
+      expandKeys.push(eventKey);
     } else {
-      _remove(openKeys, (key) => args.eventKey === key);
+      _remove(expandKeys, (key) => eventKey === key);
     }
-    if (!('openKeys' in this.props)) {
-      this.setState({openKeys});
+    if (!('expandKeys' in this.props)) {
+      this.setState({expandKeys});
     }
-    this.props.onOpenChange(openKeys);
+    this.props.onExpandChange(expandKeys);
   }
 
   _selectItem(args) {

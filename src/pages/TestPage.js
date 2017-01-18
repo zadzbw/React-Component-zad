@@ -167,8 +167,8 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div style={{width: 240}}>
-          <Menu defaultSelectedKeys={['222']} defaultOpenKeys={['sub1']}>
-            <SubMenu key="sub1" title={<span><Icon name={'folder-o'}/><span>Navigation One</span></span>}>
+          <Menu defaultSelectedKeys={['222']} defaultExpandKeys={['sub-1']} onlyExpandOneSub={true}>
+            <SubMenu key="sub-1" title={<span><Icon name={'folder-o'}/><span>Navigation One</span></span>}>
               <MenuItemGroup title={'test1'}>
                 <MenuItem key="111">11111</MenuItem>
                 <MenuItem key="222">22222</MenuItem>
@@ -179,23 +179,35 @@ export default class TestPage extends React.Component {
               </MenuItemGroup>
             </SubMenu>
 
-            <SubMenu key="sub2" title={<span><Icon name={'shield'}/><span>Navigation Two</span></span>}>
-              <MenuItemGroup title={'test3'}>
-                <MenuItem key="555">55555</MenuItem>
-                <MenuItem key="666">66666</MenuItem>
-              </MenuItemGroup>
-              <MenuItemGroup title={'test4'}>
+            <SubMenu key="sub-2" title={<span><Icon name={'shield'}/><span>Navigation Two</span></span>}>
+              <SubMenu key="sub-2-1" title="Submenu 1">
+                <MenuItemGroup title={'test3'}>
+                  <MenuItem key="555">55555</MenuItem>
+                  <MenuItem key="666">66666</MenuItem>
+                </MenuItemGroup>
+                <SubMenu key="sub-2-1-1" title="Submenu 2">
+                  <MenuItemGroup title={'test4'}>
+                    <MenuItem key="aaa">aaaaa</MenuItem>
+                    <MenuItem key="bbb">bbbbb</MenuItem>
+                  </MenuItemGroup>
+                </SubMenu>
+              </SubMenu>
+              <MenuItemGroup title={'test5'}>
                 <MenuItem key="777">77777</MenuItem>
                 <MenuItem key="888">88888</MenuItem>
               </MenuItemGroup>
             </SubMenu>
 
-            <SubMenu key="sub3" title={<span><Icon name={'user'}/><span>Navigation Three</span></span>}>
+            <SubMenu key="sub-3" title={<span><Icon name={'user'}/><span>Navigation Three</span></span>}>
               <Menu.Item key="option5">Option 5</Menu.Item>
               <Menu.Item key="option6">Option 6</Menu.Item>
-              <SubMenu key="sub4" title="Submenu">
+              <SubMenu key="sub-3-1" title="Submenu 1">
                 <Menu.Item key="option7">Option 7</Menu.Item>
                 <Menu.Item key="option8">Option 8</Menu.Item>
+                <SubMenu key="sub-3-1-1" title="Submenu 2">
+                  <Menu.Item key="option1">Option 1</Menu.Item>
+                  <Menu.Item key="option2">Option 2</Menu.Item>
+                </SubMenu>
               </SubMenu>
             </SubMenu>
           </Menu>

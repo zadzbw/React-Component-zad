@@ -11,7 +11,7 @@
   z-index: @z-index-dropdown;
   color: @text-color;
   background: @body-background;
-  line-height: 46px;
+  line-height: 42px;
   user-select: none;
 
   &-item-group-title {
@@ -76,4 +76,21 @@
     }
   }
 
+  &-inline .@{menu-prefix}-sub > .@{menu-prefix}-sub-title {
+    &:after {
+      font: normal normal normal 14px/1 FontAwesome;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      content: '\f107';
+      transition: all 0.3s @ease-out;
+    }
+  }
+
+  &-inline .@{menu-prefix}-sub.@{menu-prefix}-sub-expand > .@{menu-prefix}-sub-title {
+    &:after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
 }
