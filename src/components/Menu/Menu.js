@@ -77,9 +77,10 @@ export default class Menu extends Component {
 
   _expandSub(args) {
     const expandKeys = this.state.expandKeys.concat();
-    const {eventKey} = args;
-    if (!args.expand) {
-      if (!args.subParentKey && this.props.onlyExpandOneSub) {
+    const {eventKey, expand, subParentKey} = args;
+    if (!expand) {
+      // 当onlyExpandOneSub为true时，清空expandKeys数组
+      if (!subParentKey && this.props.onlyExpandOneSub) {
         _remove(expandKeys, (key) => eventKey !== key);
       }
       expandKeys.push(eventKey);

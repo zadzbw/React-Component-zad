@@ -37,6 +37,7 @@ export default class SubMenu extends Component {
       return React.cloneElement(child,
         {
           ...child.props,
+          // 传递每一级的level，用于缩进
           level: props.level + 1,
           prefix: props.prefix,
           expandKeys: props.expandKeys,
@@ -44,6 +45,7 @@ export default class SubMenu extends Component {
           eventKey: child.key,
           _expandSub: props._expandSub,
           _selectItem: props._selectItem,
+          // 用于传递上一级sub的key
           subParentKey: child.type === _SubMenu ? this.props.eventKey : '',
         });
     });

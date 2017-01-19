@@ -1,0 +1,123 @@
+exports[`Menu Test expand sub 1`] = `
+<ul
+  className="zad-menu zad-menu-inline">
+  <SubMenu
+    _expandSub={[Function]}
+    _selectItem={[Function]}
+    eventKey="sub-1"
+    expandKeys={
+      Array [
+        "sub-3",
+        "sub-3-1",
+        "sub-3-1-1",
+      ]
+    }
+    level={1}
+    prefix="zad-menu"
+    selectedKeys={
+      Array [
+        "222",
+      ]
+    }
+    title="Navigation One">
+    <MenuItemGroup
+      title="test1">
+      <MenuItem>
+        11111
+      </MenuItem>
+      <MenuItem>
+        22222
+      </MenuItem>
+    </MenuItemGroup>
+    <MenuItemGroup
+      title="test2">
+      <MenuItem>
+        33333
+      </MenuItem>
+      <MenuItem>
+        44444
+      </MenuItem>
+    </MenuItemGroup>
+  </SubMenu>
+  <SubMenu
+    _expandSub={[Function]}
+    _selectItem={[Function]}
+    eventKey="sub-3"
+    expandKeys={
+      Array [
+        "sub-3",
+        "sub-3-1",
+        "sub-3-1-1",
+      ]
+    }
+    level={1}
+    prefix="zad-menu"
+    selectedKeys={
+      Array [
+        "222",
+      ]
+    }
+    title="Navigation Three">
+    <MenuItem>
+      Option 5
+    </MenuItem>
+    <MenuItem>
+      Option 6
+    </MenuItem>
+    <SubMenu
+      title="Submenu 1">
+      <MenuItem>
+        Option 7
+      </MenuItem>
+      <MenuItem>
+        Option 8
+      </MenuItem>
+      <SubMenu
+        title="Submenu 2">
+        <MenuItem>
+          Option 1
+        </MenuItem>
+        <MenuItem>
+          Option 2
+        </MenuItem>
+      </SubMenu>
+    </SubMenu>
+  </SubMenu>
+</ul>
+`;
+
+exports[`Menu Test select item 1`] = `
+<ul
+  className="zad-menu zad-menu-inline">
+  <SubMenu
+    _expandSub={[Function]}
+    _selectItem={[Function]}
+    eventKey="sub-1"
+    expandKeys={
+      Array [
+        "sub-1",
+      ]
+    }
+    level={1}
+    prefix="zad-menu"
+    selectedKeys={
+      Array [
+        "333",
+      ]
+    }
+    title="Navigation One">
+    <MenuItem>
+      00000
+    </MenuItem>
+    <MenuItem>
+      11111
+    </MenuItem>
+    <MenuItem>
+      22222
+    </MenuItem>
+    <MenuItem>
+      33333
+    </MenuItem>
+  </SubMenu>
+</ul>
+`;
