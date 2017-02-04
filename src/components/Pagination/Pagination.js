@@ -21,6 +21,8 @@ export default class Pagination extends Component {
     this._hasNext = this::this._hasNext;
     this._clickPrev = this::this._clickPrev;
     this._clickNext = this::this._clickNext;
+    this._jumpPrev = this::this._jumpPrev;
+    this._jumpNext = this::this._jumpNext;
   }
 
   static propTypes = {
@@ -79,6 +81,14 @@ export default class Pagination extends Component {
     this._hasNext() && this._onPageChange(this.state._current + 1);
   }
 
+  _jumpPrev() {
+    this._onPageChange(Math.max(1, this.state._current - 5));
+  }
+
+  _jumpNext() {
+    this._onPageChange(Math.min(this._getPage(), this.state._current + 5));
+  }
+
   render() {
     const {total}= this.props;
     const {_current, _pageSize} = this.state;
@@ -129,6 +139,8 @@ export default class Pagination extends Component {
           <li
             className={`${paginationPrefix}-jump-prev`}
             key="to-prev"
+            title="向前5页"
+            onClick={this._jumpPrev}
           >
             <a/>
           </li>
@@ -139,6 +151,8 @@ export default class Pagination extends Component {
           <li
             className={`${paginationPrefix}-jump-next`}
             key="to-next"
+            title="向后5页"
+            onClick={this._jumpNext}
           >
             <a/>
           </li>

@@ -61,19 +61,49 @@
   }
 
   &-jump-prev, &-jump-next {
-    &:after {
-      content: "•••";
-      display: block;
-      color: @disabled-color;
-      text-align: center;
-    }
-
-    &:hover {
+    a {
       &:after {
-        color: @primary-color;
+        content: "•••";
+        display: block;
+        color: @disabled-color;
+        text-align: center;
       }
     }
 
+    &:hover {
+      a {
+        &:after {
+          font: normal normal normal 14px/1 FontAwesome;
+          color: @primary-color;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: block;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+
+  &-jump-prev {
+    &:hover {
+      a {
+        &:after {
+          content: "\f104\f104";
+        }
+      }
+    }
+  }
+
+  &-jump-next {
+    &:hover {
+      a {
+        &:after {
+          content: "\f105\f105";
+        }
+      }
+    }
   }
 
   &-prev, &-next {
