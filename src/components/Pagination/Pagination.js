@@ -41,6 +41,14 @@ export default class Pagination extends Component {
     onChange: (page) => undefined,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if ('current' in nextProps) {
+      this.setState({
+        _current: nextProps.current,
+      });
+    }
+  }
+
   _getPage(p) {
     let _pageSize = p;
     if (typeof _pageSize === 'undefined') {

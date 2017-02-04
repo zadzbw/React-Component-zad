@@ -49,9 +49,11 @@ export default class TestPage extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      page: 2,
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
+    this.testPage = this.testPage.bind(this);
     this.changeLoading = this.changeLoading.bind(this);
   }
 
@@ -215,11 +217,17 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div>
-          <Pagination defaultCurrent={3} total={150}/>
+          <Pagination current={this.state.page} total={155} onChange={this.testPage}/>
         </div>
 
       </div>
     );
+  }
+
+  testPage(page) {
+    this.setState({
+      page,
+    });
   }
 
   testDropDown(value, e) {
