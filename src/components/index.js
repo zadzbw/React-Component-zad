@@ -14,6 +14,7 @@ import Breadcrumb from './Breadcrumb';
 import DropDown from './DropDown';
 import Loading from './Loading';
 import Menu from './Menu';
+import Pagination from './Pagination';
 
 Button.Group = ButtonGroup;
 
@@ -28,4 +29,5 @@ export {
   DropDown,
   Loading,
   Menu,
+  Pagination,
 };

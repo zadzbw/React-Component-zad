@@ -1,0 +1,132 @@
+@import "../../style/variables";
+@import "../../style/mixins/index";
+
+.zad-pagination {
+  font-size: @font-size-base;
+  .clearfix();
+
+  &-item {
+    float: left;
+    cursor: pointer;
+    border-radius: @border-radius-base;
+    user-select: none;
+    min-width: 28px;
+    height: 28px;
+    line-height: 26px;
+    text-align: center;
+    list-style: none;
+    border: 1px solid @border-color-base;
+    background-color: @body-background;
+    margin-right: 8px;
+
+    a {
+      text-decoration: none;
+      color: @text-color;
+      margin: 0 6px;
+      transition: none; // 在切换页数的时候，去除动画
+    }
+
+    &:hover {
+      transition: all @animation-duration-slow ease;
+      border-color: @primary-color;
+      a {
+        color: @primary-color;
+      }
+    }
+
+    &-active {
+      border-color: @primary-color;
+      background-color: @primary-color;
+      &:hover a, a {
+        color: @body-background;
+      }
+    }
+  }
+
+  &-prev, &-next, &-jump-prev, &-jump-next {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    border-radius: @border-radius-base;
+    color: @text-color;
+    user-select: none;
+    min-width: 28px;
+    height: 28px;
+    line-height: 26px;
+    text-align: center;
+    list-style: none;
+    margin-right: 8px;
+    transition: all @animation-duration-slow ease;
+    display: inline-block;
+  }
+
+  &-jump-prev, &-jump-next {
+    &:after {
+      content: "•••";
+      display: block;
+      color: @disabled-color;
+      text-align: center;
+    }
+
+    &:hover {
+      &:after {
+        color: @primary-color;
+      }
+    }
+
+  }
+
+  &-prev, &-next {
+    border: 1px solid @border-color-base;
+    background-color: @body-background;
+
+    a {
+      color: @text-color;
+      &:after {
+        font: normal normal normal 14px/1 FontAwesome;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+      }
+    }
+
+    &:hover {
+      border-color: @primary-color;
+      a {
+        color: @primary-color;
+      }
+    }
+  }
+
+  &-prev {
+    a {
+      &:after {
+        content: "\f104";
+      }
+    }
+  }
+
+  &-next {
+    a {
+      &:after {
+        content: "\f105";
+      }
+    }
+  }
+
+  &-disabled {
+    &:hover {
+      border-color: @border-color-base;
+      a {
+        color: @disabled-color;
+        cursor: not-allowed;
+      }
+    }
+    cursor: not-allowed;
+    a {
+      color: @disabled-color;
+    }
+  }
+}

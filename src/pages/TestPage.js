@@ -5,7 +5,7 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading, Menu} from '../components';
+import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading, Menu, Pagination} from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
 const MenuItem = Menu.Item;
@@ -167,7 +167,7 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div style={{width: 240}}>
-          <Menu defaultSelectedKeys={['222']} defaultExpandKeys={['sub-1']} onlyExpandOneSub={true}>
+          <Menu onlyExpandOneSub>
             <SubMenu key="sub-1" title={<span><Icon name={'folder-o'}/><span>Navigation One</span></span>}>
               <MenuItemGroup title={'test1'}>
                 <MenuItem key="111">11111</MenuItem>
@@ -211,6 +211,11 @@ export default class TestPage extends React.Component {
               </SubMenu>
             </SubMenu>
           </Menu>
+        </div>
+        <br/>
+
+        <div>
+          <Pagination defaultCurrent={3} total={150}/>
         </div>
 
       </div>
