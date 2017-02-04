@@ -217,7 +217,7 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div>
-          <Pagination current={this.state.page} total={155} onChange={this.testPage}/>
+          <Pagination current={this.state.page} total={155} onChange={this.testPage} showQuickJumper/>
         </div>
 
       </div>

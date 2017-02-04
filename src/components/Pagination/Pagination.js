@@ -23,6 +23,7 @@ export default class Pagination extends Component {
     this._clickNext = this::this._clickNext;
     this._jumpPrev = this::this._jumpPrev;
     this._jumpNext = this::this._jumpNext;
+    this._quickJump = this::this._quickJump;
   }
 
   static propTypes = {
@@ -32,6 +33,7 @@ export default class Pagination extends Component {
     pageSize: PropTypes.number,
     defaultPageSize: PropTypes.number,
     onChange: PropTypes.func,
+    showQuickJumper: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -39,6 +41,7 @@ export default class Pagination extends Component {
     total: 0,
     defaultPageSize: 10,
     onChange: (page) => undefined,
+    showQuickJumper: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -97,9 +100,40 @@ export default class Pagination extends Component {
     this._onPageChange(Math.min(this._getPage(), this.state._current + 5));
   }
 
+  _quickJump(e) {
+    if (e.keyCode === 13) {
+      const {total} = this.props;
+      const {_current} = this.state;
+      const inputValue = e.target.value;
+      const maxPage = this._getPage();
+
+      if (inputValue.length && total !== 0) {
+        if (isNaN(inputValue)) {
+          e.target.value = _current;
+          console.warn('Please input a Number');
+        } else {
+          if (1 <= inputValue && inputValue <= maxPage) {
+            if (_current !== Math.round(inputValue)) {
+              this._onPageChange(Math.round(inputValue));
+              e.target.value = Math.round(inputValue);
+            }
+          } else if (inputValue < 1) {
+            this._onPageChange(1);
+            e.target.value = 1;
+          } else {
+            this._onPageChange(maxPage);
+            e.target.value = maxPage;
+          }
+        }
+      } else {
+        e.target.value = '';
+      }
+    }
+  }
+
   render() {
-    const {total}= this.props;
-    const {_current, _pageSize} = this.state;
+    const {showQuickJumper}= this.props;
+    const {_current} = this.state;
     const pages = this._getPage();
     const itemList = [];
 
@@ -190,6 +224,13 @@ export default class Pagination extends Component {
       }
     }
 
+    const quickJumper = !showQuickJumper ? null : (
+      <li className={`${paginationPrefix}-quick-jumper`}>
+        to
+        <input type="text" onKeyUp={this._quickJump} defaultValue={_current}/>
+      </li>
+    );
+
     return (
       <ul className={paginationPrefix}>
         <li
@@ -207,6 +248,7 @@ export default class Pagination extends Component {
         >
           <a/>
         </li>
+        {quickJumper}
       </ul>
     );
   }

@@ -159,4 +159,36 @@
       color: @disabled-color;
     }
   }
+
+  &-quick-jumper {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    user-select: none;
+
+    input {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+      margin: 0 8px;
+      padding: 4px 7px;
+      border: 1px solid @border-color-base;
+      border-radius: @border-radius-base;
+      outline: none;
+      font-size: @font-size-sm;
+      color: rgba(0, 0, 0, 0.65);
+      background-color: @body-background;
+      transition: all @animation-duration-slow @ease-in-out;
+
+      &:hover {
+        border-color: tint(@primary-color, 20%);
+      }
+
+      &:focus {
+        border-color: tint(@primary-color, 20%);
+        box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+      }
+    }
+  }
 }
