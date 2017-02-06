@@ -4,7 +4,7 @@
   "description": "a simple react component lib",
   "main": "src/components/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -u",
     "start": "NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --history-api-fallback",
     "build": "NODE_ENV=production webpack --progress --profile --colors"
   },
