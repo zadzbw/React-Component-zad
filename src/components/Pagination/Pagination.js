@@ -26,6 +26,8 @@ export default class Pagination extends Component {
     this._quickJump = this::this._quickJump;
   }
 
+  // todo 等把Select组件完成后，加入pageSizeChange功能
+
   static propTypes = {
     current: PropTypes.number,
     defaultCurrent: PropTypes.number,
@@ -34,6 +36,9 @@ export default class Pagination extends Component {
     defaultPageSize: PropTypes.number,
     onChange: PropTypes.func,
     showQuickJumper: PropTypes.bool,
+    onPageSizeChange: PropTypes.func,
+    showSizeChanger: PropTypes.bool,
+    pageSizeOption: PropTypes.arrayOf(PropTypes.number),
   };
 
   static defaultProps = {
@@ -42,6 +47,9 @@ export default class Pagination extends Component {
     defaultPageSize: 10,
     onChange: (page) => undefined,
     showQuickJumper: false,
+    onPageSizeChange: (size) => undefined,
+    showSizeChanger: false,
+    pageSizeOption: [10, 20, 30, 40],
   };
 
   componentWillReceiveProps(nextProps) {
@@ -176,7 +184,7 @@ export default class Pagination extends Component {
       }
 
       // 向前或向后跳转
-      if (_current >= 5) {
+      if (_current >= 4) {
         itemList.unshift(
           <li
             className={`${paginationPrefix}-jump-prev`}
@@ -188,7 +196,7 @@ export default class Pagination extends Component {
           </li>
         );
       }
-      if (_current <= pages - 4) {
+      if (_current <= pages - 3) {
         itemList.push(
           <li
             className={`${paginationPrefix}-jump-next`}
