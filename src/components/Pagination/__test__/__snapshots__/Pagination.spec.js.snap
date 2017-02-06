@@ -1,0 +1,113 @@
+exports[`Pagination Test Normal 1`] = `
+<ul
+  className="zad-pagination">
+  <li
+    className="zad-pagination-prev zad-pagination-disabled"
+    onClick={[Function]}
+    title="上一页">
+    <a />
+  </li>
+  <PageItem
+    active={true}
+    itemClick={[Function]}
+    page={1} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={2} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={3} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={4} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={5} />
+  <li
+    className="zad-pagination-jump-next"
+    onClick={[Function]}
+    title="向后5页">
+    <a />
+  </li>
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={16} />
+  <li
+    className="zad-pagination-next"
+    onClick={[Function]}
+    title="下一页">
+    <a />
+  </li>
+</ul>
+`;
+
+exports[`Pagination Test QuickJump 1`] = `
+<ul
+  className="zad-pagination">
+  <li
+    className="zad-pagination-prev"
+    onClick={[Function]}
+    title="上一页">
+    <a />
+  </li>
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={1} />
+  <li
+    className="zad-pagination-jump-prev"
+    onClick={[Function]}
+    title="向前5页">
+    <a />
+  </li>
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={7} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={8} />
+  <PageItem
+    active={true}
+    itemClick={[Function]}
+    page={9} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={10} />
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={11} />
+  <li
+    className="zad-pagination-jump-next"
+    onClick={[Function]}
+    title="向后5页">
+    <a />
+  </li>
+  <PageItem
+    active={false}
+    itemClick={[Function]}
+    page={16} />
+  <li
+    className="zad-pagination-next"
+    onClick={[Function]}
+    title="下一页">
+    <a />
+  </li>
+  <li
+    className="zad-pagination-quick-jumper">
+    to
+    <input
+      defaultValue={9}
+      onKeyUp={[Function]}
+      type="text" />
+  </li>
+</ul>
+`;
