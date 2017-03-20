@@ -12,9 +12,8 @@ export default class TabBar extends Component {
   }
 
   _tabChange() {
-    const {_tabChange} = this.props;
-
-
+    const {_tabChange, _key} = this.props;
+    _tabChange(_key);
   }
 
   render() {

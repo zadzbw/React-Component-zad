@@ -32,7 +32,7 @@ export default class Tab extends Component {
   static defaultProps = {
     defaultCurrent: '1',
     onTabChange: (current) => undefined,
-    type: 'inline',
+    type: 'card',
   };
 
   componentWillReceiveProps(nextProps) {
@@ -61,8 +61,15 @@ export default class Tab extends Component {
     this.adjustCurrent();
   }
 
-  _tabChange() {
-    console.log(123);
+  _tabChange(key) {
+    const {current} = this.state;
+    const isChange = current !== key;
+    if (!('current' in this.props)) {
+      this.setState({
+        current: key,
+      });
+    }
+    isChange && this.props.onTabChange(key);
   }
 
   render() {

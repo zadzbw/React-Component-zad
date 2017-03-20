@@ -1,1 +1,36 @@
 @import "../../style/variables";
+@import "../../style/mixins/index";
+
+@tab-prefix: zad-tab;
+
+.@{tab-prefix} {
+  .clearfix();
+
+  &-card &-bar {
+    display: inline-block;
+    height: 100%;
+    color: @text-color;
+    user-select: none;
+    margin: 0 2px 0 0;
+    padding: 5px 16px 4px;
+    border: 1px solid @border-color-base;
+    border-bottom: 0;
+    border-radius: @border-radius-base @border-radius-base 0 0;
+    transition: all 0.3s @ease-in-out;
+    background: #f9f9f9;
+
+    &:not(.@{tab-prefix}-bar-active):hover {
+      color: tint(@primary-color, 10%);
+    }
+
+    &:not(.@{tab-prefix}-bar-active):active {
+      color: shade(@primary-color, 10%);
+    }
+
+    &-active {
+      color: @primary-color;
+      background-color: @body-background;
+      transform: translateZ(0);
+    }
+  }
+}
