@@ -5,12 +5,26 @@ import React from 'react';
 
 import './TestPage.less';
 
-import {Icon, Button, Row, Col, Affix, ToTop, Breadcrumb, DropDown, Loading, Menu, Pagination} from '../components';
+import {
+  Icon,
+  Button,
+  Row,
+  Col,
+  Affix,
+  ToTop,
+  Breadcrumb,
+  DropDown,
+  Loading,
+  Menu,
+  Pagination,
+  Tab,
+} from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+const TabItem = Tab.TabItem;
 
 const mock = {
   bread: {
@@ -216,9 +230,18 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
 
-        <div>
-          <Pagination current={this.state.page} total={155} onChange={this.testPage} showQuickJumper/>
+        <Pagination current={this.state.page} total={155} onChange={this.testPage} showQuickJumper/>
+        <br/>
+
+        <div style={{width: 400}}>
+          <Tab>
+            <TabItem name="Tab 1" key="11">11111</TabItem>
+            <TabItem name="Tab 2" key="22">22222</TabItem>
+            <TabItem name="Tab 3" key="33">33333</TabItem>
+            12345
+          </Tab>
         </div>
+        <br/>
 
       </div>
     );

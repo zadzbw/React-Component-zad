@@ -2,8 +2,8 @@
  * Created by zad on 17/2/6.
  */
 import Tab from './Tab';
-import TabPane from './TabPane';
+import TabItem from './TabItem';
 import './Tab.less';
 
-Tab.TabPane = TabPane;
+Tab.TabItem = TabItem;
 export default Tab;
