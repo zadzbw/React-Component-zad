@@ -10,7 +10,7 @@ import Loader from '../../Loading/Loader';
 describe('Loading Test', () => {
   it('normal', () => {
     const wrapper = shallow(
-      <Loading size={'other'}/>
+      <Loading size={'default'}/>
     );
 
     expect(wrapper.shallow().hasClass('zad-loader-is-loading')).toBeTruthy();
@@ -50,7 +50,7 @@ describe('Loading Test', () => {
     expect(wrapper.shallow().hasClass('zad-loader-is-loading')).toBeFalsy();
     expect(wrapper.shallow().hasClass('zad-loader-show-tip')).toBeFalsy();
     expect(wrapper.shallow().hasClass('zad-loader-sm')).toBeFalsy();
-    expect(wrapper.shallow().find('.zad-loader-tip').isEmpty()).toBeTruthy();
+    expect(wrapper.shallow().find('.zad-loader-tip').exists()).toBeFalsy();
     expect(shallowToJson(wrapper.shallow())).toMatchSnapshot();
   });
 

@@ -74,28 +74,28 @@ describe('Menu Test', () => {
     expect(wrapper.state().expandKeys).toEqual(['sub-1']);
 
     // child 1 before click
-    expect(wrapper.childAt(1).shallow().find(MenuItem).isEmpty()).toBeTruthy();
-    expect(wrapper.childAt(1).shallow().find(SubMenu).isEmpty()).toBeTruthy();
+    expect(wrapper.childAt(1).shallow().find(MenuItem).exists()).toBeFalsy();
+    expect(wrapper.childAt(1).shallow().find(SubMenu).exists()).toBeFalsy();
     expect(wrapper.childAt(1).shallow().hasClass('zad-menu-sub-expand')).toBeFalsy();
 
     // child 1 click simulate
     wrapper.childAt(1).shallow().find('.zad-menu-sub-title').simulate('click');
 
     // child 1 after click
-    expect(wrapper.childAt(1).shallow().find(MenuItem).isEmpty()).toBeFalsy();
-    expect(wrapper.childAt(1).shallow().find(SubMenu).isEmpty()).toBeFalsy();
+    expect(wrapper.childAt(1).shallow().find(MenuItem).exists()).toBeTruthy();
+    expect(wrapper.childAt(1).shallow().find(SubMenu).exists()).toBeTruthy();
     expect(wrapper.childAt(1).shallow().hasClass('zad-menu-sub-expand')).toBeTruthy();
     expect(wrapper.state().expandKeys).toEqual(['sub-1', 'sub-3']);
 
     // child 0 before click
-    expect(wrapper.childAt(0).shallow().find(MenuItem).isEmpty()).toBeFalsy();
+    expect(wrapper.childAt(0).shallow().find(MenuItem).exists()).toBeTruthy();
     expect(wrapper.childAt(0).shallow().hasClass('zad-menu-sub-expand')).toBeTruthy();
 
     // child 0 click simulate
     wrapper.childAt(0).shallow().find('.zad-menu-sub-title').simulate('click');
 
     // child 0 after click
-    expect(wrapper.childAt(0).shallow().find(MenuItem).isEmpty()).toBeTruthy();
+    expect(wrapper.childAt(0).shallow().find(MenuItem).exists()).toBeFalsy();
     expect(wrapper.childAt(0).shallow().hasClass('zad-menu-sub-expand')).toBeFalsy();
     expect(wrapper.state().expandKeys).toEqual(['sub-3']);
 
