@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import _findIndex from 'lodash/findIndex';
 import isOneOf from '../../utils/isOneOf';
+import validChild from './validChild';
 import keyCode from './keyCode';
 import TabItem from './TabItem';
 import TabBar from './TabBar';
@@ -15,7 +16,7 @@ const _type = {
 };
 export const tabPrefix = 'zad-tab';
 
-export default class Tab extends Component {
+class Tab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,7 @@ export default class Tab extends Component {
     };
     this.adjustCurrent = this::this.adjustCurrent;
     this._tabChange = this::this._tabChange;
-    this.getActiveIndex = this::this.getActiveIndex;
+    this.getInfo = this::this.getInfo;
     this.setStyle = this::this.setStyle;
   }
 
@@ -61,8 +62,8 @@ export default class Tab extends Component {
   adjustCurrent() {
     const props = this.props;
     if ('defaultCurrent' in props) {
-      const {children, defaultCurrent} = props;
-      const keys = Children.map(children, child => child.key);
+      const {defaultCurrent} = props;
+      const keys = this.getInfo().keys;
       if (!isOneOf(keys, defaultCurrent)) {
         this.setState({
           current: keys[0],
@@ -84,16 +85,20 @@ export default class Tab extends Component {
     }
   }
 
-  getActiveIndex() {
+  getInfo() {
     const {children} = this.props;
     const {current} = this.state;
-    const keys = Children.map(children, child => child.key || '');
-    return _findIndex(keys, (key) => key === current);
+    const keys = Children.map(children, child => child.props._key);
+    const index = _findIndex(keys, (key) => key === current);
+    return {
+      index,
+      keys,
+    };
   }
 
   // todo 想一个不操作dom的方法去改变style?
   setStyle(isFirst) {
-    const activeIndex = this.getActiveIndex();
+    const activeIndex = this.getInfo().index;
     const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
     if (!tabBarElm) {
       return;
@@ -143,8 +148,8 @@ export default class Tab extends Component {
 
   // 获取下一个key
   getNextKey = (flag = true) => {
-    const index = this.getActiveIndex();
-    const keys = Children.map(this.props.children, child => child.key || '');
+    const index = this.getInfo().index;
+    const keys = this.getInfo().keys;
     const len = keys.length;
     let key;
     if (flag) {
@@ -157,28 +162,19 @@ export default class Tab extends Component {
 
   render() {
     const {type, className, children} = this.props;
-    const {current} =this.state;
+    const activeIndex = this.getInfo().index;
 
-    const tabBars = Children.map(children, (child, index) => {
-      if (child.type !== TabItem) {
-        return null;
-      }
-      const active = current === child.key;
+    const tabBars = Children.map(children, (child, i) => {
       return React.createElement(TabBar, {
-        active,
-        name: child.props.name,
-        _key: child.key,
+        ...child.props,
+        active: activeIndex === i,
         _tabChange: this._tabChange,
-        ref: (a) => this[`TabBar-${index}`] = a,
+        ref: (a) => this[`TabBar-${i}`] = a,
       });
     });
-    const tabItems = Children.map(children, (child) => {
-      if (child.type !== TabItem) {
-        return null;
-      }
-      const active = current === child.key;
+    const tabItems = Children.map(children, (child, i) => {
       return React.cloneElement(child, {
-        active,
+        active: activeIndex === i,
       });
     });
 
@@ -203,3 +199,5 @@ export default class Tab extends Component {
     );
   }
 }
+
+export default validChild(Tab, TabItem);
