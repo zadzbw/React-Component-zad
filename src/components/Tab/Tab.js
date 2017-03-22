@@ -2,7 +2,9 @@
  * Created by zad on 17/2/6.
  */
 import React, {PropTypes, Component, Children} from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import _findIndex from 'lodash/findIndex';
 import isOneOf from '../../utils/isOneOf';
 import TabItem from './TabItem';
 import TabBar from './TabBar';
@@ -20,6 +22,7 @@ export default class Tab extends Component {
     };
     this.adjustCurrent = this::this.adjustCurrent;
     this._tabChange = this::this._tabChange;
+    this.setBottomStyle = this::this.setBottomStyle;
   }
 
   static propTypes = {
@@ -43,6 +46,15 @@ export default class Tab extends Component {
     }
   }
 
+  componentDidMount() {
+    this.adjustCurrent();
+    this.setBottomStyle();
+  }
+
+  componentDidUpdate() {
+    this.setBottomStyle();
+  }
+
   // 排除非法的current
   adjustCurrent() {
     const props = this.props;
@@ -57,10 +69,6 @@ export default class Tab extends Component {
     }
   }
 
-  componentDidMount() {
-    this.adjustCurrent();
-  }
-
   _tabChange(key) {
     const {current} = this.state;
     const isChange = current !== key;
@@ -72,22 +80,40 @@ export default class Tab extends Component {
     isChange && this.props.onTabChange(key);
   }
 
+  setBottomStyle() {
+    const {children} = this.props;
+    const {current} = this.state;
+    const keys = Children.map(children, child => child.key);
+    const activeIndex = _findIndex(keys, (key) => key === current);
+    const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
+    const tabBarRect = tabBarElm.getBoundingClientRect();
+
+    const style = {
+      width: tabBarRect.width - 2, // 1px border on both sides
+      offset: tabBarRect.left - this.barsWrap.getBoundingClientRect().left + 1, // 1px border on left side
+    };
+
+    const barsBottom = ReactDOM.findDOMNode(this.barsBottom);
+    barsBottom.style.width = `${style.width}px`;
+    barsBottom.style.transform = `translateX(${style.offset}px)`;
+    barsBottom.style.WebkitTransform = `translateX(${style.offset}px)`;
+  }
+
   render() {
     const {type, className, children} = this.props;
     const {current} =this.state;
 
-    const tabBars = Children.map(children, (child) => {
+    const tabBars = Children.map(children, (child, index) => {
       if (child.type !== TabItem) {
         return null;
       }
-      return (
-        <TabBar
-          current={current}
-          name={child.props.name}
-          _key={child.key}
-          _tabChange={this._tabChange}
-        />
-      );
+      return React.createElement(TabBar, {
+        current,
+        name: child.props.name,
+        _key: child.key,
+        _tabChange: this._tabChange,
+        ref: (a) => this[`TabBar-${index}`] = a,
+      });
     });
     const tabItems = Children.map(children, (child) => {
       if (child.type !== TabItem) {
@@ -109,7 +135,12 @@ export default class Tab extends Component {
     return (
       <div className={tabClass}>
         <div className={`${tabPrefix}-bars-list`}>
-          {tabBars}
+          <div className={`${tabPrefix}-bars-container`}>
+            <div className={`${tabPrefix}-bars-wrap`} ref={(a) => this.barsWrap = a}>
+              <div className={`${tabPrefix}-bars-bottom`} ref={(a) => this.barsBottom = a}/>
+              {tabBars}
+            </div>
+          </div>
         </div>
         <div className={`${tabPrefix}-content`}>
           {tabItems}
