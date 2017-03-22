@@ -6,6 +6,7 @@
 
 .@{tab-prefix} {
   .clearfix();
+  overflow: hidden;
 
   &-bars {
     &-list {
@@ -34,7 +35,7 @@
       bottom: 0;
       z-index: 1;
       background-color: @primary-color;
-      transition: all 0.3s @ease-in-out;
+      will-change: transfrom;
       transform-origin: 0 0;
     }
   }
@@ -68,6 +69,29 @@
       background-color: @body-background;
       transform: translateZ(0);
       padding-bottom: @bar-padding + 1;
+    }
+  }
+
+  &-content {
+    display: flex;
+    will-change: margin-left;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  &-item {
+    display: inline-block;
+    flex-shrink: 0; // 不会缩小
+    width: 100%;
+    transition: opacity 0.3s @ease-in-out;
+
+    &-active {
+      opacity: 1;
+    }
+
+    &-inactive {
+      height: 0;
+      opacity: 0;
     }
   }
 }

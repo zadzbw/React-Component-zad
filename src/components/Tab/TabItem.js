@@ -5,9 +5,10 @@ import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
 import {tabPrefix} from './Tab';
 
-const TabItem = ({current, _key, children}) => {
+const TabItem = ({active, children}) => {
   const itemClass = classNames(`${tabPrefix}-item`, {
-    [`${tabPrefix}-item-active`]: current === _key,
+    [`${tabPrefix}-item-active`]: active,
+    [`${tabPrefix}-item-inactive`]: !active,
   });
   return (
     <div className={itemClass}>{children}</div>
@@ -15,8 +16,7 @@ const TabItem = ({current, _key, children}) => {
 };
 
 TabItem.propTypes = {
-  name: PropTypes.string,
-  _key: PropTypes.string,
+  active: PropTypes.bool,
 };
 
 export default TabItem;

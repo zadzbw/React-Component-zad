@@ -17,9 +17,9 @@ export default class TabBar extends Component {
   }
 
   render() {
-    const {current, name, _key} = this.props;
+    const {active, name} = this.props;
     const barClass = classNames(`${tabPrefix}-bar`, {
-      [`${tabPrefix}-bar-active`]: current === _key,
+      [`${tabPrefix}-bar-active`]: active,
     });
 
     return (

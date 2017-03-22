@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import _findIndex from 'lodash/findIndex';
 import isOneOf from '../../utils/isOneOf';
+import keyCode from './keyCode';
 import TabItem from './TabItem';
 import TabBar from './TabBar';
 
@@ -22,7 +23,8 @@ export default class Tab extends Component {
     };
     this.adjustCurrent = this::this.adjustCurrent;
     this._tabChange = this::this._tabChange;
-    this.setBottomStyle = this::this.setBottomStyle;
+    this.getActiveIndex = this::this.getActiveIndex;
+    this.setStyle = this::this.setStyle;
   }
 
   static propTypes = {
@@ -48,11 +50,11 @@ export default class Tab extends Component {
 
   componentDidMount() {
     this.adjustCurrent();
-    this.setBottomStyle();
+    this.setStyle(true);
   }
 
   componentDidUpdate() {
-    this.setBottomStyle();
+    this.setStyle(false);
   }
 
   // 排除非法的current
@@ -72,32 +74,86 @@ export default class Tab extends Component {
   _tabChange(key) {
     const {current} = this.state;
     const isChange = current !== key;
-    if (!('current' in this.props)) {
-      this.setState({
-        current: key,
-      });
+    if (isChange) {
+      if (!('current' in this.props)) {
+        this.setState({
+          current: key,
+        });
+      }
+      this.props.onTabChange(key);
     }
-    isChange && this.props.onTabChange(key);
   }
 
-  setBottomStyle() {
+  getActiveIndex() {
     const {children} = this.props;
     const {current} = this.state;
-    const keys = Children.map(children, child => child.key);
-    const activeIndex = _findIndex(keys, (key) => key === current);
-    const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
-    const tabBarRect = tabBarElm.getBoundingClientRect();
-
-    const style = {
-      width: tabBarRect.width - 2, // 1px border on both sides
-      offset: tabBarRect.left - this.barsWrap.getBoundingClientRect().left + 1, // 1px border on left side
-    };
-
-    const barsBottom = ReactDOM.findDOMNode(this.barsBottom);
-    barsBottom.style.width = `${style.width}px`;
-    barsBottom.style.transform = `translateX(${style.offset}px)`;
-    barsBottom.style.WebkitTransform = `translateX(${style.offset}px)`;
+    const keys = Children.map(children, child => child.key || '');
+    return _findIndex(keys, (key) => key === current);
   }
+
+  // todo 想一个不操作dom的方法去改变style?
+  setStyle(isFirst) {
+    const activeIndex = this.getActiveIndex();
+    const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
+    if (!tabBarElm) {
+      return;
+    }
+    const tabContent = this.tabContent;
+    const tabBarRect = tabBarElm.getBoundingClientRect();
+    const barsWrapRect = this.barsWrap.getBoundingClientRect();
+    const contentRect = tabContent.getBoundingClientRect();
+
+    const bottomStyle = {
+      width: tabBarRect.width - 2, // 1px border on both sides
+      offset: tabBarRect.left - barsWrapRect.left + 1, // 1px border on left side
+    };
+    this.setBottomStyle(bottomStyle, isFirst);
+
+    const contentStyle = {
+      offset: -(contentRect.width * activeIndex),
+    };
+    this.setContentStyle(contentStyle, isFirst);
+  }
+
+  setBottomStyle = (style, isFirst) => {
+    const barsBottom = this.barsBottom;
+    barsBottom.style.width = `${style.width}px`;
+    barsBottom.style.transform = barsBottom.style.WebkitTransform = `translateX(${style.offset}px)`;
+    !isFirst && (barsBottom.style.transition = 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
+  };
+
+  setContentStyle = (style, isFirst) => {
+    const tabContent = this.tabContent;
+    tabContent.style.marginLeft = `${style.offset}px`;
+    !isFirst && (tabContent.style.transition = 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
+  };
+
+  _keyDown = (e) => {
+    const code = e.keyCode;
+    if (isOneOf([keyCode.LEFT, keyCode.UP], code)) {
+      e.preventDefault();
+      const prevKey = this.getNextKey(false);
+      this._tabChange(prevKey);
+    } else if (isOneOf([keyCode.RIGHT, keyCode.DOWN], code)) {
+      e.preventDefault();
+      const nextKey = this.getNextKey(true);
+      this._tabChange(nextKey);
+    }
+  };
+
+  // 获取下一个key
+  getNextKey = (flag = true) => {
+    const index = this.getActiveIndex();
+    const keys = Children.map(this.props.children, child => child.key || '');
+    const len = keys.length;
+    let key;
+    if (flag) {
+      key = keys[(index + 1) % len];
+    } else {
+      key = keys[(len + index - 1) % len];
+    }
+    return key;
+  };
 
   render() {
     const {type, className, children} = this.props;
@@ -107,8 +163,9 @@ export default class Tab extends Component {
       if (child.type !== TabItem) {
         return null;
       }
+      const active = current === child.key;
       return React.createElement(TabBar, {
-        current,
+        active,
         name: child.props.name,
         _key: child.key,
         _tabChange: this._tabChange,
@@ -119,13 +176,10 @@ export default class Tab extends Component {
       if (child.type !== TabItem) {
         return null;
       }
-      return (
-        <TabItem
-          current={current}
-          children={child.props.children}
-          _key={child.key}
-        />
-      );
+      const active = current === child.key;
+      return React.cloneElement(child, {
+        active,
+      });
     });
 
     const tabClass = classNames(tabPrefix, {
@@ -134,7 +188,7 @@ export default class Tab extends Component {
 
     return (
       <div className={tabClass}>
-        <div className={`${tabPrefix}-bars-list`}>
+        <div className={`${tabPrefix}-bars-list`} tabIndex="0" onKeyDown={this._keyDown}>
           <div className={`${tabPrefix}-bars-container`}>
             <div className={`${tabPrefix}-bars-wrap`} ref={(a) => this.barsWrap = a}>
               <div className={`${tabPrefix}-bars-bottom`} ref={(a) => this.barsBottom = a}/>
@@ -142,7 +196,7 @@ export default class Tab extends Component {
             </div>
           </div>
         </div>
-        <div className={`${tabPrefix}-content`}>
+        <div className={`${tabPrefix}-content`} ref={(a) => this.tabContent = a}>
           {tabItems}
         </div>
       </div>
