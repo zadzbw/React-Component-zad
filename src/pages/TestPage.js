@@ -235,10 +235,10 @@ export default class TestPage extends React.Component {
 
         <div style={{width: 400}}>
           <Tab defaultCurrent={'22'}>
-            <TabItem name="Tab 1" key="11">11111</TabItem>
+            <TabItem name="Tab 1111" key="11">11111</TabItem>
             <div>12345</div>
-            <TabItem name="Tab 2" key="22">22222</TabItem>
-            <TabItem name="Tab 3" key="33">33333</TabItem>
+            <TabItem name="Tab 22" key="22">22222</TabItem>
+            <TabItem name="Tab 333" key="33">33333</TabItem>
             <TabItem name="Tab 4">44444</TabItem>
           </Tab>
         </div>
