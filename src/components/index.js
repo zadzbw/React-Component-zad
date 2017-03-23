@@ -16,6 +16,7 @@ import Loading from './Loading';
 import Menu from './Menu';
 import Pagination from './Pagination';
 import Tab from './Tab';
+import Input from './Input';
 
 Button.Group = ButtonGroup;
 
@@ -32,4 +33,5 @@ export {
   Menu,
   Pagination,
   Tab,
+  Input,
 };

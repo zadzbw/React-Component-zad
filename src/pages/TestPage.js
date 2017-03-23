@@ -18,6 +18,7 @@ import {
   Menu,
   Pagination,
   Tab,
+  Input,
 } from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -253,6 +254,10 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <br/>
+
+        <div>
+          <Input/>
+        </div>
       </div>
     );
   }
