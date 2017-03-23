@@ -20,9 +20,8 @@ class Tab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 'current' in this.props ? this.props.current : this.props.defaultCurrent,
+      current: 'current' in this.props ? this.props.current : this.getCurrent(),
     };
-    this.adjustCurrent = this::this.adjustCurrent;
     this._tabChange = this::this._tabChange;
     this.getInfo = this::this.getInfo;
     this.setStyle = this::this.setStyle;
@@ -36,7 +35,6 @@ class Tab extends Component {
   };
 
   static defaultProps = {
-    defaultCurrent: '1',
     onTabChange: (current) => undefined,
     type: 'card',
   };
@@ -50,7 +48,6 @@ class Tab extends Component {
   }
 
   componentDidMount() {
-    this.adjustCurrent();
     this.setStyle(true);
   }
 
@@ -59,18 +56,19 @@ class Tab extends Component {
   }
 
   // 排除非法的current
-  adjustCurrent() {
+  getCurrent = () => {
     const props = this.props;
+    const {children} = props;
+    const keys = Children.map(children, child => child.props._key);
     if ('defaultCurrent' in props) {
       const {defaultCurrent} = props;
-      const keys = this.getInfo().keys;
       if (!isOneOf(keys, defaultCurrent)) {
-        this.setState({
-          current: keys[0],
-        });
+        return keys[0];
       }
+      return defaultCurrent;
     }
-  }
+    return keys[0];
+  };
 
   _tabChange(key) {
     const {current} = this.state;
@@ -98,22 +96,25 @@ class Tab extends Component {
 
   // todo 想一个不操作dom的方法去改变style?
   setStyle(isFirst) {
+    const {type} = this.props;
     const activeIndex = this.getInfo().index;
     const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
     if (!tabBarElm) {
       return;
     }
     const tabContent = this.tabContent;
-    const tabBarRect = tabBarElm.getBoundingClientRect();
-    const barsWrapRect = this.barsWrap.getBoundingClientRect();
+
+    if (type === 'inline') {
+      const tabBarRect = tabBarElm.getBoundingClientRect();
+      const barsWrapRect = this.barsWrap.getBoundingClientRect();
+      const bottomStyle = {
+        width: tabBarRect.width - 2, // 1px border on both sides
+        offset: tabBarRect.left - barsWrapRect.left + 1, // 1px border on left side
+      };
+      this.setBottomStyle(bottomStyle, isFirst);
+    }
+
     const contentRect = tabContent.getBoundingClientRect();
-
-    const bottomStyle = {
-      width: tabBarRect.width - 2, // 1px border on both sides
-      offset: tabBarRect.left - barsWrapRect.left + 1, // 1px border on left side
-    };
-    this.setBottomStyle(bottomStyle, isFirst);
-
     const contentStyle = {
       offset: -(contentRect.width * activeIndex),
     };
@@ -166,7 +167,8 @@ class Tab extends Component {
 
     const tabBars = Children.map(children, (child, i) => {
       return React.createElement(TabBar, {
-        ...child.props,
+        _key: child.props._key,
+        name: child.props.name,
         active: activeIndex === i,
         _tabChange: this._tabChange,
         ref: (a) => this[`TabBar-${i}`] = a,
@@ -187,7 +189,7 @@ class Tab extends Component {
         <div className={`${tabPrefix}-bars-list`} tabIndex="0" onKeyDown={this._keyDown}>
           <div className={`${tabPrefix}-bars-container`}>
             <div className={`${tabPrefix}-bars-wrap`} ref={(a) => this.barsWrap = a}>
-              <div className={`${tabPrefix}-bars-bottom`} ref={(a) => this.barsBottom = a}/>
+              {type === 'inline' && <div className={`${tabPrefix}-bars-bottom`} ref={(a) => this.barsBottom = a}/>}
               {tabBars}
             </div>
           </div>

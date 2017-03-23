@@ -11,6 +11,13 @@ export default class TabBar extends Component {
     this._tabChange = this::this._tabChange;
   }
 
+  static propTypes = {
+    active: PropTypes.bool,
+    name: PropTypes.string,
+    _key: PropTypes.string,
+    _tabChange: PropTypes.func,
+  };
+
   _tabChange() {
     const {_tabChange, _key} = this.props;
     _tabChange(_key);

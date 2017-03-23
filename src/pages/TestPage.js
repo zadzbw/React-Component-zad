@@ -64,6 +64,7 @@ export default class TestPage extends React.Component {
     this.state = {
       loading: true,
       page: 2,
+      tab: '3333',
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
@@ -243,10 +244,24 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <br/>
-
+        <div style={{width: 400}}>
+          <Tab current={this.state.tab} type={'inline'} onTabChange={this.testTab}>
+            <TabItem name="Tab 1" key="1111">11111</TabItem>
+            <TabItem name="Tab 2" key="2222">22222</TabItem>
+            <TabItem name="Tab 3" key="3333">33333</TabItem>
+            <TabItem name="Tab 4" key="4444">44444</TabItem>
+          </Tab>
+        </div>
+        <br/>
       </div>
     );
   }
+
+  testTab = (key) => {
+    this.setState({
+      tab: key,
+    });
+  };
 
   testPage(page) {
     this.setState({

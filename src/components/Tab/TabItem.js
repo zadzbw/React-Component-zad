@@ -1,7 +1,7 @@
 /**
  * Created by zad on 17/2/6.
  */
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import {tabPrefix} from './Tab';
 
