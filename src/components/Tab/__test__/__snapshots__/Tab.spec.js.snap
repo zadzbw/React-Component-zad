@@ -1,0 +1,118 @@
+exports[`Tab inline 1`] = `
+<div
+  className="zad-tab zad-tab-inline">
+  <div
+    className="zad-tab-bars-list"
+    onKeyDown={[Function]}
+    tabIndex="0">
+    <div
+      className="zad-tab-bars-container">
+      <div
+        className="zad-tab-bars-wrap">
+        <div
+          className="zad-tab-bars-bottom" />
+        <TabBar
+          _key="11"
+          _tabChange={[Function]}
+          active={false}
+          name="Tab 1111" />
+        <TabBar
+          _key="22"
+          _tabChange={[Function]}
+          active={true}
+          name="Tab 22" />
+        <TabBar
+          _key="33"
+          _tabChange={[Function]}
+          active={false}
+          name="Tab 333" />
+        <TabBar
+          _key="4"
+          _tabChange={[Function]}
+          active={false}
+          name="Tab 444" />
+      </div>
+    </div>
+  </div>
+  <div
+    className="zad-tab-content">
+    <TabItem
+      _key="11"
+      active={false}
+      name="Tab 1111">
+      11111
+    </TabItem>
+    <TabItem
+      _key="22"
+      active={true}
+      name="Tab 22">
+      22222
+    </TabItem>
+    <TabItem
+      _key="33"
+      active={false}
+      name="Tab 333">
+      33333
+    </TabItem>
+    <TabItem
+      _key="4"
+      active={false}
+      name="Tab 444">
+      4444
+    </TabItem>
+  </div>
+</div>
+`;
+
+exports[`Tab normal 1`] = `
+<div
+  className="zad-tab zad-tab-card">
+  <div
+    className="zad-tab-bars-list"
+    onKeyDown={[Function]}
+    tabIndex="0">
+    <div
+      className="zad-tab-bars-container">
+      <div
+        className="zad-tab-bars-wrap">
+        <TabBar
+          _key="11"
+          _tabChange={[Function]}
+          active={false}
+          name="Tab 1111" />
+        <TabBar
+          _key="22"
+          _tabChange={[Function]}
+          active={false}
+          name="Tab 22" />
+        <TabBar
+          _key="33"
+          _tabChange={[Function]}
+          active={true}
+          name="Tab 333" />
+      </div>
+    </div>
+  </div>
+  <div
+    className="zad-tab-content">
+    <TabItem
+      _key="11"
+      active={false}
+      name="Tab 1111">
+      11111
+    </TabItem>
+    <TabItem
+      _key="22"
+      active={false}
+      name="Tab 22">
+      22222
+    </TabItem>
+    <TabItem
+      _key="33"
+      active={true}
+      name="Tab 333">
+      33333
+    </TabItem>
+  </div>
+</div>
+`;
