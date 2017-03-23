@@ -9,12 +9,12 @@ export default function (WrappedComponent, childName) {
 
     render() {
       const {children, ...props} = this.props;
-      const validChildren = Children.map(children, (child) => {
+      const validChildren = Children.map(children, (child, i) => {
         if (child.type !== childName) {
           return null;
         }
         return cloneElement(child, {
-          _key: child.key ? child.key : `${WrappedComponent.name}-${+new Date()}`,
+          _key: child.key ? child.key : `${WrappedComponent.name}-${i}`,
         });
       });
       return (
