@@ -32,11 +32,13 @@ class Tab extends Component {
     defaultCurrent: PropTypes.string,
     onTabChange: PropTypes.func,
     type: PropTypes.oneOf(['card', 'inline']),
+    animation: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
   };
 
   static defaultProps = {
     onTabChange: (current) => undefined,
     type: 'card',
+    animation: true,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -94,6 +96,27 @@ class Tab extends Component {
     };
   }
 
+  getAnimation = () => {
+    const {animation} = this.props;
+    switch (animation) {
+      case true:
+        return {
+          bottomBar: true,
+          tabContent: true,
+        };
+      case false:
+        return {
+          bottomBar: false,
+          tabContent: false,
+        };
+      default:
+        return {
+          bottomBar: !!animation.bottomBar,
+          tabContent: !!animation.tabContent,
+        };
+    }
+  };
+
   // todo 想一个不操作dom的方法去改变style?
   setStyle(isFirst) {
     const {type} = this.props;
@@ -111,7 +134,7 @@ class Tab extends Component {
         width: tabBarRect.width - 2, // 1px border on both sides
         offset: tabBarRect.left - barsWrapRect.left + 1, // 1px border on left side
       };
-      this.setBottomStyle(bottomStyle, isFirst);
+      this.setBottomBarStyle(bottomStyle, isFirst);
     }
 
     const contentRect = tabContent.getBoundingClientRect();
@@ -121,17 +144,19 @@ class Tab extends Component {
     this.setContentStyle(contentStyle, isFirst);
   }
 
-  setBottomStyle = (style, isFirst) => {
+  setBottomBarStyle = (style, isFirst) => {
     const barsBottom = this.barsBottom;
+    const animate = this.getAnimation().bottomBar;
     barsBottom.style.width = `${style.width}px`;
     barsBottom.style.transform = barsBottom.style.WebkitTransform = `translateX(${style.offset}px)`;
-    !isFirst && (barsBottom.style.transition = 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
+    !isFirst && animate && (barsBottom.style.transition = 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
   };
 
   setContentStyle = (style, isFirst) => {
     const tabContent = this.tabContent;
+    const animate = this.getAnimation().tabContent;
     tabContent.style.marginLeft = `${style.offset}px`;
-    !isFirst && (tabContent.style.transition = 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
+    !isFirst && animate && (tabContent.style.transition = 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
   };
 
   _keyDown = (e) => {
@@ -184,6 +209,12 @@ class Tab extends Component {
       [`${tabPrefix}-${type}`]: type && isOneOf(_type.type, type)
     }, className);
 
+    const animation = this.getAnimation();
+    const contentClass = classNames({
+      [`${tabPrefix}-content`]: true,
+      [`${tabPrefix}-content-no-animate`]: !animation.tabContent,
+    });
+
     return (
       <div className={tabClass}>
         <div className={`${tabPrefix}-bars-list`} tabIndex="0" onKeyDown={this._keyDown}>
@@ -194,7 +225,7 @@ class Tab extends Component {
             </div>
           </div>
         </div>
-        <div className={`${tabPrefix}-content`} ref={(a) => this.tabContent = a}>
+        <div className={contentClass} ref={(a) => this.tabContent = a}>
           {tabItems}
         </div>
       </div>
