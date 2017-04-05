@@ -236,7 +236,7 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div style={{width: 400}}>
-          <Tab defaultCurrent={'22'}>
+          <Tab defaultCurrent={'22'} onTabChange={this.testTab2}>
             <TabItem name="Tab 1111" key="11">11111</TabItem>
             <div>12345</div>
             <TabItem name="Tab 22" key="22">22222</TabItem>
@@ -255,7 +255,7 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div style={{width: 400}}>
-          <Tab type={'inline'} animation={false}>
+          <Tab type={'inline'} animation={false} onTabChange={this.testTab2}>
             <TabItem name="Tab 1" key="1111">11111</TabItem>
             <TabItem name="Tab 2" key="2222">22222</TabItem>
             <TabItem name="Tab 3" key="3333">33333</TabItem>
@@ -272,10 +272,15 @@ export default class TestPage extends React.Component {
   }
 
   testTab = (key) => {
+    console.log(`当前tab的key为${key}`);
     this.setState({
       tab: key,
     });
   };
+
+  testTab2(key) {
+    console.log(`当前tab的key为${key}`);
+  }
 
   testPage(page) {
     this.setState({
