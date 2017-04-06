@@ -8,7 +8,24 @@ export default class Input extends Component {
     super(props);
   }
 
+  static propTypes = {
+    size: PropTypes.oneOf(['small', 'default', 'large']),
+    disabled: PropTypes.bool,
+    id: PropTypes.string,
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    onPressEnter: PropTypes.func,
+  };
+  static defaultProps = {
+    size: 'default',
+    disabled: false,
+    onPressEnter: () => undefined,
+  };
+
+
   render() {
+
+
     return (
       <input type="text"/>
     );

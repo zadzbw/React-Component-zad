@@ -10,7 +10,8 @@ exports[`Tab inline 1`] = `
       <div
         className="zad-tab-bars-wrap">
         <div
-          className="zad-tab-bars-bottom" />
+          className="zad-tab-bars-bottom"
+          style={Object {}} />
         <TabBar
           _key="11"
           _tabChange={[Function]}
@@ -35,7 +36,8 @@ exports[`Tab inline 1`] = `
     </div>
   </div>
   <div
-    className="zad-tab-content">
+    className="zad-tab-content"
+    style={Object {}}>
     <TabItem
       _key="11"
       active={false}
@@ -94,7 +96,8 @@ exports[`Tab normal 1`] = `
     </div>
   </div>
   <div
-    className="zad-tab-content">
+    className="zad-tab-content"
+    style={Object {}}>
     <TabItem
       _key="11"
       active={false}

@@ -21,6 +21,8 @@ class Tab extends Component {
     super(props);
     this.state = {
       current: 'current' in this.props ? this.props.current : this.getCurrent(),
+      bottomStyle: {},
+      contentStyle: {},
     };
     this._tabChange = this::this._tabChange;
     this.getInfo = this::this.getInfo;
@@ -45,16 +47,12 @@ class Tab extends Component {
     if ('current' in nextProps) {
       this.setState({
         current: nextProps.current,
-      });
+      }, () => this.setStyle());
     }
   }
 
   componentDidMount() {
     this.setStyle(true);
-  }
-
-  componentDidUpdate() {
-    this.setStyle(false);
   }
 
   // 排除非法的current
@@ -79,7 +77,7 @@ class Tab extends Component {
       if (!('current' in this.props)) {
         this.setState({
           current: key,
-        });
+        }, () => this.setStyle());
       }
       this.props.onTabChange(key);
     }
@@ -117,47 +115,33 @@ class Tab extends Component {
     }
   };
 
-  // todo 想一个不操作dom的方法去改变style?
-  setStyle(isFirst) {
-    const {type} = this.props;
+  setStyle(isFirst = false) {
+    const animate = this.getAnimation();
     const activeIndex = this.getInfo().index;
     const tabBarElm = ReactDOM.findDOMNode(this[`TabBar-${activeIndex}`]);
     if (!tabBarElm) {
       return;
     }
-    const tabContent = this.tabContent;
+    const tabBarRect = tabBarElm.getBoundingClientRect();
+    const barsWrapRect = this.barsWrap.getBoundingClientRect();
+    const bottomOffset = tabBarRect.left - barsWrapRect.left + 1; // 1px border on left side
+    const contentOffset = -100 * activeIndex;
 
-    if (type === 'inline') {
-      const tabBarRect = tabBarElm.getBoundingClientRect();
-      const barsWrapRect = this.barsWrap.getBoundingClientRect();
-      const bottomStyle = {
-        width: tabBarRect.width - 2, // 1px border on both sides
-        offset: tabBarRect.left - barsWrapRect.left + 1, // 1px border on left side
-      };
-      this.setBottomBarStyle(bottomStyle, isFirst);
-    }
-
-    const contentRect = tabContent.getBoundingClientRect();
-    const contentStyle = {
-      offset: -(contentRect.width * activeIndex),
+    const bottomStyle = {
+      width: tabBarRect.width - 2, // 1px border on both sides
+      transform: `translateX(${bottomOffset}px)`,
+      WebkitTransform: `translateX(${bottomOffset}px)`,
+      transition: !isFirst && animate.bottomBar && 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)'
     };
-    this.setContentStyle(contentStyle, isFirst);
+    const contentStyle = {
+      marginLeft: `${contentOffset}%`,
+      transition: !isFirst && animate.tabContent && 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)'
+    };
+    this.setState({
+      bottomStyle,
+      contentStyle,
+    });
   }
-
-  setBottomBarStyle = (style, isFirst) => {
-    const barsBottom = this.barsBottom;
-    const animate = this.getAnimation().bottomBar;
-    barsBottom.style.width = `${style.width}px`;
-    barsBottom.style.transform = barsBottom.style.WebkitTransform = `translateX(${style.offset}px)`;
-    !isFirst && animate && (barsBottom.style.transition = 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
-  };
-
-  setContentStyle = (style, isFirst) => {
-    const tabContent = this.tabContent;
-    const animate = this.getAnimation().tabContent;
-    tabContent.style.marginLeft = `${style.offset}px`;
-    !isFirst && animate && (tabContent.style.transition = 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)');
-  };
 
   _keyDown = (e) => {
     const code = e.keyCode;
@@ -220,12 +204,18 @@ class Tab extends Component {
         <div className={`${tabPrefix}-bars-list`} tabIndex="0" onKeyDown={this._keyDown}>
           <div className={`${tabPrefix}-bars-container`}>
             <div className={`${tabPrefix}-bars-wrap`} ref={(a) => this.barsWrap = a}>
-              {type === 'inline' && <div className={`${tabPrefix}-bars-bottom`} ref={(a) => this.barsBottom = a}/>}
+              {
+                type === 'inline' &&
+                <div className={`${tabPrefix}-bars-bottom`}
+                     style={this.state.bottomStyle}
+                     ref={(a) => this.barsBottom = a}
+                />
+              }
               {tabBars}
             </div>
           </div>
         </div>
-        <div className={contentClass} ref={(a) => this.tabContent = a}>
+        <div className={contentClass} style={this.state.contentStyle}>
           {tabItems}
         </div>
       </div>
