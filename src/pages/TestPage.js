@@ -26,6 +26,7 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const TabItem = Tab.TabItem;
+const InputGroup = Input.Group;
 
 const mock = {
   bread: {
@@ -271,6 +272,18 @@ export default class TestPage extends React.Component {
           <Input size={'large'} placeholder="large size"/>
           <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testEnter}/>
           <Input size={'small'} placeholder="small size"/>
+        </div>
+        <br/>
+
+        <div style={{width: 300}}>
+          <InputGroup size={'large'}>
+            <Col span={4}>
+              <Input defaultValue="0571"/>
+            </Col>
+            <Col span={8}>
+              <Input defaultValue="26888888"/>
+            </Col>
+          </InputGroup>
         </div>
       </div>
     );
