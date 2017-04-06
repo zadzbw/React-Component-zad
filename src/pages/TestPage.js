@@ -66,6 +66,7 @@ export default class TestPage extends React.Component {
       loading: true,
       page: 2,
       tab: '3333',
+      input: '',
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
@@ -264,11 +265,30 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
 
-        <div>
-          <Input/>
+        <div className="test-input">
+          <Input onChange={this.testInput} placeholder="受控input" value={this.state.input}/>
+          <Input disabled placeholder="disabled"/>
+          <Input size={'large'} placeholder="large size"/>
+          <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testEnter}/>
+          <Input size={'small'} placeholder="small size"/>
         </div>
       </div>
     );
+  }
+
+  testInput = (e) => {
+    console.log(`输入中 现在input的值为${e.target.value}`);
+    this.setState({
+      input: e.target.value,
+    });
+  };
+
+  testInput2(e) {
+    console.log(`输入中 现在input的值为${e.target.value}`);
+  }
+
+  testEnter(e) {
+    console.log(`按下回车 现在input的值为${e.target.value}`);
   }
 
   testTab = (key) => {

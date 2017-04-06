@@ -1,1 +1,49 @@
 @import "../../style/variables";
+@import "../../style/mixins/index";
+
+.zad-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: @input-height-base;
+  font-size: @font-size-sm;
+  line-height: @line-height-base;
+  padding: @input-padding-vertical-base @input-padding-horizontal;
+  color: @input-color;
+  background: @input-bg none;
+  border: 1px @input-border-color solid;
+  border-radius: @border-radius-base;
+  cursor: text;
+  transition: all .3s;
+  .placeholder(); // Reset placeholder
+
+  &:hover {
+    border-color: tint(@primary-color, 20%);
+  }
+
+  &:focus {
+    border-color: tint(@primary-color, 20%);
+    box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+    outline: none;
+  }
+
+  &[disabled] {
+    background-color: @input-disabled-bg;
+    opacity: 1;
+    cursor: not-allowed;
+    color: @disabled-color;
+    &:hover {
+      border-color: @input-border-color
+    }
+  }
+
+  &-sm {
+    padding: @input-padding-vertical-sm @input-padding-horizontal;
+    height: @input-height-sm;
+  }
+
+  &-lg {
+    padding: @input-padding-vertical-lg @input-padding-horizontal;
+    height: @input-height-lg;
+  }
+}
