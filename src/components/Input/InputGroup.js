@@ -22,7 +22,7 @@ export default class InputGroup extends Component {
 
   static defaultProps = {
     size: 'default',
-    compact: true,
+    compact: false,
   };
 
   render() {

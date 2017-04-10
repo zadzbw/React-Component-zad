@@ -1,20 +1,36 @@
 @import "../../style/variables";
 @import "../../style/mixins/index";
 
-.zad-input {
+@inputClass: zad-input;
+
+.sm-size() {
+  padding: @input-padding-vertical-sm @input-padding-horizontal;
+  height: @input-height-sm;
+}
+
+.lg-size() {
+  padding: @input-padding-vertical-lg @input-padding-horizontal;
+  height: @input-height-lg;
+}
+
+.normal-size() {
+  padding: @input-padding-vertical-base @input-padding-horizontal;
+  height: @input-height-base;
+}
+
+.@{inputClass} {
   position: relative;
   display: inline-block;
   width: 100%;
-  height: @input-height-base;
   font-size: @font-size-sm;
   line-height: @line-height-base;
-  padding: @input-padding-vertical-base @input-padding-horizontal;
   color: @input-color;
   background: @input-bg none;
   border: 1px @input-border-color solid;
   border-radius: @border-radius-base;
   cursor: text;
   transition: all .3s;
+  .normal-size();
   .placeholder(); // Reset placeholder
 
   &:hover {
@@ -38,12 +54,71 @@
   }
 
   &-sm {
-    padding: @input-padding-vertical-sm @input-padding-horizontal;
-    height: @input-height-sm;
+    .sm-size();
   }
 
   &-lg {
-    padding: @input-padding-vertical-lg @input-padding-horizontal;
-    height: @input-height-lg;
+    .lg-size();
+  }
+}
+
+.zad-input-group {
+  display: block;
+  .clearfix();
+
+  > [class*="zad-col-"] {
+    padding-right: 8px;
+  }
+
+  .@{inputClass} {
+    .normal-size();
+  }
+
+  &-sm {
+    .@{inputClass} {
+      .sm-size();
+    }
+  }
+
+  &-lg {
+    .@{inputClass} {
+      .lg-size();
+    }
+  }
+
+  &&-compact {
+    // 去除input之间的空隙
+    .@{inputClass} + .@{inputClass} {
+      margin-left: -1px;
+    }
+
+    & > .@{inputClass} {
+      vertical-align: middle;
+
+      // 中间的input
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+
+      // 第一个input
+      &:first-child:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      // 最后一个input
+      &:last-child:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      // focus时优先级更高
+      &:hover {
+        z-index: 1;
+      }
+      &:focus {
+        z-index: 2;
+      }
+    }
   }
 }

@@ -14,7 +14,7 @@ const TARGET = process.env.npm_lifecycle_event;
 const webpackConfig = {
   entry: {
     app: path.resolve(APP_PATH, 'index.js'),
-    libs: ['classnames', 'react', 'react-dom', 'rc-animate']
+    libs: ['classnames', 'react', 'react-dom', 'rc-animate', 'velocity-animate']
   },
   output: {
     path: BUILD_PATH,

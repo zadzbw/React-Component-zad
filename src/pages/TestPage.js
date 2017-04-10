@@ -276,13 +276,24 @@ export default class TestPage extends React.Component {
         <br/>
 
         <div style={{width: 300}}>
-          <InputGroup size={'large'}>
-            <Col span={4}>
+          <InputGroup>
+            <Col span={6}>
               <Input defaultValue="0571"/>
             </Col>
             <Col span={8}>
               <Input defaultValue="26888888"/>
             </Col>
+          </InputGroup>
+          <br/>
+          <InputGroup compact={true}>
+            <Input style={{width: '20%'}} defaultValue="0571"/>
+            <Input style={{width: '30%'}} defaultValue="26888888"/>
+          </InputGroup>
+          <br/>
+          <InputGroup compact={true} size={'large'}>
+            <Input style={{width: '15%'}} defaultValue="+86"/>
+            <Input style={{width: '20%'}} defaultValue="0571" size={'small'}/>
+            <Input style={{width: '30%'}} defaultValue="26888888"/>
           </InputGroup>
         </div>
       </div>
