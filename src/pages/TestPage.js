@@ -258,44 +258,42 @@ export default class TestPage extends React.Component {
         <br/>
         <div style={{width: 400}}>
           <Tab type={'inline'} animation={false} onTabChange={this.testTab2}>
-            <TabItem name="Tab 1" key="1111">11111</TabItem>
-            <TabItem name="Tab 2" key="2222">22222</TabItem>
-            <TabItem name="Tab 3" key="3333">33333</TabItem>
-            <TabItem name="Tab 4" key="4444">44444</TabItem>
+            <TabItem name="Input" key="1111">
+              <div className="test-input">
+                <Input onChange={this.testInput} placeholder="受控input" value={this.state.input}/>
+                <Input disabled placeholder="disabled"/>
+                <Input size={'large'} placeholder="large size"/>
+                <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testEnter}/>
+                <Input size={'small'} placeholder="small size"/>
+              </div>
+              <br/>
+            </TabItem>
+            <TabItem name="InputGroup" key="2222">
+              <InputGroup>
+                <Col span={6}>
+                  <Input defaultValue="0571"/>
+                </Col>
+                <Col span={8}>
+                  <Input defaultValue="26888888"/>
+                </Col>
+              </InputGroup>
+              <br/>
+              <InputGroup compact={true} size={'large'}>
+                <Input style={{width: '15%'}} defaultValue="+86"/>
+                <Input style={{width: '20%'}} defaultValue="0571" size={'small'}/>
+                <Input style={{width: '30%'}} defaultValue="26888888"/>
+              </InputGroup>
+              <br/>
+              <InputGroup compact={true}>
+                <Input style={{width: '20%'}} defaultValue="0571"/>
+                <Input style={{width: '30%'}} defaultValue="26888888"/>
+              </InputGroup>
+            </TabItem>
+            <TabItem name="Tab 3" key="3333">333333</TabItem>
+            <TabItem name="Tab 4" key="4444">444444</TabItem>
           </Tab>
         </div>
         <br/>
-
-        <div className="test-input">
-          <Input onChange={this.testInput} placeholder="受控input" value={this.state.input}/>
-          <Input disabled placeholder="disabled"/>
-          <Input size={'large'} placeholder="large size"/>
-          <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testEnter}/>
-          <Input size={'small'} placeholder="small size"/>
-        </div>
-        <br/>
-
-        <div style={{width: 300}}>
-          <InputGroup>
-            <Col span={6}>
-              <Input defaultValue="0571"/>
-            </Col>
-            <Col span={8}>
-              <Input defaultValue="26888888"/>
-            </Col>
-          </InputGroup>
-          <br/>
-          <InputGroup compact={true}>
-            <Input style={{width: '20%'}} defaultValue="0571"/>
-            <Input style={{width: '30%'}} defaultValue="26888888"/>
-          </InputGroup>
-          <br/>
-          <InputGroup compact={true} size={'large'}>
-            <Input style={{width: '15%'}} defaultValue="+86"/>
-            <Input style={{width: '20%'}} defaultValue="0571" size={'small'}/>
-            <Input style={{width: '30%'}} defaultValue="26888888"/>
-          </InputGroup>
-        </div>
       </div>
     );
   }
