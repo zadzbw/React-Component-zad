@@ -134,8 +134,9 @@ class Tab extends Component {
       transition: !isFirst && animate.bottomBar && 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)'
     };
     const contentStyle = {
-      marginLeft: `${contentOffset}%`,
-      transition: !isFirst && animate.tabContent && 'margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)'
+      transform: `translateX(${contentOffset}%)`,
+      WebkitTransform: `translateX(${contentOffset}%)`,
+      transition: !isFirst && animate.tabContent && 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)'
     };
     this.setState({
       bottomStyle,
