@@ -174,6 +174,7 @@ class Tab extends Component {
   render() {
     const {type, className, children} = this.props;
     const activeIndex = this.getInfo().index;
+    const animation = this.getAnimation();
 
     const tabBars = Children.map(children, (child, i) => {
       return React.createElement(TabBar, {
@@ -187,6 +188,7 @@ class Tab extends Component {
     const tabItems = Children.map(children, (child, i) => {
       return React.cloneElement(child, {
         active: activeIndex === i,
+        animate: animation.tabContent,
       });
     });
 
@@ -194,7 +196,6 @@ class Tab extends Component {
       [`${tabPrefix}-${type}`]: type && isOneOf(_type.type, type)
     }, className);
 
-    const animation = this.getAnimation();
     const contentClass = classNames({
       [`${tabPrefix}-content`]: true,
       [`${tabPrefix}-content-no-animate`]: !animation.tabContent,
