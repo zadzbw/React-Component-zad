@@ -19,6 +19,7 @@ import {
   Pagination,
   Tab,
   Input,
+  Checkbox,
 } from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -27,6 +28,7 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const TabItem = Tab.TabItem;
 const InputGroup = Input.Group;
+const checkboxGroup = Checkbox.Group;
 
 const mock = {
   bread: {
@@ -256,7 +258,7 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <br/>
-        <div style={{width: 400}}>
+        <div style={{width: 400, height: 250}}>
           <Tab type={'inline'} animation={false} onTabChange={this.testTab2}>
             <TabItem name="Input" key="1111">
               <div className="test-input">
@@ -292,6 +294,10 @@ export default class TestPage extends React.Component {
             <TabItem name="Tab 3" key="3333">333333</TabItem>
             <TabItem name="Tab 4" key="4444">444444</TabItem>
           </Tab>
+        </div>
+        <br/>
+        <div style={{width: 400}}>
+          <Checkbox/>
         </div>
         <br/>
       </div>

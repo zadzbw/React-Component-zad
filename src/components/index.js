@@ -17,6 +17,7 @@ import Menu from './Menu';
 import Pagination from './Pagination';
 import Tab from './Tab';
 import Input from './Input';
+import Checkbox from './Checkbox';
 
 Button.Group = ButtonGroup;
 
@@ -34,4 +35,5 @@ export {
   Pagination,
   Tab,
   Input,
+  Checkbox,
 };
