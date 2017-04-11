@@ -1,0 +1,87 @@
+exports[`Input Test normal 1`] = `
+<div>
+  <Input
+    disabled={true}
+    onPressEnter={[Function]}
+    placeholder="disabled"
+    size="default"
+    type="text" />
+  <Input
+    onPressEnter={[Function]}
+    placeholder="large size"
+    size="large"
+    type="text" />
+  <Input
+    onChange={[Function]}
+    onPressEnter={[Function]}
+    placeholder="default size"
+    size="default"
+    type="text"
+    value="test2" />
+  <Input
+    onPressEnter={[Function]}
+    placeholder="small size"
+    size="small"
+    type="text" />
+</div>
+`;
+
+exports[`InputGroup Test no compact 1`] = `
+<span
+  className="zad-input-group zad-input-group-lg">
+  <Col
+    offset={0}
+    span={6}>
+    <Input
+      defaultValue="0571"
+      onPressEnter={[Function]}
+      size="default"
+      type="text" />
+  </Col>
+  <Col
+    offset={0}
+    span={8}>
+    <Input
+      defaultValue="26888888"
+      onPressEnter={[Function]}
+      size="default"
+      type="text" />
+  </Col>
+</span>
+`;
+
+exports[`InputGroup Test no compact 2`] = `
+<span
+  className="zad-input-group zad-input-group-sm zad-input-group-compact">
+  <Input
+    defaultValue="+86"
+    onPressEnter={[Function]}
+    size="default"
+    style={
+      Object {
+        "width": "15%",
+      }
+    }
+    type="text" />
+  <Input
+    defaultValue="0571"
+    onPressEnter={[Function]}
+    size="small"
+    style={
+      Object {
+        "width": "20%",
+      }
+    }
+    type="text" />
+  <Input
+    defaultValue="26888888"
+    onPressEnter={[Function]}
+    size="default"
+    style={
+      Object {
+        "width": "30%",
+      }
+    }
+    type="text" />
+</span>
+`;
