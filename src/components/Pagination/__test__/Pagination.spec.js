@@ -6,6 +6,7 @@ import {shallow} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import Pagination from '../../Pagination';
 import PageItem from '../../Pagination/PageItem';
+import Input from '../../Input';
 
 describe('Pagination Test', () => {
   it('Normal', () => {
@@ -59,7 +60,7 @@ describe('Pagination Test', () => {
     expect(wrapper.find('.zad-pagination-quick-jumper').exists()).toBeTruthy();
 
     // to page 9
-    wrapper.find('.zad-pagination-quick-jumper').find('input').simulate('keyUp', {keyCode: 13, target: {value: '9'}});
+    wrapper.find('.zad-pagination-quick-jumper').find(Input).simulate('keyUp', {keyCode: 13, target: {value: '9'}});
     expect(wrapper.find('.zad-pagination-jump-prev').exists()).toBeTruthy();
     expect(wrapper.find('.zad-pagination-jump-next').exists()).toBeTruthy();
     expect(wrapper.state()._current).toEqual(9);

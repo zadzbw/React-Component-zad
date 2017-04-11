@@ -104,9 +104,11 @@ exports[`Pagination Test QuickJump 1`] = `
   <li
     className="zad-pagination-quick-jumper">
     to
-    <input
+    <Input
       defaultValue={9}
       onKeyUp={[Function]}
+      onPressEnter={[Function]}
+      size="default"
       type="text" />
   </li>
 </ul>

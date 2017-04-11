@@ -4,6 +4,7 @@
 import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
 import PageItem from './PageItem';
+import Input from '../../components/Input';
 
 export const paginationPrefix = 'zad-pagination';
 
@@ -140,7 +141,7 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const {showQuickJumper}= this.props;
+    const {showQuickJumper} = this.props;
     const {_current} = this.state;
     const pages = this._getPage();
     const itemList = [];
@@ -235,7 +236,7 @@ export default class Pagination extends Component {
     const quickJumper = !showQuickJumper ? null : (
       <li className={`${paginationPrefix}-quick-jumper`}>
         to
-        <input type="text" onKeyUp={this._quickJump} defaultValue={_current}/>
+        <Input onKeyUp={this._quickJump} defaultValue={_current}/>
       </li>
     );
 

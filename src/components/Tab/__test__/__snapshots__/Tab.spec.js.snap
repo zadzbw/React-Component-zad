@@ -41,24 +41,28 @@ exports[`Tab inline 1`] = `
     <TabItem
       _key="11"
       active={false}
+      animate={true}
       name="Tab 1111">
       11111
     </TabItem>
     <TabItem
       _key="22"
       active={true}
+      animate={true}
       name="Tab 22">
       22222
     </TabItem>
     <TabItem
       _key="33"
       active={false}
+      animate={true}
       name="Tab 333">
       33333
     </TabItem>
     <TabItem
       _key="4"
       active={false}
+      animate={true}
       name="Tab 444">
       4444
     </TabItem>
@@ -101,18 +105,21 @@ exports[`Tab normal 1`] = `
     <TabItem
       _key="11"
       active={false}
+      animate={true}
       name="Tab 1111">
       11111
     </TabItem>
     <TabItem
       _key="22"
       active={false}
+      animate={true}
       name="Tab 22">
       22222
     </TabItem>
     <TabItem
       _key="33"
       active={true}
+      animate={true}
       name="Tab 333">
       33333
     </TabItem>
