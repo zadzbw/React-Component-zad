@@ -265,7 +265,7 @@ export default class TestPage extends React.Component {
                 <Input onChange={this.testInput} placeholder="受控input" value={this.state.input}/>
                 <Input disabled placeholder="disabled"/>
                 <Input size={'large'} placeholder="large size"/>
-                <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testEnter}/>
+                <Input placeholder="default size" onChange={this.testInput2} onPressEnter={this.testInputEnter}/>
                 <Input size={'small'} placeholder="small size"/>
               </div>
               <br/>
@@ -297,7 +297,8 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div style={{width: 400}}>
-          <Checkbox/>
+          <Checkbox defaultChecked={true}>Checkbox1</Checkbox>
+          <Checkbox indeterminate={true}>Checkbox2</Checkbox>
         </div>
         <br/>
       </div>
@@ -315,7 +316,7 @@ export default class TestPage extends React.Component {
     console.log(`输入中 现在input的值为${e.target.value}`);
   }
 
-  testEnter(e) {
+  testInputEnter(e) {
     console.log(`按下回车 现在input的值为${e.target.value}`);
   }
 
