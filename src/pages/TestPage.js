@@ -359,7 +359,7 @@ export default class TestPage extends React.Component {
   testCheckGroup2 = (v) => {
     console.log(v);
     this.setState({
-      check_group: v,
+      check_group1: v,
     });
   };
 
