@@ -70,6 +70,8 @@ export default class TestPage extends React.Component {
       page: 2,
       tab: '3333',
       input: '',
+      checkbox: false,
+      check_group: ['Apple'],
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
@@ -297,20 +299,56 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div style={{width: 400}}>
-          <Checkbox defaultChecked={true} onChange={this.testCheckBox}>Checkbox</Checkbox>
-          <Checkbox indeterminate={true}>不确定状态</Checkbox>
-          <br/>
+          <Checkbox defaultChecked={true} onChange={this.testCheckBox1}>非受控</Checkbox>
+          <Checkbox checked={this.state.checkbox} onChange={this.testCheckBox2}>受控</Checkbox>
+        </div>
+        <br/>
+        <div style={{width: 400}}>
           <Checkbox defaultChecked={true} disabled>disabled1</Checkbox>
           <Checkbox indeterminate={true} disabled>disabled2</Checkbox>
           <Checkbox disabled>disabled3</Checkbox>
         </div>
         <br/>
+        <CheckboxGroup
+          options={['Apple', 'Pear', 'Orange']}
+          defaultValue={['Pear', 'Orange']}
+          onChange={this.testCheckGroup1}
+        />
+        <br/>
+        <CheckboxGroup
+          options={[
+            {name: 'Apple', value: 'Apple'},
+            {name: 'Pear', value: 'Pear'},
+            {name: 'Orange', value: 'Orange', disabled: true},
+          ]}
+          value={this.state.check_group}
+          onChange={this.testCheckGroup2}
+        />
+        <br/>
       </div>
     );
   }
 
-  testCheckBox = (e) => {
+  testCheckGroup1 = (v) => {
+    console.log(v);
+  };
+
+  testCheckGroup2 = (v) => {
+    console.log(v);
+    this.setState({
+      check_group: v,
+    });
+  };
+
+  testCheckBox1 = (e) => {
     console.log(`checked: ${e.target.checked}`);
+  };
+
+  testCheckBox2 = (e) => {
+    console.log(`checked: ${e.target.checked}`);
+    this.setState({
+      checkbox: e.target.checked,
+    });
   };
 
   testInput = (e) => {

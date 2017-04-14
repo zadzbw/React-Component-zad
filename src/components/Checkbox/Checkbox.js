@@ -4,7 +4,7 @@
 import React, {PureComponent, PropTypes} from 'react';
 import classNames from 'classnames';
 
-const checkboxPrefix = 'zad-checkbox';
+export const checkboxPrefix = 'zad-checkbox';
 
 export default class Checkbox extends PureComponent {
   constructor(props) {
@@ -21,6 +21,7 @@ export default class Checkbox extends PureComponent {
     defaultChecked: PropTypes.bool,
     indeterminate: PropTypes.bool,
     onChange: PropTypes.func,
+    wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -63,10 +64,10 @@ export default class Checkbox extends PureComponent {
   }
 
   render() {
-    const {indeterminate, disabled, children} = this.props;
+    const {indeterminate, disabled, wrapperClassName, children} = this.props;
     const {checked} = this.state;
 
-    const wrapperClass = classNames({
+    const wrapperClass = classNames(wrapperClassName, {
       [`${checkboxPrefix}-wrapper`]: true,
       [`${checkboxPrefix}-wrapper-disabled`]: disabled,
     });

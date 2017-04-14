@@ -2,6 +2,7 @@
 @import "../../style/mixins/index";
 
 @checkbox-class: zad-checkbox;
+@checkbox-group-class: ~"@{checkbox-class}-group";
 
 .@{checkbox-class} {
   position: relative;
@@ -28,7 +29,7 @@
 
       .@{checkbox-class}-mock {
         border-color: @border-color-base !important; // 边框色
-        background-color: #f3f3f3 !important; // 背景色
+        background-color: lighten(@border-color-base, 10%) !important; // 背景色
 
         &:after {
           animation-name: none;
@@ -114,5 +115,15 @@
       border-color: @primary-color;
     }
   }
+}
 
+.@{checkbox-group-class} {
+  font-size: @font-size-sm;
+
+  &-item {
+    display: inline-block;
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
 }
