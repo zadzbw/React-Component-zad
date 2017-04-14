@@ -71,7 +71,10 @@ export default class TestPage extends React.Component {
       tab: '3333',
       input: '',
       checkbox: false,
-      check_group: ['Apple'],
+      check_group1: ['Apple'],
+      check_group2: ['Apple', 'Orange'],
+      checkAll: false,
+      indeterminate: true,
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
@@ -309,22 +312,42 @@ export default class TestPage extends React.Component {
           <Checkbox disabled>disabled3</Checkbox>
         </div>
         <br/>
+        非受控
         <CheckboxGroup
           options={['Apple', 'Pear', 'Orange']}
           defaultValue={['Pear', 'Orange']}
           onChange={this.testCheckGroup1}
         />
         <br/>
+        受控
         <CheckboxGroup
           options={[
             {name: 'Apple', value: 'Apple'},
             {name: 'Pear', value: 'Pear'},
             {name: 'Orange', value: 'Orange', disabled: true},
           ]}
-          value={this.state.check_group}
+          value={this.state.check_group1}
           onChange={this.testCheckGroup2}
         />
         <br/>
+        <div style={{width: 300}}>
+          中间状态
+          <div style={{borderBottom: '1px solid #E9E9E9', paddingBottom: 5}}>
+            <Checkbox
+              checked={this.state.checkAll}
+              indeterminate={this.state.indeterminate}
+              onChange={this.testCheckAll}
+            >
+              Check All
+            </Checkbox>
+          </div>
+          <br/>
+          <CheckboxGroup
+            options={['Apple', 'Pear', 'Orange']}
+            value={this.state.check_group2}
+            onChange={this.testCheckGroup3}
+          />
+        </div>
       </div>
     );
   }
@@ -337,6 +360,24 @@ export default class TestPage extends React.Component {
     console.log(v);
     this.setState({
       check_group: v,
+    });
+  };
+
+  testCheckGroup3 = (v) => {
+    const totalOptions = ['Apple', 'Pear', 'Orange'];
+    this.setState({
+      check_group2: v,
+      indeterminate: 0 < v.length && v.length < totalOptions.length,
+      checkAll: v.length === totalOptions.length,
+    });
+  };
+
+  testCheckAll = (e) => {
+    const totalOptions = ['Apple', 'Pear', 'Orange'];
+    this.setState({
+      check_group2: e.target.checked ? totalOptions : [],
+      indeterminate: false,
+      checkAll: e.target.checked,
     });
   };
 
