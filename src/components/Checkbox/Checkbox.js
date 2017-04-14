@@ -16,6 +16,7 @@ export default class Checkbox extends PureComponent {
   }
 
   static propTypes = {
+    disabled: PropTypes.bool,
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
     indeterminate: PropTypes.bool,
@@ -23,6 +24,7 @@ export default class Checkbox extends PureComponent {
   };
 
   static defaultProps = {
+    disabled: false,
     indeterminate: false,
     onChange: () => undefined,
   };
@@ -44,7 +46,10 @@ export default class Checkbox extends PureComponent {
   };
 
   changeChecked(e) {
-    const {onChange} = this.props;
+    const {onChange, disabled} = this.props;
+    if (disabled) {
+      return false;
+    }
     const {checked} = this.state;
     const isChange = checked !== e.target.checked;
     if (isChange) {
@@ -58,16 +63,20 @@ export default class Checkbox extends PureComponent {
   }
 
   render() {
-    const {indeterminate, children} = this.props;
+    const {indeterminate, disabled, children} = this.props;
     const {checked} = this.state;
 
+    const wrapperClass = classNames({
+      [`${checkboxPrefix}-wrapper`]: true,
+      [`${checkboxPrefix}-wrapper-disabled`]: disabled,
+    });
     const checkboxClass = classNames(checkboxPrefix, {
       [`${checkboxPrefix}-checked`]: checked,
       [`${checkboxPrefix}-indeterminate`]: indeterminate,
     });
 
     return (
-      <label className={`${checkboxPrefix}-wrapper`}>
+      <label className={wrapperClass}>
         <span className={checkboxClass}>
           <input type="checkbox"
                  className={`${checkboxPrefix}-input`}

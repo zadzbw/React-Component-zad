@@ -13,6 +13,33 @@
     cursor: pointer;
     font-size: @font-size-sm;
     display: inline-block;
+
+    &:hover {
+      .@{checkbox-class}-mock {
+        border-color: @primary-color;
+      }
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      .@{checkbox-class}-name {
+        color: @disabled-color;
+      }
+
+      .@{checkbox-class}-mock {
+        border-color: @border-color-base !important; // 边框色
+        background-color: #f3f3f3 !important; // 背景色
+
+        &:after {
+          animation-name: none;
+          border-color: @disabled-color; // 对应的对勾或横杠颜色
+        }
+      }
+    }
+  }
+
+  &-input:focus + &-mock {
+    border-color: @primary-color;
   }
 
   &-input {
@@ -39,7 +66,6 @@
     border-radius: @border-radius-sm;
     background-color: #fff;
     transition: all .3s;
-    cursor: pointer;
     z-index: 2;
 
     // 创建一个block，利用border画出线条

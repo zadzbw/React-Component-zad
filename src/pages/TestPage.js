@@ -28,7 +28,7 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const TabItem = Tab.TabItem;
 const InputGroup = Input.Group;
-const checkboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group;
 
 const mock = {
   bread: {
@@ -297,13 +297,21 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div style={{width: 400}}>
-          <Checkbox defaultChecked={true}>Checkbox1</Checkbox>
-          <Checkbox indeterminate={true}>Checkbox2</Checkbox>
+          <Checkbox defaultChecked={true} onChange={this.testCheckBox}>Checkbox</Checkbox>
+          <Checkbox indeterminate={true}>不确定状态</Checkbox>
+          <br/>
+          <Checkbox defaultChecked={true} disabled>disabled1</Checkbox>
+          <Checkbox indeterminate={true} disabled>disabled2</Checkbox>
+          <Checkbox disabled>disabled3</Checkbox>
         </div>
         <br/>
       </div>
     );
   }
+
+  testCheckBox = (e) => {
+    console.log(`checked: ${e.target.checked}`);
+  };
 
   testInput = (e) => {
     console.log(`输入中 现在input的值为${e.target.value}`);
