@@ -41,16 +41,6 @@ export default class CheckboxGroup extends PureComponent {
     }
   }
 
-  getOptions = () => {
-    const {options} = this.props;
-    return options.map((item) => {
-      if (_isString(item)) {
-        return {name: item, value: item, disabled: false};
-      }
-      return item;
-    });
-  };
-
   changeChecked = (v) => {
     const {value} = this.state;
     const {onChange} = this.props;
@@ -70,6 +60,16 @@ export default class CheckboxGroup extends PureComponent {
     if (_isFunction(onChange)) {
       onChange(newValue);
     }
+  };
+
+  getOptions = () => {
+    const {options} = this.props;
+    return options.map((item) => {
+      if (_isString(item)) {
+        return {name: item, value: item, disabled: false};
+      }
+      return item;
+    });
   };
 
   getCheckbox = () => {

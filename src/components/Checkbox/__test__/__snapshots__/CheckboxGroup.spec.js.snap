@@ -1,0 +1,89 @@
+exports[`CheckboxGroup Test controlled component 1`] = `
+<div
+  className="zad-checkbox-group">
+  <Checkbox
+    checked={true}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Apple
+  </Checkbox>
+  <Checkbox
+    checked={true}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Pear
+  </Checkbox>
+  <Checkbox
+    checked={false}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Orange
+  </Checkbox>
+</div>
+`;
+
+exports[`CheckboxGroup Test uncontrolled component 1`] = `
+<div
+  className="zad-checkbox-group">
+  <Checkbox
+    checked={true}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Apple
+  </Checkbox>
+  <Checkbox
+    checked={false}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Pear
+  </Checkbox>
+  <Checkbox
+    checked={true}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Orange
+  </Checkbox>
+</div>
+`;
+
+exports[`CheckboxGroup Test with disabled 1`] = `
+<div
+  className="zad-checkbox-group">
+  <Checkbox
+    checked={false}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Apple
+  </Checkbox>
+  <Checkbox
+    checked={true}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Pear
+  </Checkbox>
+  <Checkbox
+    checked={true}
+    disabled={true}
+    indeterminate={false}
+    onChange={[Function]}
+    wrapperClassName="zad-checkbox-group-item">
+    Orange
+  </Checkbox>
+</div>
+`;

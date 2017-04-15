@@ -17,7 +17,6 @@ describe('Input Test', () => {
       }
 
       testInput = (e) => {
-        console.log(e);
         this.setState({
           input: e.target.value
         })

@@ -1,0 +1,71 @@
+exports[`Checkbox Test controlled component 1`] = `
+<div>
+  <Checkbox
+    checked={false}
+    disabled={false}
+    indeterminate={false}
+    onChange={[Function]}>
+    受控
+  </Checkbox>
+</div>
+`;
+
+exports[`Checkbox Test disabled 1`] = `
+<label
+  className="zad-checkbox-wrapper zad-checkbox-wrapper-disabled">
+  <span
+    className="zad-checkbox">
+    <input
+      checked={false}
+      className="zad-checkbox-input"
+      onChange={[Function]}
+      type="checkbox" />
+    <span
+      className="zad-checkbox-mock" />
+  </span>
+  <span
+    className="zad-checkbox-name">
+    disabled
+  </span>
+</label>
+`;
+
+exports[`Checkbox Test indeterminate 1`] = `
+<label
+  className="zad-checkbox-wrapper">
+  <span
+    className="zad-checkbox zad-checkbox-indeterminate">
+    <input
+      checked={false}
+      className="zad-checkbox-input"
+      onChange={[Function]}
+      type="checkbox" />
+    <span
+      className="zad-checkbox-mock" />
+  </span>
+  <span
+    className="zad-checkbox-name">
+    indeterminate
+  </span>
+</label>
+`;
+
+exports[`Checkbox Test uncontrolled component 1`] = `
+<label
+  className="zad-checkbox-wrapper">
+  <span
+    className="zad-checkbox zad-checkbox-checked">
+    <input
+      checked={true}
+      className="zad-checkbox-input"
+      onChange={[Function]}
+      type="checkbox" />
+    <span
+      className="zad-checkbox-mock" />
+  </span>
+  <span
+    className="zad-checkbox-name">
+    非受控
+  </span>
+</label>
+`;
