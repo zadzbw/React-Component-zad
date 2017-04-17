@@ -42,3 +42,9 @@ npm install cross-env --save-dev
 ```
 npm run build
 ```
+
+测试：
+
+```
+npm run test
+```

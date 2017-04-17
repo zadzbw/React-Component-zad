@@ -303,7 +303,7 @@ export default class TestPage extends React.Component {
             <TabItem name="Tab 4" key="4444">444444</TabItem>
           </Tab>
         </div>
-        <br/>
+        <h3>CheckBox</h3>
         <div style={{width: 400}}>
           <Checkbox defaultChecked={true} onChange={this.testCheckBox1}>非受控</Checkbox>
           <Checkbox checked={this.state.checkbox} onChange={this.testCheckBox2}>受控</Checkbox>
@@ -351,7 +351,7 @@ export default class TestPage extends React.Component {
             onChange={this.testCheckGroup3}
           />
         </div>
-        <br/>
+        <h3>Radio</h3>
         <div style={{width: 400}}>
           <Radio>Radio1</Radio>
           <Radio checked={true}>Radio2</Radio>
@@ -395,7 +395,7 @@ export default class TestPage extends React.Component {
   };
 
   testRadioGroup2 = ({value}) => {
-    console.log(value);
+    console.log(`radio的值为: ${value}`);
     this.setState({
       radio_group: value,
     });

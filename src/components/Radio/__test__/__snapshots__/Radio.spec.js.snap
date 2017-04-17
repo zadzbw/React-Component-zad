@@ -1,0 +1,39 @@
+exports[`Radio Test disabled 1`] = `
+<label
+  className="zad-radio-wrapper zad-radio-wrapper-disabled">
+  <span
+    className="zad-radio">
+    <input
+      checked={false}
+      className="zad-radio-input"
+      onChange={[Function]}
+      type="radio" />
+    <span
+      className="zad-radio-mock" />
+  </span>
+  <span
+    className="zad-radio-name">
+    Radio
+  </span>
+</label>
+`;
+
+exports[`Radio Test normal 1`] = `
+<label
+  className="zad-radio-wrapper">
+  <span
+    className="zad-radio zad-radio-checked">
+    <input
+      checked={true}
+      className="zad-radio-input"
+      onChange={[Function]}
+      type="radio" />
+    <span
+      className="zad-radio-mock" />
+  </span>
+  <span
+    className="zad-radio-name">
+    Radio
+  </span>
+</label>
+`;
