@@ -20,6 +20,7 @@ import {
   Tab,
   Input,
   Checkbox,
+  Radio,
 } from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -347,6 +348,14 @@ export default class TestPage extends React.Component {
             value={this.state.check_group2}
             onChange={this.testCheckGroup3}
           />
+        </div>
+        <br/>
+        <div style={{width: 400}}>
+          <Radio>Radio1</Radio>
+          <Radio checked={true}>Radio2</Radio>
+          <br/>
+          <Radio disabled checked={false}>disabled</Radio>
+          <Radio disabled checked={true}>disabled</Radio>
         </div>
       </div>
     );

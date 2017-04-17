@@ -1,0 +1,104 @@
+@import "../../style/variables";
+@import "../../style/mixins/index";
+
+@radio-class: zad-radio;
+
+.@{radio-class} {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: text-bottom; // 保证假的radio与name在同一水平线上
+
+  &-wrapper {
+    cursor: pointer;
+    font-size: @font-size-sm;
+    display: inline-block;
+
+    &:hover {
+      .@{radio-class}-mock {
+        border-color: @primary-color;
+      }
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      .@{radio-class}-name {
+        color: @disabled-color;
+      }
+
+      .@{radio-class}-mock {
+        border-color: @border-color-base !important; // 边框色
+        background-color: lighten(@border-color-base, 10%) !important; // 背景色
+
+        &:after {
+          animation-name: none;
+          background-color: @border-color-base; // 圆点色
+        }
+      }
+    }
+  }
+
+  &-input:focus + &-mock {
+    border-color: @primary-color;
+  }
+
+  &-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  // 假的radio
+  &-mock {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid @border-color-base;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all .3s;
+    z-index: 2;
+
+    // 创建一个block，利用background画出圆点
+    &:after {
+      transform: scale(0);
+      position: absolute;
+      display: table;
+      left: 3px;
+      top: 3px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: @primary-color;
+      content: ' ';
+      transition: all .1s @ease-in-back;
+    }
+  }
+
+  &-name {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  &-checked {
+    .@{radio-class}-mock:after {
+      transform: scale(1);
+      transition: all .2s @ease-out-back .1s;
+    }
+  }
+
+  &-checked {
+    .@{radio-class}-mock {
+      border-color: @primary-color;
+    }
+  }
+}

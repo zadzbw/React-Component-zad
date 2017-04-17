@@ -18,6 +18,7 @@ import Pagination from './Pagination';
 import Tab from './Tab';
 import Input from './Input';
 import Checkbox from './Checkbox';
+import Radio from './Radio';
 
 Button.Group = ButtonGroup;
 
@@ -36,4 +37,5 @@ export {
   Tab,
   Input,
   Checkbox,
+  Radio,
 };
