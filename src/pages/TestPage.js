@@ -30,6 +30,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const TabItem = Tab.TabItem;
 const InputGroup = Input.Group;
 const CheckboxGroup = Checkbox.Group;
+const RadioGroup = Radio.Group;
 
 const mock = {
   bread: {
@@ -76,6 +77,7 @@ export default class TestPage extends React.Component {
       check_group2: ['Apple', 'Orange'],
       checkAll: false,
       indeterminate: true,
+      radio_group: 'male',
     };
     this.text = 'test';
     this.testDropDown = this.testDropDown.bind(this);
@@ -357,9 +359,47 @@ export default class TestPage extends React.Component {
           <Radio disabled checked={false}>disabled</Radio>
           <Radio disabled checked={true}>disabled</Radio>
         </div>
+        <br/>
+        <div>
+          非受控
+          <RadioGroup
+            options={[
+              {name: '男性', value: 'male'},
+              {name: '女性', value: 'female'},
+              {name: '其他', value: 'other', disabled: true},
+            ]}
+            defaultValue={'female'}
+            onChange={this.testRadioGroup1}
+          />
+        </div>
+        <br/>
+        <div>
+          受控
+          <RadioGroup
+            options={[
+              {name: '男性', value: 'male'},
+              {name: '女性', value: 'female'},
+              {name: '其他', value: 'other'},
+            ]}
+            value={this.state.radio_group}
+            onChange={this.testRadioGroup2}
+          />
+        </div>
+        <br/>
       </div>
     );
   }
+
+  testRadioGroup1 = (o) => {
+    console.log(o);
+  };
+
+  testRadioGroup2 = ({value}) => {
+    console.log(value);
+    this.setState({
+      radio_group: value,
+    });
+  };
 
   testCheckGroup1 = (v) => {
     console.log(v);

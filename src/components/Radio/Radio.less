@@ -2,6 +2,7 @@
 @import "../../style/mixins/index";
 
 @radio-class: zad-radio;
+@radio-group-class: ~"@{radio-class}-group";
 
 .@{radio-class} {
   position: relative;
@@ -99,6 +100,16 @@
   &-checked {
     .@{radio-class}-mock {
       border-color: @primary-color;
+    }
+  }
+}
+
+.@{radio-group-class} {
+  font-size: @font-size-sm;
+  &-item {
+    display: inline-block;
+    &:not(:last-child) {
+      margin-right: 8px;
     }
   }
 }

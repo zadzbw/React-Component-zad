@@ -3,6 +3,7 @@
  */
 import React, {PureComponent, PropTypes} from 'react';
 import classNames from 'classnames';
+import _isFunction from 'lodash/isFunction';
 
 export const radioPrefix = 'zad-radio';
 
@@ -10,21 +11,18 @@ export default class Radio extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      checked: 'checked' in this.props ? this.props.checked : this.getInitChecked(),
+      checked: 'checked' in this.props ? this.props.checked : false,
     };
   }
 
   static propTypes = {
     disabled: PropTypes.bool,
     checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
-    onChange: PropTypes.func,
     wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
     disabled: false,
-    onChange: () => undefined,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -34,14 +32,6 @@ export default class Radio extends PureComponent {
       });
     }
   }
-
-  getInitChecked = () => {
-    const props = this.props;
-    if ('defaultChecked' in props) {
-      return props.defaultChecked;
-    }
-    return false;
-  };
 
   changeChecked = (e) => {
     const {onChange, disabled} = this.props;
@@ -53,7 +43,9 @@ export default class Radio extends PureComponent {
         checked: e.target.checked,
       });
     }
-    onChange(e);
+    if (_isFunction(onChange)) {
+      onChange(e);
+    }
   };
 
   render() {
