@@ -106,6 +106,8 @@ if (TARGET === 'build') {
       }
     })
   ]);
+  // build 至 gh-pages
+  webpackConfig.output.publicPath = '/React-Component-zad/';
 } else {
   webpackConfig.devServer = {port: 9999};
   webpackConfig.module.preLoaders = [{test: /\.jsx?$/, loader: 'eslint'}];
