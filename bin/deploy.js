@@ -8,6 +8,10 @@ const log = _debug('deploy:gh-pages');
 
 log('checkout branch gh-pages!!');
 
-exec('git checkout gh-pages', () => {
+async function deploy() {
+  const a = await exec('git checkout gh-pages');
+  console.log(a);
   log('checkout to gh-pages');
-});
+}
+
+deploy();
