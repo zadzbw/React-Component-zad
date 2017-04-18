@@ -56,7 +56,7 @@ async function deploy() {
     log('checkout to branch gh-pages');
     const exists = fs.existsSync('dist');
     if (exists) {
-      await Promisefy(exec)('rm -rf dist/*'); // commit
+      await Promisefy(exec)('rm -rf dist/*'); // 删除dist下原有的文件
     }
     await copy('build', 'dist'); // 开始读写文件
     await Promisefy(exec)('git add dist'); // add
@@ -65,6 +65,8 @@ async function deploy() {
     log('commit info');
     await Promisefy(exec)('git push origin gh-pages'); // push
     log('push to gh-pages');
+    await Promisefy(exec)('git checkout master'); // checkout to master
+    log('checkout to branch master');
   } catch (e) {
     console.log(e);
   }
