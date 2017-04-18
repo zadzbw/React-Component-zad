@@ -57,8 +57,7 @@ async function deploy() {
     log('checkout to branch gh-pages');
     fs.exists('dist', async (exists) => {
       if (exists) {
-        await Promisefy(fs.rmdir)('dist');
-        fs.mkdirSync('dist');
+        await Promisefy(exec)('rm -rf dist/*'); // commit
       }
       copy('build', 'dist'); // 开始读写文件
       await Promisefy(exec)('git add dist'); // add
