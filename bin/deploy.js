@@ -51,7 +51,6 @@ async function copy(src, target) {
   }
 }
 
-
 async function deploy() {
   try {
     await Promisefy(exec)('git checkout gh-pages');
@@ -66,3 +65,5 @@ async function deploy() {
     console.log(e);
   }
 }
+
+deploy();
