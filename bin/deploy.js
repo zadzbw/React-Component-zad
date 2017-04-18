@@ -54,4 +54,4 @@ async function copy(src, target) {
 
 log('checkout to gh-pages');
 
-copy('build', './');
+copy('build', 'dist');
