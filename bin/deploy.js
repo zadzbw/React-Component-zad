@@ -58,7 +58,7 @@ async function deploy() {
     if (exists) {
       await Promisefy(exec)('rm -rf dist/*'); // commit
     }
-    copy('build', 'dist'); // 开始读写文件
+    await copy('build', 'dist'); // 开始读写文件
     await Promisefy(exec)('git add dist'); // add
     log('add files');
     await Promisefy(exec)('git commit -a -m "deploy"'); // commit
