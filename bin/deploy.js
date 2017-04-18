@@ -55,12 +55,18 @@ async function deploy() {
   try {
     await Promisefy(exec)('git checkout gh-pages');
     log('checkout to branch gh-pages');
-    await Promisefy(fs.rmdir)('dist');
-    copy('build', 'dist'); // 开始读写文件
-    await Promisefy(exec)('git add dist'); // add
-    await Promisefy(exec)('git commit -a -m "deploy"'); // commit
-    await Promisefy(exec)('git push origin gh-pages'); // push
-
+    fs.exists('dist', async (exists) => {
+      if (exists) {
+        await Promisefy(fs.rmdir)('dist');
+      }
+      copy('build', 'dist'); // 开始读写文件
+      await Promisefy(exec)('git add dist'); // add
+      log('add files');
+      await Promisefy(exec)('git commit -a -m "deploy"'); // commit
+      log('commit info');
+      await Promisefy(exec)('git push origin gh-pages'); // push
+      log('push to gh-pages');
+    });
   } catch (e) {
     console.log(e);
   }
