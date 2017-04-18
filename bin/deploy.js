@@ -26,7 +26,7 @@ log('checkout branch gh-pages!!');
 
 async function copy(src, target) {
   try {
-    // const a = await Promisefy(exec)('git checkout gh-pages');
+    await Promisefy(exec)('git checkout gh-pages');
     const files = await Promisefy(fs.readdir)(src);
     fs.exists(target, (exists) => {
       if (!exists) {
