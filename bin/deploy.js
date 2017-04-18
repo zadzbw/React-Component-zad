@@ -22,16 +22,14 @@ function Promisefy(fn, ctx) {
 
 const log = _debug('deploy:gh-pages');
 
-log('checkout branch gh-pages!!');
-
 async function copy(src, target) {
   try {
-    await Promisefy(exec)('git checkout gh-pages');
     const files = await Promisefy(fs.readdir)(src);
-    fs.exists(target, (exists) => {
+    fs.exists(target, async (exists) => {
       if (!exists) {
         fs.mkdirSync(target);
       }
+      log('copy file start');
       files.forEach(async (file) => {
         const srcPath = path.resolve(src, file);
         const targetPath = path.resolve(target, file);
@@ -46,12 +44,25 @@ async function copy(src, target) {
           readable.pipe(writable);
         }
       });
+      log('copy file done');
     });
   } catch (e) {
     console.log(e);
   }
 }
 
-log('checkout to gh-pages');
 
-copy('build', 'dist');
+async function deploy() {
+  try {
+    await Promisefy(exec)('git checkout gh-pages');
+    log('checkout to branch gh-pages');
+    await Promisefy(fs.rmdir)('dist');
+    copy('build', 'dist'); // 开始读写文件
+    await Promisefy(exec)('git add dist'); // add
+    await Promisefy(exec)('git commit -a -m "deploy"'); // commit
+    await Promisefy(exec)('git push origin gh-pages'); // push
+
+  } catch (e) {
+    console.log(e);
+  }
+}
