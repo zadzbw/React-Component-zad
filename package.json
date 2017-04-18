@@ -7,7 +7,7 @@
     "test": "jest -u",
     "start": "NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --history-api-fallback",
     "build": "NODE_ENV=production webpack --progress --profile --colors",
-    "deploy": "DEBUG=deploy:* babel-node bin/deploy"
+    "deploy": "npm run build && DEBUG=deploy:* babel-node bin/deploy"
   },
   "repository": {
     "type": "git",
