@@ -2,6 +2,8 @@
  * Created by zad on 17/4/17.
  */
 import {exec} from 'child_process';
+import fs from 'fs';
+import path from 'path';
 import _debug from 'debug';
 
 function Promisefy(fn, ctx) {
@@ -22,14 +24,34 @@ const log = _debug('deploy:gh-pages');
 
 log('checkout branch gh-pages!!');
 
-async function deploy() {
+async function copy(src, target) {
   try {
-    const a = await Promisefy(exec)('git checkout gh-pages');
-    console.log(a);
-    log('checkout to gh-pages');
+    // const a = await Promisefy(exec)('git checkout gh-pages');
+    const files = await Promisefy(fs.readdir)(src);
+    fs.exists(target, (exists) => {
+      if (!exists) {
+        fs.mkdirSync(target);
+      }
+      files.forEach(async (file) => {
+        const srcPath = path.resolve(src, file);
+        const targetPath = path.resolve(target, file);
+        const stats = await Promisefy(fs.stat)(srcPath);
+        if (stats.isDirectory()) {
+          copy(srcPath, targetPath);
+        } else {
+          const readable = fs.createReadStream(srcPath);
+          // 创建写入流
+          const writable = fs.createWriteStream(targetPath);
+          // 通过管道来传输流
+          readable.pipe(writable);
+        }
+      });
+    });
   } catch (e) {
     console.log(e);
   }
 }
 
-deploy();
+log('checkout to gh-pages');
+
+copy('build', './');
