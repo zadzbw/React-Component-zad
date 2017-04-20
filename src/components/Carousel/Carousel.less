@@ -1,0 +1,75 @@
+@import "../../style/variables";
+@import "../../style/mixins/index";
+
+@carousel-class: zad-carousel;
+@dots-height: 3px;
+
+.@{carousel-class} {
+  &-wrapper {
+    position: relative;
+    overflow: hidden;
+    outline: none;
+  }
+
+  &-content {
+    position: relative;
+    height: 200px;
+  }
+
+  &-item {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s @ease-in-out;
+    z-index: 0;
+  }
+
+  &-nav {
+
+  }
+
+  &-dots {
+    position: absolute;
+    list-style: none;
+    bottom: 12px;
+    text-align: center;
+    width: 100%;
+    height: @dots-height;
+    .clearfix();
+
+    .@{carousel-class}-dot {
+      position: relative;
+      display: inline-block;
+      margin: 0 2px;
+      padding: 0;
+      vertical-align: top;
+
+      button {
+        display: block;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        width: 16px;
+        height: @dots-height;
+        border-radius: 1px;
+        background-color: #fff;
+        opacity: 0.4;
+        transition: all 0.3s @ease-in-out;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+
+      &-active {
+        button {
+          width: 24px;
+          opacity: 1 !important;
+        }
+      }
+    }
+  }
+}

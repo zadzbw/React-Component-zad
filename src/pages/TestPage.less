@@ -44,4 +44,21 @@
       margin: 0 8px 8px 0;
     }
   }
+
+  .test-carousel {
+    color: #fff;
+
+    .zad-carousel-item {
+      text-align: center;
+      line-height: 200px;
+
+      &:nth-child(2n) {
+        background-color: shade(@primary-color, 10%);
+      }
+
+      &:nth-child(2n+1) {
+        background-color: @primary-color;
+      }
+    }
+  }
 }

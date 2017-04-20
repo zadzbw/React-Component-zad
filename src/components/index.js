@@ -19,6 +19,7 @@ import Tab from './Tab';
 import Input from './Input';
 import Checkbox from './Checkbox';
 import Radio from './Radio';
+import Carousel from './Carousel';
 
 Button.Group = ButtonGroup;
 
@@ -38,4 +39,5 @@ export {
   Input,
   Checkbox,
   Radio,
+  Carousel,
 };

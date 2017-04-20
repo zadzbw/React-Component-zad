@@ -21,6 +21,7 @@ import {
   Input,
   Checkbox,
   Radio,
+  Carousel,
 } from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -386,6 +387,14 @@ export default class TestPage extends React.Component {
           />
         </div>
         <br/>
+        <div style={{width: 400}} className="test-carousel">
+          <Carousel>
+            <div><h3>0</h3></div>
+            <div><h3>1</h3></div>
+            <div><h3>2</h3></div>
+            <div><h3>3</h3></div>
+          </Carousel>
+        </div>
       </div>
     );
   }

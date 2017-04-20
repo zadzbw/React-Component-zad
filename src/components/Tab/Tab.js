@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import _findIndex from 'lodash/findIndex';
 import isOneOf from '../../utils/isOneOf';
 import validChild from './validChild';
-import keyCode from './keyCode';
+import keyCode from '../../utils/keyCode';
 import TabItem from './TabItem';
 import TabBar from './TabBar';
 
