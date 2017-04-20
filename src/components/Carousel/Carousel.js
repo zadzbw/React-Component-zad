@@ -1,8 +1,9 @@
 /**
  * Created by zad on 17/4/20.
  */
-import React, {Component, Proptypes, Children} from 'react';
+import React, {Component, PropTypes, Children} from 'react';
 import classNames from 'classnames';
+import _isFunction from 'lodash/isFunction';
 import isOneOf from '../../utils/isOneOf';
 import keyCode from '../../utils/keyCode';
 
@@ -16,12 +17,26 @@ export default class Carousel extends Component {
     };
   }
 
+  static propTypes = {
+    showDots: PropTypes.bool,
+    onPageChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    showDots: true,
+    onPageChange: () => undefined,
+  };
+
   setCurrent = (v) => {
     const {current} = this.state;
+    const {onPageChange} = this.props;
     if (v !== current) {
       this.setState({
         current: v,
       });
+      if (_isFunction(onPageChange)) {
+        onPageChange(v);
+      }
     }
   };
 
@@ -82,6 +97,7 @@ export default class Carousel extends Component {
   };
 
   render() {
+    const {showDots} = this.props;
     return (
       <div className={`${carouselClass}-wrapper`} tabIndex="0" onKeyDown={this._keyDown}>
         <div className={`${carouselClass}-content`}>
@@ -90,9 +106,12 @@ export default class Carousel extends Component {
         <div className={`${carouselClass}-nav`}>
 
         </div>
-        <ul className={`${carouselClass}-dots`}>
-          {this.getDots()}
-        </ul>
+        {
+          showDots &&
+          <ul className={`${carouselClass}-dots`}>
+            {this.getDots()}
+          </ul>
+        }
       </div>
     );
   }
