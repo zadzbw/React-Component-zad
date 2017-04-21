@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import _isFunction from 'lodash/isFunction';
 import isOneOf from '../../utils/isOneOf';
 import keyCode from '../../utils/keyCode';
+import {rightShift} from '../../utils/array_shift';
 
 const carouselClass = 'zad-carousel';
 
@@ -14,6 +15,7 @@ export default class Carousel extends Component {
     super(props);
     this.state = {
       current: 0,
+      prevCurrent: this.getChildrenLength() - 1,
     };
   }
 
@@ -27,22 +29,41 @@ export default class Carousel extends Component {
     onPageChange: () => undefined,
   };
 
+  getChildrenLength = () => {
+    return this.props.children.length;
+  };
+
+  // [0, 1, 2, -1]
+  getPositionArray = () => {
+    const result = [];
+    const len = this.getChildrenLength();
+    for (let i = 0; i < len - 1; i++) {
+      result.push(i);
+    }
+    result.push(-1);
+    return result;
+  };
+
   setCurrent = (v) => {
     const {current} = this.state;
     const {onPageChange} = this.props;
     if (v !== current) {
       this.setState({
         current: v,
+        prevCurrent: current,
       });
       if (_isFunction(onPageChange)) {
-        onPageChange(v);
+        onPageChange({
+          current: v,
+          prevCurrent: current,
+        });
       }
     }
   };
 
   getNextCurrent = (flag = true) => {
     const {current} = this.state;
-    const len = this.props.children.length;
+    const len = this.getChildrenLength();
     if (flag) {
       return (current + 1) % len;
     } else {
@@ -65,16 +86,21 @@ export default class Carousel extends Component {
 
   getItems = () => {
     const {children} = this.props;
-    const {current} = this.state;
+    const {current, prevCurrent} = this.state;
+    const positionArray = rightShift(this.getPositionArray(), current);
     return Children.map(children, (child, i) => {
       const itemClass = classNames({
         [`${carouselClass}-item`]: true,
         [`${carouselClass}-item-active`]: current === i,
       });
+      const position = positionArray[i];
+      const min = Math.min(current, prevCurrent);
+      const max = Math.max(current, prevCurrent);
       return React.cloneElement(child, {
         className: itemClass,
         style: {
-          transform: `translateX(${(i - current) * 100}%)`,
+          transform: `translate3d(${ position * 100}%, 0px, 0px)`,
+          transitionDuration: (min <= i && i <= max) ? '400ms' : '0ms',
         }
       });
     });
