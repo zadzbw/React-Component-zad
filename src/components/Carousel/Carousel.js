@@ -16,12 +16,14 @@ export default class Carousel extends Component {
     this.state = {
       current: 0,
       prevCurrent: this.getChildrenLength() - 1,
+      auto: false,
     };
   }
 
   static propTypes = {
     showDots: PropTypes.bool,
     onPageChange: PropTypes.func,
+    auto: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -48,6 +50,9 @@ export default class Carousel extends Component {
     const {current} = this.state;
     const {onPageChange} = this.props;
     if (v !== current) {
+      // 先stop，再start
+      this.stopAuto();
+      this.startAuto();
       this.setState({
         current: v,
         prevCurrent: current,
@@ -59,6 +64,54 @@ export default class Carousel extends Component {
         });
       }
     }
+  };
+
+  autoPlay = () => {
+    const {auto} = this.props;
+    if (!auto) {
+      return;
+    }
+    const len = this.getChildrenLength();
+    const {current} = this.state;
+    if (current < len - 1) {
+      this.setState({
+        current: current + 1,
+        prevCurrent: current,
+      });
+    } else {
+      this.setState({
+        current: 0,
+        prevCurrent: len - 1,
+      });
+    }
+    this.timer = setTimeout(this.autoPlay, 3000);
+  };
+
+  componentDidMount() {
+    this.startAuto();
+  }
+
+  componentWillUnmount() {
+    this.stopAuto();
+  }
+
+  stopAuto = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    if (this.startTimer) {
+      clearTimeout(this.startTimer);
+      this.startTimer = null;
+    }
+  };
+
+  startAuto = () => {
+    if (this.startTimer) {
+      clearTimeout(this.startTimer);
+      this.startAuto = null;
+    }
+    this.startTimer = setTimeout(this.autoPlay, 3000);
   };
 
   getNextCurrent = (flag = true) => {
@@ -136,7 +189,14 @@ export default class Carousel extends Component {
   render() {
     const {showDots} = this.props;
     return (
-      <div className={`${carouselClass}-wrapper`} tabIndex="0" onKeyDown={this._keyDown()}>
+      <div
+        className={`${carouselClass}-wrapper`}
+        tabIndex="0"
+        onKeyDown={this._keyDown()}
+        onMouseEnter={this.stopAuto}
+        onMouseMove={this.stopAuto}
+        onMouseLeave={this.startAuto}
+      >
         <div className={`${carouselClass}-content`}>
           {this.getItems()}
         </div>
