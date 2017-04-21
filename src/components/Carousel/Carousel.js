@@ -71,17 +71,28 @@ export default class Carousel extends Component {
     }
   };
 
-  _keyDown = (e) => {
-    const code = e.keyCode;
-    if (isOneOf([keyCode.LEFT, keyCode.UP], code)) {
+  doKeyDown = (e) => {
+    if (isOneOf([keyCode.LEFT, keyCode.UP], e.keyCode)) {
       e.preventDefault();
       const prevCurrent = this.getNextCurrent(false);
       this.setCurrent(prevCurrent);
-    } else if (isOneOf([keyCode.RIGHT, keyCode.DOWN], code)) {
+    } else if (isOneOf([keyCode.RIGHT, keyCode.DOWN], e.keyCode)) {
       e.preventDefault();
       const nextCurrent = this.getNextCurrent(true);
       this.setCurrent(nextCurrent);
     }
+  };
+
+  // 不用lodash.throttle的原因是无法异步获取event
+  _keyDown = () => {
+    let start = +new Date();
+    return (e) => {
+      const now = +new Date();
+      if (now - start > 400) {
+        this.doKeyDown(e);
+        start = now;
+      }
+    };
   };
 
   getItems = () => {
@@ -125,7 +136,7 @@ export default class Carousel extends Component {
   render() {
     const {showDots} = this.props;
     return (
-      <div className={`${carouselClass}-wrapper`} tabIndex="0" onKeyDown={this._keyDown}>
+      <div className={`${carouselClass}-wrapper`} tabIndex="0" onKeyDown={this._keyDown()}>
         <div className={`${carouselClass}-content`}>
           {this.getItems()}
         </div>
