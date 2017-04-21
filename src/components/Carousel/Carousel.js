@@ -2,11 +2,14 @@
  * Created by zad on 17/4/20.
  */
 import React, {Component, PropTypes, Children} from 'react';
+import Animate from 'rc-animate';
 import classNames from 'classnames';
 import _isFunction from 'lodash/isFunction';
 import isOneOf from '../../utils/isOneOf';
 import keyCode from '../../utils/keyCode';
 import {rightShift} from '../../utils/array_shift';
+import chainFunc from '../../utils/chainFunc';
+import Icon from '../Icon';
 
 const carouselClass = 'zad-carousel';
 
@@ -16,19 +19,22 @@ export default class Carousel extends Component {
     this.state = {
       current: 0,
       prevCurrent: this.getChildrenLength() - 1,
-      auto: false,
+      hover: false,
     };
   }
 
   static propTypes = {
     showDots: PropTypes.bool,
+    showNav: PropTypes.bool,
     onPageChange: PropTypes.func,
     auto: PropTypes.bool,
   };
 
   static defaultProps = {
     showDots: true,
+    showNav: true,
     onPageChange: () => undefined,
+    auto: false,
   };
 
   getChildrenLength = () => {
@@ -84,7 +90,7 @@ export default class Carousel extends Component {
         prevCurrent: len - 1,
       });
     }
-    this.timer = setTimeout(this.autoPlay, 3000);
+    this.timer = setTimeout(this.autoPlay, 4000);
   };
 
   componentDidMount() {
@@ -109,9 +115,9 @@ export default class Carousel extends Component {
   startAuto = () => {
     if (this.startTimer) {
       clearTimeout(this.startTimer);
-      this.startAuto = null;
+      this.startTimer = null;
     }
-    this.startTimer = setTimeout(this.autoPlay, 3000);
+    this.startTimer = setTimeout(this.autoPlay, 4000);
   };
 
   getNextCurrent = (flag = true) => {
@@ -136,8 +142,8 @@ export default class Carousel extends Component {
     }
   };
 
-  // 不用lodash.throttle的原因是无法异步获取event
-  _keyDown = () => {
+  // 不用lodash.throttle的原因是无法异步获取event，且改变state后，重新render，使节流失效
+  throttleKeyDown = () => {
     let start = +new Date();
     return (e) => {
       const now = +new Date();
@@ -186,23 +192,94 @@ export default class Carousel extends Component {
     });
   };
 
+  clickNav = (left) => {
+    if (left) {
+      const prevCurrent = this.getNextCurrent(false);
+      this.setCurrent(prevCurrent);
+    } else {
+      const nextCurrent = this.getNextCurrent(true);
+      this.setCurrent(nextCurrent);
+    }
+  };
+
+  throttleClickNav = (left) => {
+    let start = +new Date();
+    return () => {
+      const now = +new Date();
+      if (now - start > 400) {
+        this.clickNav(left);
+        start = now;
+      }
+    };
+  };
+
+  getNavClass = (left) => {
+    return classNames(`${carouselClass}-nav`, {
+      [`${carouselClass}-nav-left`]: left,
+      [`${carouselClass}-nav-right`]: !left,
+    });
+  };
+
+  _hover = () => {
+    const {showNav} = this.props;
+    if (showNav) {
+      this.setState({
+        hover: true,
+      });
+    }
+  };
+
+  _blur = () => {
+    const {showNav} = this.props;
+    if (showNav) {
+      this.setState({
+        hover: false,
+      });
+    }
+  };
+
+  getNav = (left) => {
+    const {hover} = this.state;
+    if (hover) {
+      return (
+        <div
+          className={this.getNavClass(left)}
+          onClick={this.throttleClickNav(left)}
+        >
+          <Icon name={left ? 'angle-left' : 'angle-right'}/>
+        </div>
+      );
+    }
+    return null;
+  };
+
   render() {
-    const {showDots} = this.props;
+    const {showDots, showNav} = this.props;
+    const enterFunc = chainFunc(this._hover, this.stopAuto);
+    const leaveFunc = chainFunc(this._blur, this.startAuto);
     return (
       <div
         className={`${carouselClass}-wrapper`}
         tabIndex="0"
-        onKeyDown={this._keyDown()}
-        onMouseEnter={this.stopAuto}
-        onMouseMove={this.stopAuto}
-        onMouseLeave={this.startAuto}
+        onKeyDown={this.throttleKeyDown()}
+        onMouseEnter={enterFunc}
+        onMouseLeave={leaveFunc}
       >
         <div className={`${carouselClass}-content`}>
           {this.getItems()}
         </div>
-        <div className={`${carouselClass}-nav`}>
-
-        </div>
+        {
+          showNav &&
+          <Animate transitionName="move-left">
+            {this.getNav(true)}
+          </Animate>
+        }
+        {
+          showNav &&
+          <Animate transitionName="move-right">
+            {this.getNav(false)}
+          </Animate>
+        }
         {
           showDots &&
           <ul className={`${carouselClass}-dots`}>

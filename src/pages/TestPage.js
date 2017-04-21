@@ -388,7 +388,19 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
         <div style={{width: 400}} className="test-carousel">
+          <p style={{color: 'black'}}>normal carousel</p>
           <Carousel>
+            <div><h3>0</h3></div>
+            <div><h3>1</h3></div>
+            <div><h3>2</h3></div>
+            <div><h3>3</h3></div>
+            <div><h3>4</h3></div>
+            <div><h3>5</h3></div>
+          </Carousel>
+        </div>
+        <div style={{width: 400}} className="test-carousel">
+          <p style={{color: 'black'}}>自动播放</p>
+          <Carousel auto>
             <div><h3>0</h3></div>
             <div><h3>1</h3></div>
             <div><h3>2</h3></div>
