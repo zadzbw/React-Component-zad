@@ -82,7 +82,8 @@ let plugins = [
 if (TARGET === 'build') {
   webpackConfig.module.loaders.push({
     test: /\.jsx?$/,
-    loader: 'strip-loader?strip[]=log,strip[]=console.log',
+    // loader: 'strip-loader?strip[]=log,strip[]=console.log',
+    loader: 'strip-loader?strip[]=log',
     exclude: [
       path.resolve(ROOT_PATH, 'node_modules')
     ]
