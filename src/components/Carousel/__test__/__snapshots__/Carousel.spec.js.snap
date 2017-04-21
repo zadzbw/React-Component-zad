@@ -1,0 +1,141 @@
+exports[`Carousel normal 1`] = `
+<div
+  className="zad-carousel-wrapper"
+  onKeyDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  tabIndex="0">
+  <div
+    className="zad-carousel-content">
+    <div
+      className="zad-carousel-item"
+      style={
+        Object {
+          "transform": "translate3d(300%, 0px, 0px)",
+          "transitionDuration": "400ms",
+        }
+      }>
+      <h3>
+        0
+      </h3>
+    </div>
+    <div
+      className="zad-carousel-item"
+      style={
+        Object {
+          "transform": "translate3d(400%, 0px, 0px)",
+          "transitionDuration": "400ms",
+        }
+      }>
+      <h3>
+        1
+      </h3>
+    </div>
+    <div
+      className="zad-carousel-item"
+      style={
+        Object {
+          "transform": "translate3d(-100%, 0px, 0px)",
+          "transitionDuration": "400ms",
+        }
+      }>
+      <h3>
+        2
+      </h3>
+    </div>
+    <div
+      className="zad-carousel-item zad-carousel-item-active"
+      style={
+        Object {
+          "transform": "translate3d(0%, 0px, 0px)",
+          "transitionDuration": "400ms",
+        }
+      }>
+      <h3>
+        3
+      </h3>
+    </div>
+    <div
+      className="zad-carousel-item"
+      style={
+        Object {
+          "transform": "translate3d(100%, 0px, 0px)",
+          "transitionDuration": "0ms",
+        }
+      }>
+      <h3>
+        4
+      </h3>
+    </div>
+    <div
+      className="zad-carousel-item"
+      style={
+        Object {
+          "transform": "translate3d(200%, 0px, 0px)",
+          "transitionDuration": "0ms",
+        }
+      }>
+      <h3>
+        5
+      </h3>
+    </div>
+  </div>
+  <Animate
+    animation={Object {}}
+    component="span"
+    componentProps={Object {}}
+    onAppear={[Function]}
+    onEnd={[Function]}
+    onEnter={[Function]}
+    onLeave={[Function]}
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionLeave={true}
+    transitionName="move-left" />
+  <Animate
+    animation={Object {}}
+    component="span"
+    componentProps={Object {}}
+    onAppear={[Function]}
+    onEnd={[Function]}
+    onEnter={[Function]}
+    onLeave={[Function]}
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionLeave={true}
+    transitionName="move-right" />
+  <ul
+    className="zad-carousel-dots">
+    <li
+      className="zad-carousel-dot">
+      <button
+        onClick={[Function]} />
+    </li>
+    <li
+      className="zad-carousel-dot">
+      <button
+        onClick={[Function]} />
+    </li>
+    <li
+      className="zad-carousel-dot">
+      <button
+        onClick={[Function]} />
+    </li>
+    <li
+      className="zad-carousel-dot zad-carousel-dot-active">
+      <button
+        onClick={[Function]} />
+    </li>
+    <li
+      className="zad-carousel-dot">
+      <button
+        onClick={[Function]} />
+    </li>
+    <li
+      className="zad-carousel-dot">
+      <button
+        onClick={[Function]} />
+    </li>
+  </ul>
+</div>
+`;

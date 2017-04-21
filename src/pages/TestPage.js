@@ -389,7 +389,7 @@ export default class TestPage extends React.Component {
         <br/>
         <div style={{width: 400}} className="test-carousel">
           <p style={{color: 'black'}}>normal carousel</p>
-          <Carousel>
+          <Carousel onPageChange={this.testCarousel}>
             <div><h3>0</h3></div>
             <div><h3>1</h3></div>
             <div><h3>2</h3></div>
@@ -411,6 +411,10 @@ export default class TestPage extends React.Component {
         </div>
       </div>
     );
+  }
+
+  testCarousel(obj) {
+    console.log(obj);
   }
 
   testRadioGroup1 = (o) => {
