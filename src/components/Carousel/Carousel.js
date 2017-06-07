@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import _isFunction from 'lodash/isFunction';
 import isOneOf from '../../utils/isOneOf';
 import keyCode from '../../utils/keyCode';
-import {rightShift} from '../../utils/array_shift';
+import {rightShift} from '../../utils/arrayShift';
 import chainFunc from '../../utils/chainFunc';
 import Icon from '../Icon';
 

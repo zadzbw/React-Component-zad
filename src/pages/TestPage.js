@@ -409,6 +409,11 @@ export default class TestPage extends React.Component {
             <div><h3>5</h3></div>
           </Carousel>
         </div>
+        <br/>
+        <div className="test-corner">
+          123
+        </div>
+        <br/>
       </div>
     );
   }
