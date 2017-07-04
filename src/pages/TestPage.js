@@ -421,7 +421,7 @@ export default class TestPage extends React.Component {
   }
 
   openMessage = () => {
-    Message.info('12345');
+    Message.info('test', 60000 * 5);
   };
 
   testCarousel(obj) {

@@ -32,14 +32,6 @@ class Message extends Component {
     className: PropTypes.string,
   };
 
-  static defaultProps = {
-    animation: 'fade',
-    style: {
-      top: 65,
-      left: '50%',
-    },
-  };
-
   componentDidMount() {
     this.getKey = getKey();
   }
