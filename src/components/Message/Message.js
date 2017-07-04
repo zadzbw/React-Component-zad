@@ -45,13 +45,16 @@ class Message extends Component {
         messages: messages.concat(message),
       });
     }
+    return message;
   };
 
   removeMessage = (key) => {
     const { messages } = this.state;
+    const restMessages = messages.filter((msg) => msg.key !== key);
     this.setState({
-      messages: messages.filter((msg) => msg.key !== key),
+      messages: restMessages,
     });
+    return restMessages;
   };
 
   getItems = () => {
@@ -104,10 +107,10 @@ Message.createInstance = (options = {}) => {
   const instance = ReactDOM.render(<Message {...msgProps}/>, target);
   return {
     add(msg) {
-      instance.addMessage(msg);
+      return instance.addMessage(msg);
     },
     remove(key) {
-      instance.removeMessage(key);
+      return instance.removeMessage(key);
     },
     destroy() {
       ReactDOM.unmountComponentAtNode(target); // target是其他element

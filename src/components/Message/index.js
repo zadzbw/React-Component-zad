@@ -41,7 +41,7 @@ function show(content, duration = defaultDuration, onClose = () => undefined, ty
     loading: 'spinner',
   })[type];
 
-  msg.add({
+  const addedMsg = msg.add({
     duration,
     onClose,
     content: (
@@ -51,6 +51,7 @@ function show(content, duration = defaultDuration, onClose = () => undefined, ty
       </div>
     ),
   });
+  return msg.remove.bind(msg, addedMsg.key);
 }
 
 export default {

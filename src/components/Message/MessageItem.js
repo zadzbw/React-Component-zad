@@ -23,10 +23,13 @@ export default class MessageItem extends Component {
 
   componentDidMount() {
     const { duration, onClose } = this.props;
-    this.closeTimer = setTimeout(() => {
-      onClose();
-      this.clearCloseTimer();
-    }, duration);
+    // 如果为0，则一直显示
+    if (duration !== 0) {
+      this.closeTimer = setTimeout(() => {
+        onClose();
+        this.clearCloseTimer();
+      }, duration);
+    }
   }
 
   componentWillUnmount() {
