@@ -7,7 +7,7 @@ import '../style/index.less';
 import Icon from './Icon';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import {Row, Col} from './Grid';
+import { Row, Col } from './Grid';
 import Affix from './Affix';
 import ToTop from './ToTop';
 import Breadcrumb from './Breadcrumb';
@@ -20,6 +20,7 @@ import Input from './Input';
 import Checkbox from './Checkbox';
 import Radio from './Radio';
 import Carousel from './Carousel';
+import Message from './Message';
 
 Button.Group = ButtonGroup;
 
@@ -40,4 +41,5 @@ export {
   Checkbox,
   Radio,
   Carousel,
+  Message,
 };

@@ -22,6 +22,7 @@ import {
   Checkbox,
   Radio,
   Carousel,
+  Message,
 } from '../components';
 const ButtonGroup = Button.Group;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -36,28 +37,28 @@ const RadioGroup = Radio.Group;
 const mock = {
   bread: {
     // react-router mock
-    params: {userId: 1, appId: 2, postId: 3},
+    params: { userId: 1, appId: 2, postId: 3 },
     routes: [
-      {path: '/', breadcrumbName: 'Home'},
-      {path: 'user/:userId', breadcrumbName: 'User:userId'},
-      {path: 'application/:appId', breadcrumbName: 'Application:appId'},
-      {path: 'post/:postId', breadcrumbName: 'Post:postId'}
+      { path: '/', breadcrumbName: 'Home' },
+      { path: 'user/:userId', breadcrumbName: 'User:userId' },
+      { path: 'application/:appId', breadcrumbName: 'Application:appId' },
+      { path: 'post/:postId', breadcrumbName: 'Post:postId' }
     ]
   },
   dropdown: [
-    {name: '中国1-China', value: 'CN1'},
-    {name: '日本1-Japan', value: 'JP1'},
-    {name: '美国1-USA', value: 'USA1'},
+    { name: '中国1-China', value: 'CN1' },
+    { name: '日本1-Japan', value: 'JP1' },
+    { name: '美国1-USA', value: 'USA1' },
     {
       name: '二级菜单', menus: [
-      {name: '中国2-China', value: 'CN2'},
-      {name: '日本2-Japan', value: 'JP2'},
-      {name: '美国2-USA', value: 'USA2'},
+      { name: '中国2-China', value: 'CN2' },
+      { name: '日本2-Japan', value: 'JP2' },
+      { name: '美国2-USA', value: 'USA2' },
       {
         name: '三级菜单', menus: [
-        {name: '中国3-China', value: 'CN3'},
-        {name: '日本3-Japan', value: 'JP3'},
-        {name: '美国3-USA', value: 'USA3'}
+        { name: '中国3-China', value: 'CN3' },
+        { name: '日本3-Japan', value: 'JP3' },
+        { name: '美国3-USA', value: 'USA3' }
       ]
       }
     ]
@@ -170,7 +171,7 @@ export default class TestPage extends React.Component {
         <div>
           <Row gap={24}>
             <Col span={6}>
-              <div style={{background: '#eee'}}>
+              <div style={{ background: '#eee' }}>
                 <Loading tip="waiting for success..." size={'default'} loading={this.state.loading} delay={300}>
                   <div>
                     <p>111111111</p>
@@ -185,7 +186,7 @@ export default class TestPage extends React.Component {
               </div>
             </Col>
             <Col span={6}>
-              <div style={{background: '#eee'}}>
+              <div style={{ background: '#eee' }}>
                 <Loading size={'small'}/>
                 <Loading/>
                 <Loading size={'large'}/>
@@ -197,7 +198,7 @@ export default class TestPage extends React.Component {
         </div>
         <br/>
 
-        <div style={{width: 240}}>
+        <div style={{ width: 240 }}>
           <Menu onlyExpandOneSub>
             <SubMenu key="sub-1" title={<span><Icon name={'folder-o'}/><span>Navigation One</span></span>}>
               <MenuItemGroup title={'test1'}>
@@ -248,7 +249,7 @@ export default class TestPage extends React.Component {
         <Pagination current={this.state.page} total={155} onChange={this.testPage} showQuickJumper/>
         <br/>
 
-        <div style={{width: 400}}>
+        <div style={{ width: 400 }}>
           <Tab defaultCurrent={'22'} onTabChange={this.testTab2}>
             <TabItem name="Tab 1111" key="11">11111</TabItem>
             <div>12345</div>
@@ -258,7 +259,7 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <br/>
-        <div style={{width: 400}}>
+        <div style={{ width: 400 }}>
           <Tab current={this.state.tab} type={'inline'} onTabChange={this.testTab}>
             <TabItem name="Tab 1" key="1111">11111</TabItem>
             <TabItem name="Tab 2" key="2222">22222</TabItem>
@@ -267,7 +268,7 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <br/>
-        <div style={{width: 400, height: 250}}>
+        <div style={{ width: 400, height: 250 }}>
           <Tab type={'inline'} animation={false} onTabChange={this.testTab2}>
             <TabItem name="Input" key="1111">
               <div className="test-input">
@@ -290,14 +291,14 @@ export default class TestPage extends React.Component {
               </InputGroup>
               <br/>
               <InputGroup compact={true} size={'large'}>
-                <Input style={{width: '15%'}} defaultValue="+86"/>
-                <Input style={{width: '20%'}} defaultValue="0571" size={'small'}/>
-                <Input style={{width: '30%'}} defaultValue="26888888"/>
+                <Input style={{ width: '15%' }} defaultValue="+86"/>
+                <Input style={{ width: '20%' }} defaultValue="0571" size={'small'}/>
+                <Input style={{ width: '30%' }} defaultValue="26888888"/>
               </InputGroup>
               <br/>
               <InputGroup compact={true}>
-                <Input style={{width: '20%'}} defaultValue="0571"/>
-                <Input style={{width: '30%'}} defaultValue="26888888"/>
+                <Input style={{ width: '20%' }} defaultValue="0571"/>
+                <Input style={{ width: '30%' }} defaultValue="26888888"/>
               </InputGroup>
             </TabItem>
             <TabItem name="Tab 3" key="3333">333333</TabItem>
@@ -305,12 +306,12 @@ export default class TestPage extends React.Component {
           </Tab>
         </div>
         <h3>CheckBox</h3>
-        <div style={{width: 400}}>
+        <div style={{ width: 400 }}>
           <Checkbox defaultChecked={true} onChange={this.testCheckBox1}>非受控</Checkbox>
           <Checkbox checked={this.state.checkbox} onChange={this.testCheckBox2}>受控</Checkbox>
         </div>
         <br/>
-        <div style={{width: 400}}>
+        <div style={{ width: 400 }}>
           <Checkbox defaultChecked={true} disabled>disabled1</Checkbox>
           <Checkbox indeterminate={true} disabled>disabled2</Checkbox>
           <Checkbox disabled>disabled3</Checkbox>
@@ -326,17 +327,17 @@ export default class TestPage extends React.Component {
         受控
         <CheckboxGroup
           options={[
-            {name: 'Apple', value: 'Apple'},
-            {name: 'Pear', value: 'Pear'},
-            {name: 'Orange', value: 'Orange', disabled: true},
+            { name: 'Apple', value: 'Apple' },
+            { name: 'Pear', value: 'Pear' },
+            { name: 'Orange', value: 'Orange', disabled: true },
           ]}
           value={this.state.check_group1}
           onChange={this.testCheckGroup2}
         />
         <br/>
-        <div style={{width: 300}}>
+        <div style={{ width: 300 }}>
           中间状态
-          <div style={{borderBottom: '1px solid #E9E9E9', paddingBottom: 5}}>
+          <div style={{ borderBottom: '1px solid #E9E9E9', paddingBottom: 5 }}>
             <Checkbox
               checked={this.state.checkAll}
               indeterminate={this.state.indeterminate}
@@ -353,7 +354,7 @@ export default class TestPage extends React.Component {
           />
         </div>
         <h3>Radio</h3>
-        <div style={{width: 400}}>
+        <div style={{ width: 400 }}>
           <Radio>Radio1</Radio>
           <Radio checked={true}>Radio2</Radio>
           <br/>
@@ -365,9 +366,9 @@ export default class TestPage extends React.Component {
           非受控
           <RadioGroup
             options={[
-              {name: '男性', value: 'male'},
-              {name: '女性', value: 'female'},
-              {name: '其他', value: 'other', disabled: true},
+              { name: '男性', value: 'male' },
+              { name: '女性', value: 'female' },
+              { name: '其他', value: 'other', disabled: true },
             ]}
             defaultValue={'female'}
             onChange={this.testRadioGroup1}
@@ -378,17 +379,17 @@ export default class TestPage extends React.Component {
           受控
           <RadioGroup
             options={[
-              {name: '男性', value: 'male'},
-              {name: '女性', value: 'female'},
-              {name: '其他', value: 'other'},
+              { name: '男性', value: 'male' },
+              { name: '女性', value: 'female' },
+              { name: '其他', value: 'other' },
             ]}
             value={this.state.radio_group}
             onChange={this.testRadioGroup2}
           />
         </div>
         <br/>
-        <div style={{width: 400}} className="test-carousel">
-          <p style={{color: 'black'}}>normal carousel</p>
+        <div style={{ width: 400 }} className="test-carousel">
+          <p style={{ color: 'black' }}>normal carousel</p>
           <Carousel onPageChange={this.testCarousel}>
             <div><h3>0</h3></div>
             <div><h3>1</h3></div>
@@ -398,8 +399,8 @@ export default class TestPage extends React.Component {
             <div><h3>5</h3></div>
           </Carousel>
         </div>
-        <div style={{width: 400}} className="test-carousel">
-          <p style={{color: 'black'}}>自动播放</p>
+        <div style={{ width: 400 }} className="test-carousel">
+          <p style={{ color: 'black' }}>自动播放</p>
           <Carousel auto>
             <div><h3>0</h3></div>
             <div><h3>1</h3></div>
@@ -414,9 +415,14 @@ export default class TestPage extends React.Component {
           123
         </div>
         <br/>
+        <Button className="test-btn" onClick={this.openMessage}>打开message</Button>
       </div>
     );
   }
+
+  openMessage = () => {
+    Message.info('12345');
+  };
 
   testCarousel(obj) {
     console.log(obj);
@@ -426,7 +432,7 @@ export default class TestPage extends React.Component {
     console.log(o);
   };
 
-  testRadioGroup2 = ({value}) => {
+  testRadioGroup2 = ({ value }) => {
     console.log(`radio的值为: ${value}`);
     this.setState({
       radio_group: value,
