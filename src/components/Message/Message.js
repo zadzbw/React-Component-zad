@@ -28,8 +28,10 @@ class Message extends Component {
 
   static propTypes = {
     animation: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
+    containerClass: PropTypes.string,
+    containerStyle: PropTypes.object,
+    itemClass: PropTypes.string,
+    itemStyle: PropTypes.object,
   };
 
   componentDidMount() {
@@ -40,7 +42,7 @@ class Message extends Component {
     const key = message.key = message.key || this.getKey();
     const { messages } = this.state;
     // 如果key唯一，则添加
-    if (messages.findIndex((msg) => msg.key === key) === -1) {
+    if (messages.findIndex(msg => msg.key === key) === -1) {
       this.setState({
         messages: messages.concat(message),
       });
@@ -50,7 +52,7 @@ class Message extends Component {
 
   removeMessage = (key) => {
     const { messages } = this.state;
-    const restMessages = messages.filter((msg) => msg.key !== key);
+    const restMessages = messages.filter(msg => msg.key !== key);
     this.setState({
       messages: restMessages,
     });
@@ -60,14 +62,14 @@ class Message extends Component {
   getItems = () => {
     const { messages } = this.state;
     return messages.map((msg) => {
-      const { onClose, duration, content, className, style, key } = msg;
+      const { onClose, duration, content, itemClass, itemStyle, key } = msg;
       const closeFunc = chainFunc(this.removeMessage.bind(this, msg.key), onClose);
       return (
         <MessageItem
           duration={duration}
           onClose={closeFunc}
-          className={className}
-          style={style}
+          itemClass={itemClass}
+          itemStyle={itemStyle}
           key={key}
         >
           {content}
@@ -77,14 +79,14 @@ class Message extends Component {
   };
 
   render() {
-    const { className, style, animation } = this.props;
+    const { containerClass, containerStyle, animation } = this.props;
     const wrapCls = classNames({
       [`${messagePrefix}-container`]: true,
-      [className]: !!className,
+      [containerClass]: !!containerClass,
     });
 
     return (
-      <div className={wrapCls} style={style}>
+      <div className={wrapCls} style={containerStyle}>
         <Animate transitionName={animation}>
           {this.getItems()}
         </Animate>
@@ -112,11 +114,12 @@ Message.createInstance = (options = {}) => {
     remove(key) {
       return instance.removeMessage(key);
     },
-    destroy() {
-      ReactDOM.unmountComponentAtNode(target); // target是其他element
-      document.body.removeChild(target);
+    destroy(_target) {
+      ReactDOM.unmountComponentAtNode(_target); // _target是其他element
+      document.body.removeChild(_target);
     },
     instance,
+    target,
   };
 };
 

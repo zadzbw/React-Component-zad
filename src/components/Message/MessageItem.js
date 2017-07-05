@@ -14,6 +14,8 @@ export default class MessageItem extends Component {
   static propTypes = {
     duration: PropTypes.number,
     onClose: PropTypes.func,
+    itemClass: PropTypes.string,
+    itemStyle: PropTypes.object,
   };
 
   static defaultProps = {
@@ -44,14 +46,14 @@ export default class MessageItem extends Component {
   };
 
   render() {
-    const { className, children } = this.props;
+    const { itemClass, itemStyle, children } = this.props;
     const itemCls = classNames({
       [`${messagePrefix}-item`]: true,
-      [className]: !!className,
+      [itemClass]: !!itemClass,
     });
 
     return (
-      <div className={itemCls}>
+      <div className={itemCls} style={itemStyle}>
         <div className={`${messagePrefix}-content-container`}>{children}</div>
       </div>
     );

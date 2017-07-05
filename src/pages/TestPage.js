@@ -415,13 +415,37 @@ export default class TestPage extends React.Component {
           123
         </div>
         <br/>
-        <Button className="test-btn" onClick={this.openMessage}>打开message</Button>
+        <Button className="test-btn" onClick={this.infoMessage}>info</Button>
+        <Button className="test-btn" onClick={this.successMessage}>success</Button>
+        <Button className="test-btn" onClick={this.setMessage}>setOptions</Button>
+        <Button className="test-btn" onClick={this.destroyMessage}>destroy</Button>
       </div>
     );
   }
 
-  openMessage = () => {
-    Message.info('test', 60000 * 5);
+  setMessage = () => {
+    Message.setOptions({
+      containerClass: 'test123',
+    });
+  };
+
+  destroyMessage = () => {
+    Message.destroy();
+  };
+
+  infoMessage = () => {
+    Message.info({
+      content: 'info',
+      duration: 60000 * 5,
+      itemClass: 'test-info'
+    });
+  };
+
+  successMessage = () => {
+    Message.success({
+      content: 'success',
+      duration: 60000 * 5,
+    });
   };
 
   testCarousel(obj) {

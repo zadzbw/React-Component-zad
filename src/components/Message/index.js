@@ -8,26 +8,40 @@ import './Message.less';
 import Message, { messagePrefix } from './Message';
 import Icon from '../Icon';
 
+const instances = [];
 let instance = null;
-let defaultStyle = {
+
+let defaultContainerStyle = {
   top: 65,
   left: '50%',
 };
-let defaultCls = '';
+let defaultContainerClass = '';
+let defaultItemStyle = {};
+let defaultItemClass = '';
 let defaultGetContainer = null;
 let defaultDuration = 1500;
 
 function getInstance() {
-  instance = instance || Message.createInstance({
+  if (!instance) {
+    instance = Message.createInstance({
       animation: 'move-up',
-      style: defaultStyle,
-      className: defaultCls,
+      containerStyle: defaultContainerStyle,
+      containerClass: defaultContainerClass,
       getContainer: defaultGetContainer,
     });
+    instances.push(instance);
+  }
   return instance;
 }
 
-function show(content, duration = defaultDuration, onClose = () => undefined, type) {
+function show({
+                content = '',
+                duration = defaultDuration,
+                itemStyle = defaultItemStyle,
+                itemClass = defaultItemClass,
+                onClose = () => undefined,
+              },
+              type,) {
   const msg = getInstance();
   const contentCls = classNames(
     `${messagePrefix}-content`,
@@ -43,6 +57,8 @@ function show(content, duration = defaultDuration, onClose = () => undefined, ty
 
   const addedMsg = msg.add({
     duration,
+    itemStyle,
+    itemClass,
     onClose,
     content: (
       <div className={contentCls}>
@@ -55,35 +71,41 @@ function show(content, duration = defaultDuration, onClose = () => undefined, ty
 }
 
 export default {
-  info(content, duration, onClose) {
-    return show(content, duration, onClose, 'info');
+  info(options) {
+    return show(options, 'info');
   },
-  success(content, duration, onClose) {
-    return show(content, duration, onClose, 'success');
+  success(options) {
+    return show(options, 'success');
   },
-  error(content, duration, onClose) {
-    return show(content, duration, onClose, 'error');
+  error(options) {
+    return show(options, 'error');
   },
-  warning(content, duration, onClose) {
-    return show(content, duration, onClose, 'warning');
+  warning(options) {
+    return show(options, 'warning');
   },
-  loading(content, duration, onClose) {
-    return show(content, duration, onClose, 'loading');
+  loading(options) {
+    return show(options, 'loading');
   },
   setOptions(options) {
-    const { style, duration, className, getContainer } = options;
+    const { containerStyle, containerClass, getContainer, itemStyle, itemClass, duration } = options;
     let needClear = false;
-    if (_.isObject(style)) {
-      defaultStyle = style;
+    if (_.isObject(containerStyle)) {
+      defaultContainerStyle = containerStyle;
       needClear = true;
     }
-    if (_.isString(className)) {
-      defaultCls = className;
+    if (_.isString(containerClass)) {
+      defaultContainerClass = containerClass;
       needClear = true;
     }
     if (_.isFunction(getContainer)) {
       defaultGetContainer = getContainer;
       needClear = true;
+    }
+    if (_.isObject(itemStyle)) {
+      defaultItemStyle = itemStyle;
+    }
+    if (_.isString(itemClass)) {
+      defaultItemClass = itemClass;
     }
     if (_.isNumber(duration)) {
       defaultDuration = duration;
@@ -93,9 +115,11 @@ export default {
     }
   },
   destroy() {
-    if (instance) {
-      instance.destroy();
-      instance = null;
-    }
+    instances.forEach((instance) => {
+      if (instance) {
+        instance.destroy(instance.target);
+        instance = null;
+      }
+    });
   },
 };
